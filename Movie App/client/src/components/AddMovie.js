@@ -10,12 +10,12 @@ class AddMovie extends Component {
             name: '',
             genre: '',
             year: '',
-            star_actor: '',
+            star_actors: '',
             directorId: ''
         };
     }
     displayDirectors(){
-        //console.log(this.props);
+        console.log(this.props);
         const data = this.props.getDirectorsQuery;
         if(data.loading){
             return( <option disabled>Loading directors</option> );
@@ -34,7 +34,7 @@ class AddMovie extends Component {
                 name: this.state.name,
                 genre: this.state.genre,
                 year: this.state.year,
-                star_actor: this.state.star_actor,
+                star_actors: this.state.star_actors,
                 directorId: this.state.directorId
             },
             refetchQueries: [{ query: getMoviesQuery }]
@@ -56,8 +56,8 @@ class AddMovie extends Component {
                     <input type="text" onChange={ (e) => this.setState({ year: e.target.value }) } />
                 </div>
                 <div className="field">
-                    <label>Star Actor:</label>
-                    <input type="text" onChange={ (e) => this.setState({ star_actor: e.target.value }) } />
+                    <label>Star actors:</label>
+                    <input type="text" onChange={ (e) => this.setState({ star_actors: e.target.value }) } />
                 </div>
                 <div className="field">
                     <label>Director:</label>

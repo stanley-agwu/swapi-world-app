@@ -11,7 +11,7 @@ class MovieDetails extends Component {
                     <h2>{ movie.name }</h2>
                     <p>{ movie.genre }</p>
                     <p>{ movie.year }</p>
-                    <p>{ movie.star_actor }</p>
+                    <p>{ movie.star_actors }</p>
                     <p>{ movie.director.name }</p>
                     <p>All movies by this director:</p>
                     <ul className="other-movies">

@@ -13,7 +13,7 @@ class MovieList extends Component {
         }
     }
     displayMovies(){
-        const data = this.props.getMoviesQuery;
+        const data = this.props.data;
         console.log(data)
         if(data.loading){
             return( <div>Loading movies...</div> );
