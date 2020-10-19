@@ -9,10 +9,10 @@ class MovieDetails extends Component {
             return(
                 <div>
                     <h2>{ movie.name }</h2>
-                    <p>{ movie.genre }</p>
-                    <p>{ movie.year }</p>
-                    <p>{ movie.star_actors }</p>
-                    <p>{ movie.director.name }</p>
+                    <p>Genre: { movie.genre }</p>
+                    <p>Year: { movie.year }</p>
+                    <p>Stars: { movie.star_actors }</p>
+                    <p>Director: { movie.director.name }</p>
                     <p>All movies by this director:</p>
                     <ul className="other-movies">
                         { movie.director.movies.map(item => {
