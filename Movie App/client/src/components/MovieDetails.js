@@ -7,13 +7,13 @@ class MovieDetails extends Component {
         const { movie } = this.props.data;
         if(movie){
             return(
-                <div>
+                <div id="display-details">
                     <h2>{ movie.name }</h2>
-                    <p>Genre: { movie.genre }</p>
-                    <p>Year: { movie.year }</p>
-                    <p>Stars: { movie.star_actors }</p>
-                    <p>Director: { movie.director.name }</p>
-                    <p>All movies by this director:</p>
+                    <p><span>Genre:</span> { movie.genre }</p>
+                    <p><span>Year:</span> { movie.year }</p>
+                    <p><span>Stars:</span> { movie.star_actors }</p>
+                    <p><span>Director:</span> { movie.director.name }</p>
+                    <p><span>All movies by this director:</span></p>
                     <ul className="other-movies">
                         { movie.director.movies.map(item => {
                             return <li key={item.id}>{ item.name }</li>

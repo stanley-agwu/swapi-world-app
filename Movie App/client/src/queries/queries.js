@@ -19,9 +19,9 @@ const getMoviesQuery = gql`
 `;
 
 const addMovieMutation = gql`
-    mutation AddMovie($name: String!, $genre: String!, $year: Int!,
+    mutation addMovie($name: String!, $genre: String!, $year: Int!,
         $star_actors: String!, $directorId: ID!){
-        addBook(name: $name, genre: $genre, year: $year, 
+        addMovie(name: $name, genre: $genre, year: $year, 
             star_actors: $star_actors, directorId: $directorId){
             name
             id

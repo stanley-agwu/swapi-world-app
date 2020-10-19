@@ -97,6 +97,9 @@ form button{
   box-sizing: border-box;
   color: #ffffff;
 }
+#display-details span{
+  font-weight: 800;
+}
 .other-movies{
   list-style: none;
 }
