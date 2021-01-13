@@ -1,3 +1,7 @@
+db.collection('newsBits').get().then(snapshot => {
+  setupNewsBits(snapshot.docs);
+});
+
 // listen for auth status changes
 auth.onAuthStateChanged(user => {
   if (user) {
