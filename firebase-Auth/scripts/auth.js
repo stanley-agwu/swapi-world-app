@@ -1,13 +1,13 @@
-db.collection('newsBits').get().then(snapshot => {
-  setupNewsBits(snapshot.docs);
-});
-
 // listen for auth status changes
 auth.onAuthStateChanged(user => {
   if (user) {
-    console.log('user logged in: ', user);
+    db.collection('newsBits').get().then(snapshot => {
+      setupNewsBits(snapshot.docs);
+      UIsetUp(user)
+    });
   } else {
-    console.log('user logged out');
+    setupNewsBits([]);
+    UIsetUp()
   }
 })
 
