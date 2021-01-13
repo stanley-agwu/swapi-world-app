@@ -1,15 +1,32 @@
 // listen for auth status changes
 auth.onAuthStateChanged(user => {
   if (user) {
-    db.collection('newsBits').get().then(snapshot => {
+    db.collection('newsBits').onSnapshot(snapshot => {
       setupNewsBits(snapshot.docs);
       UIsetUp(user)
-    });
+    })
   } else {
     setupNewsBits([]);
     UIsetUp()
   }
-})
+});
+
+// create new news bit
+const createForm = document.querySelector('#create-form');
+createForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  db.collection('newsBits').add({
+    heading: createForm['heading'].value,
+    content: createForm['content'].value
+  }).then(() => {
+    // close the create modal & reset form
+    const modal = document.querySelector('#modal-create');
+    M.Modal.getInstance(modal).close();
+    createForm.reset();
+  }).catch(err => {
+    console.log(err.message);
+  });
+});
 
 // signup
 const signupForm = document.querySelector('#signup-form');
@@ -32,9 +49,7 @@ signupForm.addEventListener('submit', (e) => {
 const logout = document.querySelector('#logout');
 logout.addEventListener('click', (e) => {
   e.preventDefault();
-  auth.signOut().then(() => {
-    console.log('user signed out');
-  })
+  auth.signOut()
 });
 
 // login a user

@@ -2,13 +2,21 @@
 const newsbits = document.querySelector('.news-list');
 const loggedOutLinks = document.querySelectorAll('.logged-out');
 const loggedInLinks = document.querySelectorAll('.logged-in');
+const accountDetails = document.querySelector('.account-details');
 
 const UIsetUp = (user) => {
   if (user) {
+    // account info
+    const html = `
+      <div>Logged in as ${user.email}</div>
+    `;
+    accountDetails.innerHTML = html;
     // toggle user UI elements
     loggedInLinks.forEach(item => item.style.display = 'block');
     loggedOutLinks.forEach(item => item.style.display = 'none');
   } else {
+    // clear account info
+    accountDetails.innerHTML = '';
     // toggle user elements
     loggedInLinks.forEach(item => item.style.display = 'none');
     loggedOutLinks.forEach(item => item.style.display = 'block');
@@ -21,7 +29,7 @@ const setupNewsBits = (data) => {
     let html = '';
     data.forEach(doc => {
       const news = doc.data();
-      console.log(news)
+      //console.log(news)
       const li = `
         <li>
           <div class="collapsible-header grey lighten-4"> ${news.heading} </div>
