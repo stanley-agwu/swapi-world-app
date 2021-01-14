@@ -7,10 +7,14 @@ const accountDetails = document.querySelector('.account-details');
 const UIsetUp = (user) => {
   if (user) {
     // account info
-    const html = `
+    db.collection('users').doc(user.uid).get().then(doc =>{
+      const html = `
       <div>Logged in as ${user.email}</div>
+      <div>${doc.data().bio}</div>
     `;
     accountDetails.innerHTML = html;
+    })
+    
     // toggle user UI elements
     loggedInLinks.forEach(item => item.style.display = 'block');
     loggedOutLinks.forEach(item => item.style.display = 'none');
@@ -40,7 +44,7 @@ const setupNewsBits = (data) => {
     });
     newsbits.innerHTML = html
   } else {
-    newsbits.innerHTML = '<h5 class="center-align">Login to view guides</h5>';
+    newsbits.innerHTML = '<h5 class="center-align">Login to view and/or create news.</h5>';
   }
 
 };

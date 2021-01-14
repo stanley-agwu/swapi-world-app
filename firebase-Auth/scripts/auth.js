@@ -3,11 +3,11 @@ auth.onAuthStateChanged(user => {
   if (user) {
     db.collection('newsBits').onSnapshot(snapshot => {
       setupNewsBits(snapshot.docs);
-      UIsetUp(user)
-    })
+      UIsetUp(user);
+    }, err => console.log(err.message))
   } else {
     setupNewsBits([]);
-    UIsetUp()
+    UIsetUp();
   }
 });
 
@@ -38,12 +38,17 @@ signupForm.addEventListener('submit', (e) => {
   const password = signupForm['signup-password'].value;
 
   // sign up the user
-  auth.createUserWithEmailAndPassword(email, password)
+  auth.createUserWithEmailAndPassword(email, password).then(cred => {
+    return db.collection('users').doc(cred.user.uid).set({
+      bio: signupForm['signup-bio'].value
+    })
+  }).then(() => {
     // close the signup modal & reset form
     const modal = document.querySelector('#modal-signup');
     M.Modal.getInstance(modal).close();
     signupForm.reset();
-});
+  });
+})
 
 // logout
 const logout = document.querySelector('#logout');
