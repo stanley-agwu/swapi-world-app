@@ -1,6 +1,8 @@
-export const PLANET_LOADING = 'PLANET_LOADING';
-export const PLANET_FAILED = 'PLANET_FAILED';
-export const PLANET_SUCCESS = 'PLANET_SUCCESS';
+export enum ActionType {
+    PLANET_LOADING = 'PLANET_LOADING',
+    PLANET_FAILED = 'PLANET_FAILED',
+    PLANET_SUCCESS = 'PLANET_SUCCESS',
+}
 
 export type PlanetInfoType = {
     name: string,
@@ -17,15 +19,16 @@ export type PlanetInfoType = {
 export type resident = string
 
 export interface PlanetLoading {
-    type:   typeof PLANET_LOADING
+    type:   ActionType.PLANET_LOADING
 }
 
 export interface PlanetFailed {
-    type:   typeof PLANET_FAILED
+    type:   ActionType.PLANET_FAILED,
+    payload: string
 }
 
 export interface PlanetSuccess {
-    type:   typeof PLANET_SUCCESS,
+    type:   ActionType.PLANET_SUCCESS,
     payload: {
         planet: PlanetInfoType
     }
