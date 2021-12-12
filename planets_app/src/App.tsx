@@ -1,11 +1,11 @@
 import React, {FC, useState} from 'react';
 import './App.css';
 import {useDispatch, useSelector} from "react-redux";
-import {RootStore} from "./store/Store";
-import {getPlanets} from "./store/actions/PlanetActions";
+import {RootState} from "./store";
+import {planetActions} from "./store";
 
 const App: FC = () => {
-  const planetState = useSelector((state: RootStore) => state.planet)
+  const { loading, error, planet } = useSelector((state: RootState) => state.planet)
   const [planets, setPlanets] = useState<string>('')
   const dispatch = useDispatch()
 
@@ -14,19 +14,16 @@ const App: FC = () => {
   )
   const handleSubmit = (e:  React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault()
-      dispatch(getPlanets(planets))
+      dispatch(planetActions.getPlanets(planets))
       setPlanets('')
   }
 
-
-  console.log('planets are: ', planetState)
+  console.log(loading, error, planet)
 
   return (
     <div className="App">
       <input type='text' value={planets} onChange={handleChange} />
       <button onClick={handleSubmit}>Search</button>
-
-      <div></div>
     </div>
   );
 }

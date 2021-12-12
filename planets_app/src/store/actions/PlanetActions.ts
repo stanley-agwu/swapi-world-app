@@ -5,7 +5,8 @@ import {ActionType, PlanetDispatchTypes} from './PlanetActionTypes';
 export const getPlanets = (planets: string) => async (dispatch: Dispatch<PlanetDispatchTypes>) => {
     try {
         dispatch({
-            type: ActionType.PLANET_LOADING
+            type: ActionType.PLANET_LOADING,
+            payload: null
         })
 
         const {data} = await axios.get(`https://swapi.py4e.com/api/${planets}`)

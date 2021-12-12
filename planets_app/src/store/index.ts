@@ -1,3 +1,3 @@
 export * from './Store'
 export * as planetActions from './actions/PlanetActions'
-export * from './reducers/PlanetReducer'
+export * from './reducers/RootReducer'
