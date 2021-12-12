@@ -29,9 +29,7 @@ export interface PlanetFailed {
 
 export interface PlanetSuccess {
     type:   ActionType.PLANET_SUCCESS,
-    payload: {
-        planet: PlanetInfoType
-    }
+    payload: PlanetInfoType | PlanetInfoType[]
 }
 
 export type PlanetDispatchTypes = PlanetLoading | PlanetFailed | PlanetSuccess
