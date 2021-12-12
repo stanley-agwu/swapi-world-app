@@ -2,7 +2,7 @@ export const PLANET_LOADING = 'PLANET_LOADING';
 export const PLANET_FAILED = 'PLANET_FAILED';
 export const PLANET_SUCCESS = 'PLANET_SUCCESS';
 
-export type PlanetInfo = {
+export type PlanetInfoType = {
     name: string,
     rotation_period: string,
     orbital_period: string,
@@ -27,7 +27,7 @@ export interface PlanetFailed {
 export interface PlanetSuccess {
     type:   typeof PLANET_SUCCESS,
     payload: {
-        planet: PlanetInfo
+        planet: PlanetInfoType
     }
 }
 
