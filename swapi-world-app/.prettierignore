@@ -1,0 +1,7 @@
+node_modules/
+.eslintrc.js
+build/
+coverage/
+dist/
+.env
+mockServiceWorker.js
