@@ -13,9 +13,7 @@ module.exports = {
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
     '!<rootDir>/node_modules/',
-    '!<rootDir>/node_modules/',
     '!<rootDir>/src/reportWebVitals.ts',
-    '!<rootDir>/src/**/useDisneyCharactersData.ts',
     '!<rootDir>/src/index.tsx',
   ],
   coverageReporters: ['text'],
@@ -24,7 +22,6 @@ module.exports = {
     'index.tsx',
     '<rootDir>/src/index.tsx',
     '<rootDir>/src/reportWebVitals.ts',
-    '<rootDir>/src/hooks/useDisneyCharactersData.ts',
   ],
   coverageDirectory: '<rootDir>/coverage/',
   coverageThreshold: {

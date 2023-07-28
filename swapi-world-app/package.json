@@ -121,8 +121,6 @@
       "src/**/*.{js,jsx,ts,tsx}",
       "!<rootDir>/node_modules/",
       "!<rootDir>/src/reportWebVitals.ts",
-      "!<rootDir>/src/**/useDisneyCharactersData.ts",
-      "!<rootDir>/src/**/mockDispatch.ts",
       "!<rootDir>/src/index.tsx"
     ],
     "coverageThreshold": {
@@ -136,5 +134,8 @@
     "coverageReporters": [
       "text"
     ]
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
