@@ -6,7 +6,7 @@ import startBrowserMsw from 'mocks/browser.dev';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import './index.css';
+import './index.scss';
 
 startBrowserMsw();
 
