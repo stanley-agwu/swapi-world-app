@@ -24,8 +24,9 @@
       "tests/*": ["tests/*"]
     }
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist", "coverage", "build", "public"],
+  "include": ["src", "types/index.d.ts"],
+  "exclude": ["node_modules", "dist", "coverage", "build", "public", "jest"],
+  "types": ["types/index.d.ts"],
   "ts-node": {
     "transpileOnly": true,
     "files": true,
