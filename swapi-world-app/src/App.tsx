@@ -1,5 +1,7 @@
 import React from 'react';
-import Header from 'modules/common/Header/Header';
+import Header from 'common/components/Header/Header';
+
+import 'common/utils/extensions';
 
 import styles from './App.module.scss';
 
