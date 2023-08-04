@@ -1,0 +1,126 @@
+@import 'styles/main';
+
+.Toastify {
+  &__toast-container {
+    width: 400px !important;
+  }
+
+  &__toast {
+    border-radius: 8px;
+    box-shadow: none;
+    padding: $space $space-2 !important;
+  }
+
+  &__toast-body.toastbody {
+    font-family: $fontFamily;
+    padding: 0 $space 0 0;
+
+    .title {
+      font-weight: $fontWeightBold;
+      margin-bottom: calc($space/2);
+    }
+
+    .body {
+      font-size: $fontSizeSmall;
+      font-weight: $baseFontWeight;
+    }
+
+    .icon-wrapper {
+      align-items: center;
+      background-color: $whiteBG;
+      border-radius: 50%;
+      display: flex;
+      height: 48px;
+      justify-content: center;
+      min-width: 48px;
+
+      .image-icon {
+        height: 24px;
+        width: 24px;
+      }
+
+      .success {
+        path {
+          fill: $successColorDarker;
+        }
+      }
+
+      .error {
+        color: $errorColorDarker;
+        height: 32px;
+        stroke: $errorColorDarker;
+        width: 32px;
+
+        path {
+          fill: $whiteBG;
+          stroke: $errorColorDarker;
+        }
+      }
+
+      .information {
+        path {
+          fill: $infoColorDark;
+        }
+      }
+    }
+  }
+
+  &__close-button {
+    align-self: center;
+  }
+
+  &__toast-icon {
+    height: 48px !important;
+    width: 48px !important;
+  }
+
+  &__toast-theme--colored.Toastify__toast {
+    &--success {
+      background: $successColorLight !important;
+      color: $successColorDarker !important;
+
+      .Toastify__close-button {
+        align-self: center;
+        color: $successColorDarker;
+      }
+    }
+
+    &--error {
+      background: $errorColorLight !important;
+      color: $errorColorDarker !important;
+
+      .Toastify__close-button {
+        align-self: center;
+        color: $errorColorDarker;
+      }
+    }
+
+    &--info {
+      background-color: $greyBG !important;
+      color: $infoColorDarker !important;
+
+      .Toastify__close-button {
+        align-self: center;
+        color: $infoColorDarker;
+      }
+    }
+  }
+
+  &__progress-bar {
+    height: 4px;
+  }
+
+  &__progress-bar-theme--colored.Toastify__progress-bar {
+    &--success {
+      background: $successColorDark !important;
+    }
+
+    &--error {
+      background: $errorColorDark !important;
+    }
+
+    &--info {
+      background: $infoColorDark !important;
+    }
+  }
+}
