@@ -82,7 +82,7 @@ module.exports = {
       {
         groups: [
           // react and react scoped imports first, then next, and other packages
-          ['^react', '^next', '^[a-zA-Z]'],
+          ['^react', '^next', '^@reduxjs', '^[a-zA-Z]'],
           // Packages starting with '@'
           ['^@'],
           // Packages starting with '~'
@@ -91,19 +91,12 @@ module.exports = {
           ['^\\u0000'],
           // Other local absolute imports
           [
-            '^components',
-            '^features',
-            '^constants',
-            '^types',
-            '^hooks',
-            '^pages',
+            '^common',
             '^mocks',
+            '^modules',
+            '^styles',
+            '^types',
             '^tests',
-            '^services',
-            '^store',
-            '^assets',
-            '^utils',
-            '^app',
           ],
           // Relative imports
           ['^\\.'],
