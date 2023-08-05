@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 
-import { store } from 'common/api/store/store';
+import { setupStore } from 'common/api/store/store';
 import startBrowserMsw from 'mocks/browser.dev';
 
 import App from './App';
@@ -11,6 +11,8 @@ import reportWebVitals from './reportWebVitals';
 import './index.scss';
 
 startBrowserMsw();
+
+const store = setupStore();
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
