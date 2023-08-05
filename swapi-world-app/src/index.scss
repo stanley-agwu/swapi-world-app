@@ -1,4 +1,40 @@
-@import 'styles/_main.scss';
+@import 'styles/main';
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../public/fonts/Montserrat-Regular.woff2') format('woff2'),
+    url('../public/fonts/Montserrat-Regular.woff') format('woff'),
+    url('../public/fonts/Montserrat-Regular.ttf') format('ttf');
+  font-style: normal;
+  font-weight: $fontWeightLight;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../public/fonts/Montserrat-Medium.woff2') format('woff2'),
+    url('../public/fonts/Montserrat-Medium.woff') format('woff'),
+    url('../public/fonts/Montserrat-Medium.ttf') format('ttf');
+  font-style: normal;
+  font-weight: $baseFontWeight;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../public/fonts/Montserrat-SemiBold.woff2') format('woff2'),
+    url('../public/fonts/Montserrat-SemiBold.woff') format('woff'),
+    url('../public/fonts/Montserrat-SemiBold.ttf') format('ttf');
+  font-style: normal;
+  font-weight: $fontWeightSemiBold;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../public/fonts/Montserrat-Bold.woff2') format('woff2'),
+    url('../public/fonts/Montserrat-Bold.woff') format('woff'),
+    url('../public/fonts/Montserrat-Bold.ttf') format('ttf');
+  font-style: normal;
+  font-weight: $fontWeightBold;
+}
 
 *,
 *::before,
@@ -11,11 +47,16 @@
 html,
 body {
   box-sizing: border-box;
-  background: var(--slate-2);
+  background: $white;
   margin: 0;
   padding: 0;
 }
 
 :root {
-  background: var(--slate-2);
+  background: $white;
+  color: $fontColor;
+  font-family: $fontFamily;
+  font-size: $baseFontSize;
+  font-weight: $baseFontWeight;
+  line-height: $baseLineHeight;
 }

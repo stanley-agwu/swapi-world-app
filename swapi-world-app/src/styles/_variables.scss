@@ -1,5 +1,28 @@
+// color
+$white: #ffffff;
+$fontColor: var(--slate-12);
+// font-size
+$baseFontSize: 15px;
+$normalFontSize: 16px;
+$fontSizeSmall: 14px;
+$fontSizeExtraSmall: 12px;
+$fontSizeLarge: 18px;
+$fontSizeExtraLarge: 20px;
+$fontSizeXExtraLarge: 24px;
+$fontSizeUltraLarge: 36px;
+// font family
+$fontFamily: 'Montserrat', sans-serif;
+// font weight
+$baseFontWeight: 400;
+$fontWeightLight: 300;
+$fontWeightSemiBold: 500;
+$fontWeightBold: 600;
+$fontWeightExtraBold: 800;
+// spacings
 $space: 8px;
 $space-2: 16px;
 $space-3: 24px;
 $space-4: 32px;
-$white: #ffffff;
+$space-6: 64px;
+// line-height
+$baseLineHeight: 1.7;
