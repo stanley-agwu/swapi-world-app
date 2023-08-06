@@ -1,15 +1,12 @@
-@import '~styles/variables';
+@import 'styles/main';
 
 .tableWrapper {
-  background: $greyBG;
+  background: $white;
   border-radius: 8px;
-  border: 1px solid $colorTintGrey;
   width: 100%;
 }
 
 .table {
-  border: 1px solid $colorTintGrey;
-  border-radius: 8px 8px 0 0;
   font-size: $baseFontSize;
   padding: $space;
   width: 100%;
@@ -25,25 +22,10 @@
   overflow-wrap: break-word;
 }
 
-@media screen and (min-width: 769px) {
-  .headerRow,
-  .bodyRow {
-    grid-template-columns: 0.5fr 0.5fr 1fr 1fr 1fr 1.5fr;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .headerRow,
-  .bodyRow {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  }
-}
-
 .headerRow {
+  color: $fontColorGray;
   th {
-    color: $selectBG;
-    font-weight: $baseFontWeight;
-    font-size: $fontSizeLarge;
+    font-weight: $fontWeightLight;
     height: 48px;
     padding: $space;
     text-align: center;
@@ -52,12 +34,14 @@
 
 .bodyRow {
   font-weight: $baseFontWeight;
-  font-size: $baseFontSize;
+  font-size: $normalFontSize;
+  color: $baseFontColor;
+  border-bottom: 2px solid var(--slate-5);
+  padding: $space 0;
 
   &:hover {
-    background: $colorDimGrey;
+    background: var(--gray-3);
     border-radius: 4px;
-    color: $fontColorDark;
   }
 
   td {
@@ -68,8 +52,14 @@
     padding: $space;
   }
 
+  td:last-of-type {
+    justify-self: end;
+    padding-right: $space-2;
+  }
+
   i {
     font-style: normal;
+    text-align: left;
   }
 }
 
