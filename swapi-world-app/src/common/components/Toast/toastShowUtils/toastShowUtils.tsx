@@ -12,55 +12,43 @@ const coloredTheme: ToastOptions = {
 };
 
 const IconWrapper: FC<React.ReactNode> = (children): JSX.Element => (
-  <div className='icon-wrapper'>{children}</div>
+  <div className="icon-wrapper">{children}</div>
 );
 
 const getContent = (title?: string, body?: string | JSX.Element) => {
   return (
     <div>
-      {title && <div className='title'>{title}</div>}
-      {body && <div className='body'>{body}</div>}
+      {title && <div className="title">{title}</div>}
+      {body && <div className="body">{body}</div>}
     </div>
   );
 };
 
-export const showSuccess = (
-  title: string,
-  body: string,
-  config: ToastOptions = {}
-) => {
+export const showSuccess = (title: string, body: string, config: ToastOptions = {}) => {
   const content = getContent(title, body);
   toast.success(content, {
     ...coloredTheme,
-    icon: IconWrapper(<SuccessIcon className='image-icon success' />),
+    icon: IconWrapper(<SuccessIcon className="image-icon success" />),
     bodyClassName: 'toastbody',
     ...config,
   });
 };
 
-export const showError = (
-  title: string,
-  body: string,
-  config: ToastOptions = {}
-) => {
+export const showError = (title: string, body: string, config: ToastOptions = {}) => {
   const content = getContent(title, body);
   toast.error(content, {
     ...coloredTheme,
-    icon: IconWrapper(<ErrorIcon className='image-icon error' />),
+    icon: IconWrapper(<ErrorIcon className="image-icon error" />),
     bodyClassName: 'toastbody',
     ...config,
   });
 };
 
-export const showInformation = (
-  title: string,
-  body: string,
-  config: ToastOptions = {}
-) => {
+export const showInformation = (title: string, body: string, config: ToastOptions = {}) => {
   const content = getContent(title, body);
   toast.info(content, {
     ...coloredTheme,
-    icon: IconWrapper(<InformationIcon className='image-icon information' />),
+    icon: IconWrapper(<InformationIcon className="image-icon information" />),
     bodyClassName: 'toastbody',
     ...config,
   });
