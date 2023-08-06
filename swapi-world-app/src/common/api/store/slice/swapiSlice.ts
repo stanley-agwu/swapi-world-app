@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { AppState } from 'common/models';
+import { IAppState } from 'common/models';
+import { CategoriesEnum } from 'common/utils/CategoriesEnum';
 
-const initialState: AppState = {
-  category: '',
+const initialState: IAppState = {
+  category: CategoriesEnum.planets,
 };
 
 export const swapiModuleName = 'swapi';

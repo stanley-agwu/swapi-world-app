@@ -1,4 +1,4 @@
-export interface Person {
+export interface IPerson {
   name: string;
   height: string;
   mass: string;
@@ -17,7 +17,7 @@ export interface Person {
   url: string;
 }
 
-export interface Planet {
+export interface IPlanet {
   name: string;
   rotation_period: string;
   orbital_period: string;
@@ -34,7 +34,7 @@ export interface Planet {
   url: string;
 }
 
-export interface Film {
+export interface IFilm {
   title: string;
   episode_id: number;
   opening_crawl: string;
@@ -51,7 +51,7 @@ export interface Film {
   url: string;
 }
 
-export interface Specie {
+export interface ISpecie {
   name: string;
   classification: string;
   designation: string;
@@ -69,7 +69,7 @@ export interface Specie {
   url: string;
 }
 
-export interface Vehicle {
+export interface IVehicle {
   name: string;
   model: string;
   manufacturer: string;
@@ -88,7 +88,7 @@ export interface Vehicle {
   url: string;
 }
 
-export interface Starship {
+export interface IStarship {
   name: string;
   model: string;
   manufacturer: string;
@@ -109,46 +109,46 @@ export interface Starship {
   url: string;
 }
 
-export interface People {
+export interface IPeople {
   count: number;
   next: string | null;
   previous: string | null;
-  results: Person[] | [];
+  results: IPerson[] | [];
 }
 
-export interface Planets {
+export interface IPlanets {
   count: number;
   next: string | null;
   previous: string | null;
-  results: Planet[] | [];
+  results: IPlanet[] | [];
 }
-export interface Films {
+export interface IFilms {
   count: number;
   next: string | null;
   previous: string | null;
-  results: Film[] | [];
-}
-
-export interface Species {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: Specie[] | [];
+  results: IFilm[] | [];
 }
 
-export interface Vehicles {
+export interface ISpecies {
   count: number;
   next: string | null;
   previous: string | null;
-  results: Vehicle[] | [];
+  results: ISpecie[] | [];
 }
 
-export interface Starships {
+export interface IVehicles {
   count: number;
   next: string | null;
   previous: string | null;
-  results: Starship[] | [];
+  results: IVehicle[] | [];
 }
-export interface AppState {
+
+export interface IStarships {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: IStarship[] | [];
+}
+export interface IAppState {
   category: string;
 }
