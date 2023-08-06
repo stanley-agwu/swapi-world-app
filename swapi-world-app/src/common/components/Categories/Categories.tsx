@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from 'common/api/store/hooks';
 import { setCategory } from 'common/api/store/slice/swapiSlice';
 
-import { CategoriesEnum } from './CategoriesEnum';
+import { CategoriesEnum } from '../../utils/CategoriesEnum';
 
 import styles from './Categories.module.scss';
 
