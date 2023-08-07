@@ -151,4 +151,5 @@ export interface IStarships {
 }
 export interface IAppState {
   category: string;
+  favorites: string[] | [];
 }

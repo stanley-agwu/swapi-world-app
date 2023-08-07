@@ -45,10 +45,11 @@
   }
 
   td {
-    align-items: center;
     display: flex;
-    height: 48px;
+    min-height: 48px;
+    max-height: auto;
     justify-content: center;
+    align-items: center;
     padding: $space;
   }
 
@@ -58,8 +59,11 @@
   }
 
   i {
+    display: flex;
+    align-items: center;
     font-style: normal;
     text-align: left;
+    height: auto;
   }
 }
 

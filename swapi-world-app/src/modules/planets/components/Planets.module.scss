@@ -6,8 +6,21 @@
   margin: $space-2 0;
 }
 
-.icon {
+.icon_arrow {
   justify-self: flex-end;
+  fill: $fontColorGray;
+}
+
+.icon_heart {
+  justify-self: center;
+  align-self: center;
+  fill: var(--slate-7);
+  font-size: $fontSizeXXExtraLarge;
+  margin-top: calc($space/2);
+
+  &:hover {
+    fill: var(--tomato-10);
+  }
 }
 
 .loaderContainer {
@@ -15,4 +28,8 @@
   min-height: 400px;
   justify-content: center;
   align-items: center;
+}
+
+.selected {
+  fill: var(--tomato-10);
 }
