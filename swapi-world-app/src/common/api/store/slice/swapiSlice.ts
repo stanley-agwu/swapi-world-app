@@ -6,6 +6,7 @@ import { CategoriesEnum } from 'common/utils/CategoriesEnum';
 const initialState: IAppState = {
   category: CategoriesEnum.planets,
   favorites: [],
+  planets: [],
 };
 
 export const swapiModuleName = 'swapi';
@@ -25,9 +26,13 @@ export const swapiSlice = createSlice({
       const filteredList = state.favorites?.filter((favorite) => favorite !== payload);
       state.favorites = filteredList;
     },
+    setPlanetList: (state, { payload }) => {
+      state.planets = [...state.planets, ...payload];
+    },
   },
   /* eslint-enable no-param-reassign */
 });
 
-export const { setCategory, addToFavorites, removeFromFavorites } = swapiSlice.actions;
+export const { setCategory, addToFavorites, removeFromFavorites, setPlanetList } =
+  swapiSlice.actions;
 export default swapiSlice.reducer;

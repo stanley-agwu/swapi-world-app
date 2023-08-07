@@ -16,7 +16,7 @@ import styles from './Table.module.scss';
 
 export interface TableProps {
   tableData: IPlanet[] | undefined;
-  tableColumns: ColumnDef<any, unknown>[];
+  tableColumns: ColumnDef<any, any>[];
   hasNextPage: boolean;
   initialState?: VisibilityTableState;
   onLoadNextPage: () => void;
@@ -32,7 +32,7 @@ const Table = ({
   onLoadNextPage,
   onHandleRowClick,
   gridColumnsCustomization = undefined,
-}: TableProps) => {
+}: TableProps): JSX.Element => {
   const columns = useMemo(() => tableColumns, [tableColumns]);
   const data = useMemo(() => tableData, [tableData]);
 
@@ -94,8 +94,8 @@ const Table = ({
             </tr>
           ))}
         </tbody>
-        {hasNextPage ? <Loader width={40} height={40} /> : null}
       </table>
+      {hasNextPage ? <Loader width={80} height={80} className={styles.loader} /> : null}
     </div>
   );
 };
