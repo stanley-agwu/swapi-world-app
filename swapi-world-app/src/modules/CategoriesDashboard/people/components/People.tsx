@@ -2,45 +2,46 @@ import { useEffect, useState } from 'react';
 import { MdArrowForwardIos, MdFavorite } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
-import moment from 'moment';
 
 import { createColumnHelper } from '@tanstack/react-table';
 
-import { useGetPlanetsQuery } from 'common/api/services/swapi';
+import { useGetPeopleQuery } from 'common/api/services/swapi';
 import { useAppDispatch, useAppSelector } from 'common/api/store/hooks';
 import {
-  addToPlanetsFavorites,
-  removeFromPlanetsFavorites,
-  setPlanetList,
+  addToPeopleFavorites,
+  removeFromPeopleFavorites,
+  setPeopleList,
 } from 'common/api/store/slice/swapiSlice';
 import PageLoader from 'common/components/Loader/PageLoader';
 import Table from 'common/components/Table/Table';
 import { coreConfig } from 'common/core/config';
-import { IPlanet } from 'common/models';
+import { IPerson, IPlanet } from 'common/models';
 
-import styles from './Planets.module.scss';
+import Avatar from './NameTag/Avatar';
 
-const Planets = () => {
+import styles from './People.module.scss';
+
+const People = () => {
   const [pageNumber, setPageNumer] = useState(1);
-  const { isLoading, data } = useGetPlanetsQuery(`${pageNumber}`);
-  const columnHelper = createColumnHelper<IPlanet>();
+  const { isLoading, data } = useGetPeopleQuery(`${pageNumber}`);
+  const columnHelper = createColumnHelper<IPerson>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const favoriteList = useAppSelector((state) => state.swapi.favorites.planets);
-  const planetList = useAppSelector((state) => state.swapi.planets) as IPlanet[];
+  const favoriteList = useAppSelector((state) => state.swapi.favorites.people);
+  const peopleList = useAppSelector((state) => state.swapi.people) as IPerson[];
 
   const handleIsInFavoriteList = (name: string): boolean =>
     (favoriteList as string[])?.includes(name);
 
   const handleAddToFavorite = (name: string) => {
-    dispatch(addToPlanetsFavorites(name));
+    dispatch(addToPeopleFavorites(name));
   };
 
   const handleRemoveFromFavorite = (name: string) => {
-    dispatch(removeFromPlanetsFavorites(name));
+    dispatch(removeFromPeopleFavorites(name));
   };
 
-  const handleAddPlanetToFavorite = (name: string) => {
+  const handleAddPeopleToFavorite = (name: string) => {
     const isInFavoriteList = handleIsInFavoriteList(name);
     return isInFavoriteList ? handleRemoveFromFavorite(name) : handleAddToFavorite(name);
   };
@@ -52,41 +53,57 @@ const Planets = () => {
   };
 
   const handleRowClick = (name: string) => {
-    navigate(coreConfig.routes.planets.format(name));
+    navigate(coreConfig.routes.people.format(name));
   };
 
   const columns = [
     columnHelper.accessor((row) => row.name, {
       id: 'name',
-      cell: (info) => <i>{info.getValue()}</i>,
+      cell: (info) => {
+        const name = info.getValue();
+        return (
+          <i>
+            <Avatar name={name} />
+            {name}
+          </i>
+        );
+      },
       header: () => <span>Name</span>,
     }),
-    columnHelper.accessor((row) => row.climate, {
-      id: 'climate',
+    columnHelper.accessor((row) => row.height, {
+      id: 'height',
       cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Climate</span>,
+      header: () => <span>Height</span>,
     }),
-    columnHelper.accessor((row) => row.gravity, {
-      id: 'gravity',
+    columnHelper.accessor((row) => row.birth_year, {
+      id: 'birth_year',
       cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Gravity</span>,
+      header: () => <span>Birth year</span>,
     }),
-    columnHelper.accessor((row) => row.terrain, {
-      id: 'terrain',
+    columnHelper.accessor((row) => row.skin_color, {
+      id: 'skin_color',
       cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Terrain</span>,
+      header: () => <span>Skin color</span>,
     }),
-    columnHelper.accessor((row) => row.population, {
-      id: 'population',
+    columnHelper.accessor((row) => row.hair_color, {
+      id: 'hair_color',
       cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Population</span>,
+      header: () => <span>Hair color</span>,
     }),
-    columnHelper.accessor((row) => row.created, {
-      id: 'created',
-      cell: (info) => (
-        <i>{info.getValue() ? moment.utc(info.getValue()).format('DD/MM/YYYY') : null}</i>
-      ),
-      header: () => <span>Date created</span>,
+    columnHelper.accessor((row) => row.eye_color, {
+      id: 'eye_color',
+      cell: (info) => <i>{info.getValue()}</i>,
+      header: () => <span>Eye color</span>,
+    }),
+    columnHelper.accessor((row) => row.mass, {
+      id: 'mass',
+      cell: (info) => <i>{info.getValue()}</i>,
+      header: () => <span>Body mass</span>,
+    }),
+    columnHelper.accessor((row) => row.gender, {
+      id: 'gender',
+      cell: (info) => <i>{info.getValue()}</i>,
+      header: () => <span>Gender</span>,
     }),
     columnHelper.accessor((row) => row.name, {
       id: 'icon_heart',
@@ -97,7 +114,7 @@ const Planets = () => {
               styles.icon_heart,
               handleIsInFavoriteList(info.getValue()) ? styles.selected : undefined
             )}
-            onClick={() => handleAddPlanetToFavorite(info.getValue())}
+            onClick={() => handleAddPeopleToFavorite(info.getValue())}
           />
         </i>
       ),
@@ -116,7 +133,7 @@ const Planets = () => {
 
   useEffect(() => {
     if (data?.results) {
-      dispatch(setPlanetList(data?.results));
+      dispatch(setPeopleList(data?.results));
     }
   }, [data?.results]);
 
@@ -127,15 +144,15 @@ const Planets = () => {
   return (
     <div className={styles.planets}>
       <Table
-        tableData={planetList}
+        tableData={peopleList as unknown as IPlanet[]}
         tableColumns={columns}
         hasNextPage={Boolean(data?.next)}
         onLoadNextPage={handleLoadNextPage}
         onHandleRowClick={handleRowClick}
-        gridColumnsCustomization="1fr 1fr 1fr 1.5fr 1fr 1fr 0.5fr 0.25fr"
+        gridColumnsCustomization="2fr repeat(7, 1fr) 0.5fr 0.25fr"
       />
     </div>
   );
 };
 
-export default Planets;
+export default People;
