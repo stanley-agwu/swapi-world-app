@@ -43,11 +43,11 @@ export const coreConfig: CoreConfig = {
   },
   routes: {
     root: '/',
-    people: '',
+    people: '/people/{0}',
     planets: '/planets/{0}',
-    films: '',
-    species: '',
-    vehicles: '',
-    starships: '',
+    films: '/films/{0}',
+    species: 'species/{0}',
+    vehicles: 'vehicles/{0}',
+    starships: 'starships/{0}',
   },
 };

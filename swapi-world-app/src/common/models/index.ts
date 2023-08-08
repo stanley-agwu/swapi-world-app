@@ -153,6 +153,12 @@ export interface IStarships {
 }
 export interface IAppState {
   category: CategoriesEnum;
-  favorites: string[] | [];
+  favorites: {
+    planets: string[] | [];
+    people: string[] | [];
+    starships: string[] | [];
+  };
   planets: string[] | [];
+  people: string[] | [];
+  warships: string[] | [];
 }
