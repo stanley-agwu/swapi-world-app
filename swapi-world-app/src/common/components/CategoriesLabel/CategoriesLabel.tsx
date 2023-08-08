@@ -6,7 +6,7 @@ import { setCategory } from 'common/api/store/slice/swapiSlice';
 
 import { CategoriesEnum } from '../../utils/CategoriesEnum';
 
-import styles from './Categories.module.scss';
+import styles from './CategoriesLabel.module.scss';
 
 const Categories = () => {
   const dispatch = useAppDispatch();

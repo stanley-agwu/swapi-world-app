@@ -1,3 +1,5 @@
+import { CategoriesEnum } from 'common/utils/CategoriesEnum';
+
 export interface IPerson {
   name: string;
   height: string;
@@ -150,7 +152,7 @@ export interface IStarships {
   results: IStarship[] | [];
 }
 export interface IAppState {
-  category: string;
+  category: CategoriesEnum;
   favorites: string[] | [];
   planets: string[] | [];
 }

@@ -42,9 +42,9 @@ export const coreConfig: CoreConfig = {
     starship: 'starships/{0}',
   },
   routes: {
-    root: 'https://swapi.dev/api/',
+    root: '/',
     people: '',
-    planets: '',
+    planets: '/planets/{0}',
     films: '',
     species: '',
     vehicles: '',

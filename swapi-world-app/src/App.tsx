@@ -1,7 +1,9 @@
+import { Route, Routes } from 'react-router-dom';
+
 import 'common/utils/extensions';
 
-import Categories from 'common/components/Categories/Categories';
 import Header from 'common/components/Header/Header';
+import { coreConfig } from 'common/core/config';
 import CategoriesContainer from 'modules/CategoriesContainer/components/CategoriesContainer';
 
 import styles from './App.module.scss';
@@ -10,8 +12,10 @@ function App() {
   return (
     <div className={styles.App}>
       <Header />
-      <Categories />
-      <CategoriesContainer />
+      <Routes>
+        <Route path={coreConfig.routes.root} element={<CategoriesContainer />} />
+        {/* <Route path={coreConfig.routes.planets} element={<Planet />} /> */}
+      </Routes>
     </div>
   );
 }
