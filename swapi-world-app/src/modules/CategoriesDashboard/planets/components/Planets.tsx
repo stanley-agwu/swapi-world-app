@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import { MdArrowForwardIos, MdFavorite } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
@@ -40,7 +40,12 @@ const Planets = () => {
     dispatch(removeFromPlanetsFavorites(name));
   };
 
-  const handleAddPlanetToFavorite = (name: string) => {
+  const handleAddPlanetToFavorite = (
+    e: SyntheticEvent<SVGElement, globalThis.MouseEvent>,
+    name: string
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
     const isInFavoriteList = handleIsInFavoriteList(name);
     return isInFavoriteList ? handleRemoveFromFavorite(name) : handleAddToFavorite(name);
   };
@@ -97,7 +102,8 @@ const Planets = () => {
               styles.icon_heart,
               handleIsInFavoriteList(info.getValue()) ? styles.selected : undefined
             )}
-            onClick={() => handleAddPlanetToFavorite(info.getValue())}
+            onClick={(e) => handleAddPlanetToFavorite(e, info.getValue())}
+            aria-label="Planets favorite"
           />
         </i>
       ),

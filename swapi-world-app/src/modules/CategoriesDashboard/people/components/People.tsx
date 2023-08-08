@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import { MdArrowForwardIos, MdFavorite } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
@@ -41,7 +41,12 @@ const People = () => {
     dispatch(removeFromPeopleFavorites(name));
   };
 
-  const handleAddPeopleToFavorite = (name: string) => {
+  const handleAddPeopleToFavorite = (
+    e: SyntheticEvent<SVGElement, globalThis.MouseEvent>,
+    name: string
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
     const isInFavoriteList = handleIsInFavoriteList(name);
     return isInFavoriteList ? handleRemoveFromFavorite(name) : handleAddToFavorite(name);
   };
@@ -114,7 +119,8 @@ const People = () => {
               styles.icon_heart,
               handleIsInFavoriteList(info.getValue()) ? styles.selected : undefined
             )}
-            onClick={() => handleAddPeopleToFavorite(info.getValue())}
+            onClick={(e) => handleAddPeopleToFavorite(e, info.getValue())}
+            aria-label="People favorite"
           />
         </i>
       ),

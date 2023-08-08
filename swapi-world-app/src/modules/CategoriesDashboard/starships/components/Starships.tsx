@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import { MdArrowForwardIos, MdFavorite } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
@@ -39,7 +39,12 @@ const Starships = () => {
     dispatch(removeFromStarshipFavorites(name));
   };
 
-  const handleAddStarshipsToFavorite = (name: string) => {
+  const handleAddStarshipsToFavorite = (
+    e: SyntheticEvent<SVGElement, globalThis.MouseEvent>,
+    name: string
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
     const isInFavoriteList = handleIsInFavoriteList(name);
     return isInFavoriteList ? handleRemoveFromFavorite(name) : handleAddToFavorite(name);
   };
@@ -94,7 +99,8 @@ const Starships = () => {
               styles.icon_heart,
               handleIsInFavoriteList(info.getValue()) ? styles.selected : undefined
             )}
-            onClick={() => handleAddStarshipsToFavorite(info.getValue())}
+            onClick={(e) => handleAddStarshipsToFavorite(e, info.getValue())}
+            aria-label="Starships favorite"
           />
         </i>
       ),
