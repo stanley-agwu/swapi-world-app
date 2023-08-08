@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react';
 
-import { setupStore } from 'common/api/store/store';
+import { persistor, store } from 'common/api/store/store';
+import Loader from 'common/components/Loader/Loader';
 import startBrowserMsw from 'mocks/browser.dev';
 
 import App from './App';
@@ -13,14 +15,14 @@ import './index.scss';
 
 startBrowserMsw();
 
-const store = setupStore();
-
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <Router>
       <Provider store={store}>
-        <App />
+        <PersistGate loading={<Loader width={100} height={100} />} persistor={persistor}>
+          <App />
+        </PersistGate>
       </Provider>
     </Router>
   </React.StrictMode>

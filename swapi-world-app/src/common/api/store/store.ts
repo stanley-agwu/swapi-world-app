@@ -1,8 +1,16 @@
 import { combineReducers, configureStore, PreloadedState } from '@reduxjs/toolkit';
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 
 import { swapiApi } from 'common/api/services/swapi';
 
 import swapiSliceReducer, { swapiModuleName } from './slice/swapiSlice';
+
+const persistConfig = {
+  key: 'root',
+  version: 1,
+  storage,
+};
 
 const rootReducer = combineReducers({
   // Add the generated reducer as a specific top-level slice
@@ -10,14 +18,21 @@ const rootReducer = combineReducers({
   [swapiModuleName]: swapiSliceReducer,
 });
 
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 export const setupStore = (preloadedState?: PreloadedState<RootState>) =>
   configureStore({
-    reducer: rootReducer,
+    reducer: persistedReducer,
     // Adding the api middleware enables caching, invalidation, polling,
     // and other useful features of `rtk-query`.
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(swapiApi.middleware),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({ serializableCheck: false }).concat(swapiApi.middleware),
     preloadedState,
   });
+
+export const store = setupStore();
+
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;
