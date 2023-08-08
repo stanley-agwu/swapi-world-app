@@ -17,12 +17,12 @@
   color: $fontColorGray;
 
   &:hover {
-    color: var(--crimson-10);
-    border-bottom: 2px solid var(--crimson-10);
+    color: var(--crimson-5);
+    border-bottom: 2px solid var(--crimson-5);
   }
 }
 
 .active {
-  color: var(--crimson-10);
-  border-bottom: 2px solid var(--crimson-10);
+  color: var(--crimson-8);
+  border-bottom: 2px solid var(--crimson-8);
 }

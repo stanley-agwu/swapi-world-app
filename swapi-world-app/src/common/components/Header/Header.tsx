@@ -18,7 +18,7 @@ const Header = () => {
               Learn <CaretDownIcon className={styles.CaretDown} aria-hidden />
             </NavigationMenu.Trigger>
             <NavigationMenu.Content className={styles.NavigationMenuContent}>
-              <ul className="List one">
+              <ul className={classNames(styles.List, styles.one)}>
                 <ListItem href="/" title="Stitches">
                   CSS-in-JS with best-in-class developer experience.
                 </ListItem>
@@ -31,7 +31,7 @@ const Header = () => {
               </ul>
             </NavigationMenu.Content>
           </NavigationMenu.Item>
-
+          <span className={styles.Seperator}>|</span>
           <NavigationMenu.Item>
             <NavigationMenu.Trigger className={styles.NavigationMenuTrigger}>
               Overview <CaretDownIcon className={styles.CaretDown} aria-hidden />
@@ -58,12 +58,6 @@ const Header = () => {
                 </ListItem>
               </ul>
             </NavigationMenu.Content>
-          </NavigationMenu.Item>
-
-          <NavigationMenu.Item>
-            <NavigationMenu.Link className={styles.NavigationMenuLink} href="/">
-              Github
-            </NavigationMenu.Link>
           </NavigationMenu.Item>
         </NavigationMenu.List>
 

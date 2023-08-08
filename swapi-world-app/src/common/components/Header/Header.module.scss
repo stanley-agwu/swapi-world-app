@@ -28,7 +28,8 @@ p {
 
 .NavigationMenuList {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  width: 300px;
   background-color: $white;
   padding: calc($space/2);
   border-radius: $space;
@@ -38,9 +39,8 @@ p {
   margin: 0;
 }
 
-.NavigationMenuTrigger,
-.NavigationMenuLink {
-  padding: $space $space * 1.5;
+.NavigationMenuTrigger {
+  padding: $space $space-3;
   outline: none;
   user-select: none;
   font-weight: 500;
@@ -49,12 +49,10 @@ p {
   font-size: 15px;
   color: var(--gray-11);
 }
-.NavigationMenuTrigger:focus,
-.NavigationMenuLink:focus {
-  box-shadow: 0 0 0 2px var(--violet-7);
+.NavigationMenuTrigger:focus {
+  box-shadow: 0 0 0 2px var(--crimson-7);
 }
-.NavigationMenuTrigger:hover,
-.NavigationMenuLink:hover {
+.NavigationMenuTrigger:hover {
   background-color: var(--violet-3);
 }
 
@@ -70,6 +68,10 @@ p {
   text-decoration: none;
   font-size: 15px;
   line-height: 1;
+}
+
+.Seperator {
+  color: var(--gray-11);
 }
 
 .NavigationMenuContent {
