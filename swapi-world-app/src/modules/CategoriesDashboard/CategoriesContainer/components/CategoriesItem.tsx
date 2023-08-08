@@ -1,5 +1,5 @@
 import { CategoriesEnum } from 'common/utils/CategoriesEnum';
-import Planets from 'modules/planets/components/Planets';
+import Planets from 'modules/CategoriesDashboard/planets/components/Planets';
 
 interface ICategoriesItem {
   activeCategory: CategoriesEnum;

@@ -4,7 +4,7 @@ import 'common/utils/extensions';
 
 import Header from 'common/components/Header/Header';
 import { coreConfig } from 'common/core/config';
-import CategoriesContainer from 'modules/CategoriesContainer/components/CategoriesContainer';
+import CategoriesContainer from 'modules/CategoriesDashboard/CategoriesContainer/components/CategoriesContainer';
 
 import styles from './App.module.scss';
 
