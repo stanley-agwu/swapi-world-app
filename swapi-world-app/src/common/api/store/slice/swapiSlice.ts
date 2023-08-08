@@ -12,7 +12,7 @@ const initialState: IAppState = {
   },
   planets: [],
   people: [],
-  warships: [],
+  starships: [],
 };
 
 export const swapiModuleName = 'swapi';
@@ -45,6 +45,16 @@ export const swapiSlice = createSlice({
     setPeopleList: (state, { payload }) => {
       state.people = [...state.people, ...payload];
     },
+    addToStarshipFavorites: (state, action) => {
+      state.favorites.starships = [...state.favorites.starships, action.payload];
+    },
+    removeFromStarshipFavorites: (state, { payload }) => {
+      const filteredList = state.favorites.starships?.filter((favorite) => favorite !== payload);
+      state.favorites.starships = filteredList;
+    },
+    setStarshipList: (state, { payload }) => {
+      state.starships = [...state.starships, ...payload];
+    },
   },
   /* eslint-enable no-param-reassign */
 });
@@ -57,5 +67,8 @@ export const {
   addToPeopleFavorites,
   removeFromPeopleFavorites,
   setPeopleList,
+  addToStarshipFavorites,
+  removeFromStarshipFavorites,
+  setStarshipList,
 } = swapiSlice.actions;
 export default swapiSlice.reducer;

@@ -160,5 +160,5 @@ export interface IAppState {
   };
   planets: string[] | [];
   people: string[] | [];
-  warships: string[] | [];
+  starships: string[] | [];
 }

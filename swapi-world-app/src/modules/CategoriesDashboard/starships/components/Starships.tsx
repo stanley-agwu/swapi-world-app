@@ -5,43 +5,41 @@ import classNames from 'classnames';
 
 import { createColumnHelper } from '@tanstack/react-table';
 
-import { useGetPeopleQuery } from 'common/api/services/swapi';
+import { useGetStarshipsQuery } from 'common/api/services/swapi';
 import { useAppDispatch, useAppSelector } from 'common/api/store/hooks';
 import {
-  addToPeopleFavorites,
-  removeFromPeopleFavorites,
-  setPeopleList,
+  addToStarshipFavorites,
+  removeFromStarshipFavorites,
+  setStarshipList,
 } from 'common/api/store/slice/swapiSlice';
 import PageLoader from 'common/components/Loader/PageLoader';
 import Table from 'common/components/Table/Table';
 import { coreConfig } from 'common/core/config';
-import { IPerson, IPlanet } from 'common/models';
+import { IPlanet, IStarship } from 'common/models';
 
-import Avatar from './NameTag/Avatar';
+import styles from './Starships.module.scss';
 
-import styles from './People.module.scss';
-
-const People = () => {
+const Starships = () => {
   const [pageNumber, setPageNumer] = useState(1);
-  const { isLoading, data } = useGetPeopleQuery(`${pageNumber}`);
-  const columnHelper = createColumnHelper<IPerson>();
+  const { isLoading, data } = useGetStarshipsQuery(`${pageNumber}`);
+  const columnHelper = createColumnHelper<IStarship>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const favoriteList = useAppSelector((state) => state.swapi.favorites.people);
-  const peopleList = useAppSelector((state) => state.swapi.people) as IPerson[];
+  const favoriteList = useAppSelector((state) => state.swapi.favorites.starships);
+  const starshipList = useAppSelector((state) => state.swapi.starships) as IStarship[];
 
   const handleIsInFavoriteList = (name: string): boolean =>
     (favoriteList as string[])?.includes(name);
 
   const handleAddToFavorite = (name: string) => {
-    dispatch(addToPeopleFavorites(name));
+    dispatch(addToStarshipFavorites(name));
   };
 
   const handleRemoveFromFavorite = (name: string) => {
-    dispatch(removeFromPeopleFavorites(name));
+    dispatch(removeFromStarshipFavorites(name));
   };
 
-  const handleAddPeopleToFavorite = (name: string) => {
+  const handleAddStarshipsToFavorite = (name: string) => {
     const isInFavoriteList = handleIsInFavoriteList(name);
     return isInFavoriteList ? handleRemoveFromFavorite(name) : handleAddToFavorite(name);
   };
@@ -53,57 +51,39 @@ const People = () => {
   };
 
   const handleRowClick = (name: string) => {
-    navigate(coreConfig.routes.people.format(name));
+    navigate(coreConfig.routes.starships.format(name));
   };
 
   const columns = [
     columnHelper.accessor((row) => row.name, {
       id: 'name',
-      cell: (info) => {
-        const name = info.getValue();
-        return (
-          <i>
-            <Avatar name={name} />
-            {name}
-          </i>
-        );
-      },
+      cell: (info) => <i>{info.getValue()}</i>,
       header: () => <span>Name</span>,
     }),
-    columnHelper.accessor((row) => row.height, {
-      id: 'height',
+    columnHelper.accessor((row) => row.model, {
+      id: 'model',
       cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Height</span>,
+      header: () => <span>Model</span>,
     }),
-    columnHelper.accessor((row) => row.birth_year, {
-      id: 'birth_year',
+    columnHelper.accessor((row) => row.manufacturer, {
+      id: 'manufacturer',
       cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Birth year</span>,
+      header: () => <span>Manufacturer</span>,
     }),
-    columnHelper.accessor((row) => row.skin_color, {
-      id: 'skin_color',
+    columnHelper.accessor((row) => row.cost_in_credits, {
+      id: 'cost_in_credits',
       cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Skin color</span>,
+      header: () => <span>Cost</span>,
     }),
-    columnHelper.accessor((row) => row.hair_color, {
-      id: 'hair_color',
+    columnHelper.accessor((row) => row.cargo_capacity, {
+      id: 'cargo_capacity',
       cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Hair color</span>,
+      header: () => <span>Cargo capacity</span>,
     }),
-    columnHelper.accessor((row) => row.eye_color, {
-      id: 'eye_color',
+    columnHelper.accessor((row) => row.consumables, {
+      id: 'consumables',
       cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Eye color</span>,
-    }),
-    columnHelper.accessor((row) => row.mass, {
-      id: 'mass',
-      cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Body mass</span>,
-    }),
-    columnHelper.accessor((row) => row.gender, {
-      id: 'gender',
-      cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Gender</span>,
+      header: () => <span>Consumables</span>,
     }),
     columnHelper.accessor((row) => row.name, {
       id: 'icon_heart',
@@ -114,7 +94,7 @@ const People = () => {
               styles.icon_heart,
               handleIsInFavoriteList(info.getValue()) ? styles.selected : undefined
             )}
-            onClick={() => handleAddPeopleToFavorite(info.getValue())}
+            onClick={() => handleAddStarshipsToFavorite(info.getValue())}
           />
         </i>
       ),
@@ -133,7 +113,7 @@ const People = () => {
 
   useEffect(() => {
     if (data?.results) {
-      dispatch(setPeopleList(data?.results));
+      dispatch(setStarshipList(data?.results));
     }
   }, [data?.results]);
 
@@ -142,17 +122,17 @@ const People = () => {
   }
 
   return (
-    <div className={styles.people}>
+    <div className={styles.starships}>
       <Table
-        tableData={peopleList as unknown as IPlanet[]}
+        tableData={starshipList as unknown as IPlanet[]}
         tableColumns={columns}
         hasNextPage={Boolean(data?.next)}
         onLoadNextPage={handleLoadNextPage}
         onHandleRowClick={handleRowClick}
-        gridColumnsCustomization="2fr repeat(7, 1fr) 0.5fr 0.25fr"
+        gridColumnsCustomization="repeat(6, 1fr) 0.5fr 0.25fr"
       />
     </div>
   );
 };
 
-export default People;
+export default Starships;
