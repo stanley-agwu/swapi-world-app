@@ -1,6 +1,3 @@
-import { MouseEvent } from 'react';
-import classNames from 'classnames';
-
 import { useAppSelector } from 'common/api/store/hooks';
 
 import { CategoriesEnum } from '../../utils/CategoriesEnum';
@@ -10,7 +7,7 @@ import CategoriesLabelItem from './CategoriesLabelItem';
 import styles from './CategoriesLabel.module.scss';
 
 const CategoriesLabel = () => {
-  const activeCategory = useAppSelector((state) => state.swapi.category);
+  const activeCategory = useAppSelector((state) => state.swapi.category.dashboard);
 
   const categories = [CategoriesEnum.planets, CategoriesEnum.people, CategoriesEnum.starships];
 

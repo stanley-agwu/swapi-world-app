@@ -4,7 +4,10 @@ import { IAppState } from 'common/models';
 import { CategoriesEnum } from 'common/utils/CategoriesEnum';
 
 const initialState: IAppState = {
-  category: CategoriesEnum.planets,
+  category: {
+    dashboard: CategoriesEnum.planets,
+    details: '',
+  },
   favorites: {
     planets: [],
     people: [],
@@ -22,8 +25,8 @@ export const swapiSlice = createSlice({
   name: swapiModuleName,
   initialState,
   reducers: {
-    setCategory: (state, action) => {
-      state.category = action.payload;
+    setDashboardCategory: (state, action) => {
+      state.category = { ...state.category, dashboard: action.payload };
     },
     addToPlanetsFavorites: (state, action) => {
       state.favorites.planets = [...state.favorites.planets, action.payload];
@@ -60,7 +63,7 @@ export const swapiSlice = createSlice({
 });
 
 export const {
-  setCategory,
+  setDashboardCategory,
   addToPlanetsFavorites,
   removeFromPlanetsFavorites,
   setPlanetList,

@@ -10,7 +10,7 @@ import CategoriesItem from './CategoriesItem';
 
 const CategoriesContainer = () => {
   const navigate = useNavigate();
-  const activeCategory: CategoriesEnum = useAppSelector((state) => state.swapi.category);
+  const activeCategory = useAppSelector((state) => state.swapi.category.dashboard);
 
   useEffect(() => {
     if (activeCategory === CategoriesEnum.starships) {

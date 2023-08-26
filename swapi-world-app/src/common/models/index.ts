@@ -152,7 +152,10 @@ export interface IStarships {
   results: IStarship[] | [];
 }
 export interface IAppState {
-  category: CategoriesEnum;
+  category: {
+    dashboard: CategoriesEnum;
+    details: string;
+  };
   favorites: {
     planets: string[] | [];
     people: string[] | [];
