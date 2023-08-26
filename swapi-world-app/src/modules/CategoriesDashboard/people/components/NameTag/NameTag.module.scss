@@ -16,13 +16,14 @@
 }
 
 .avatar {
-  width: 48px;
-  min-width: 48px;
-  height: 48px;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: var(--gray-6);
   margin-right: $space;
   cursor: pointer;
+  padding: calc($space/2);
 }
 
 .initials {
@@ -31,7 +32,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--gray-11);
-  font-size: $normalFontSize;
-  font-weight: $baseFontWeight;
+  color: var(--gray-12);
+  font-weight: $fontWeightSemiBold;
+  font-size: $fontSizeSmall;
 }
