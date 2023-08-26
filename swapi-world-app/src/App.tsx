@@ -13,8 +13,8 @@ function App() {
     <div className={styles.App}>
       <Header />
       <Routes>
-        <Route path={coreConfig.routes.root} element={<CategoriesContainer />} />
-        {/* <Route path={coreConfig.routes.planets} element={<Planet />} /> */}
+        <Route path={coreConfig.routes.dashboard.root} element={<CategoriesContainer />} />
+        <Route path="*" element={<CategoriesContainer />} />
       </Routes>
     </div>
   );

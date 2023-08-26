@@ -15,13 +15,18 @@ interface CoreConfig {
     starship: string;
   };
   routes: {
-    root: string;
-    people: string;
-    planets: string;
-    films: string;
-    species: string;
-    vehicles: string;
-    starships: string;
+    dashboard: {
+      root: string;
+      planets: string;
+      people: string;
+      starships: string;
+    };
+    details: {
+      root: string;
+      planets: string;
+      people: string;
+      starships: string;
+    };
   };
 }
 
@@ -42,12 +47,17 @@ export const coreConfig: CoreConfig = {
     starship: 'starships/{0}',
   },
   routes: {
-    root: '/',
-    people: '/people/{0}',
-    planets: '/planets/{0}',
-    films: '/films/{0}',
-    species: 'species/{0}',
-    vehicles: 'vehicles/{0}',
-    starships: 'starships/{0}',
+    dashboard: {
+      root: '/dashboard',
+      planets: '/dashboard/planets',
+      people: '/dashboard/people',
+      starships: '/dashboard/starships',
+    },
+    details: {
+      root: '/details',
+      planets: '/details/planets/{0}',
+      people: '/details/people/{0}',
+      starships: '/details/starships/{0}',
+    },
   },
 };

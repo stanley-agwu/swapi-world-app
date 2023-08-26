@@ -55,8 +55,8 @@ const Starships = () => {
     }
   };
 
-  const handleRowClick = (name: string) => {
-    navigate(coreConfig.routes.starships.format(name));
+  const handleRowClick = (id: string) => {
+    navigate(coreConfig.routes.details.starships.format(id));
   };
 
   const columns = [
