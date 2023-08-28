@@ -1,7 +1,17 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { coreConfig } from 'common/core/config';
-import type { IFilms, IPeople, IPlanets, ISpecies, IStarships, IVehicles } from 'common/models';
+import type {
+  IFilms,
+  IPeople,
+  IPerson,
+  IPlanet,
+  IPlanets,
+  ISpecies,
+  IStarship,
+  IStarships,
+  IVehicles,
+} from 'common/models';
 
 // Define a service using a base URL and expected endpoints
 export const swapiApi = createApi({
@@ -26,6 +36,15 @@ export const swapiApi = createApi({
     getStarships: builder.query<IStarships, string>({
       query: (pageNumber = '1') => coreConfig.endpoints.starships.format(pageNumber),
     }),
+    getPerson: builder.query<IPerson, string>({
+      query: (id) => coreConfig.endpoints.person.format(id),
+    }),
+    getPlanet: builder.query<IPlanet, string>({
+      query: (id) => coreConfig.endpoints.planet.format(id),
+    }),
+    getStarship: builder.query<IStarship, string>({
+      query: (id) => coreConfig.endpoints.starship.format(id),
+    }),
   }),
 });
 
@@ -38,4 +57,7 @@ export const {
   useGetSpeciesQuery,
   useGetVehiclesQuery,
   useGetStarshipsQuery,
+  useGetPersonQuery,
+  useGetPlanetQuery,
+  useGetStarshipQuery,
 } = swapiApi;
