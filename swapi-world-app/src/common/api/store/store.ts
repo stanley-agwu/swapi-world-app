@@ -8,7 +8,7 @@ import swapiSliceReducer, { swapiModuleName } from './slice/swapiSlice';
 
 const persistConfig = {
   key: 'root',
-  version: 1,
+  timeout: 50,
   storage,
 };
 
@@ -26,7 +26,9 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) =>
     // Adding the api middleware enables caching, invalidation, polling,
     // and other useful features of `rtk-query`.
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({ serializableCheck: false }).concat(swapiApi.middleware),
+      getDefaultMiddleware({ serializableCheck: false, immutableCheck: false }).concat(
+        swapiApi.middleware
+      ),
     preloadedState,
   });
 
