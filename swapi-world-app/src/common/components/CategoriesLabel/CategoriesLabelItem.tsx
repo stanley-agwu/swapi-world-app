@@ -1,25 +1,28 @@
 import { MouseEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 
-import { useAppDispatch } from 'common/api/store/hooks';
-import { setDashboardCategory } from 'common/api/store/slice/swapiSlice';
-import { CategoriesEnum } from 'common/utils/CategoriesEnum';
+import { CategoriesEnum } from 'common/utils/categoriesEnum';
+import { getDashboardCategoryRoute } from 'common/utils/common';
 
 import styles from './CategoriesLabel.module.scss';
 
 interface CategoriesLabelItemProps {
-  category: CategoriesEnum;
-  activeCategory: string;
+  category: CategoriesEnum | undefined;
+  activeCategory: string | undefined;
 }
 
 const CategoriesLabelItem = ({
   category,
   activeCategory,
 }: CategoriesLabelItemProps): JSX.Element => {
-  const dispatch = useAppDispatch();
-
-  const handleCategoryChange = (e: MouseEvent<HTMLDivElement>) =>
-    dispatch(setDashboardCategory(e.currentTarget.title));
+  const navigate = useNavigate();
+  const handleCategoryChange = (e: MouseEvent<HTMLDivElement>) => {
+    const { title } = e.currentTarget;
+    if (title) {
+      navigate(getDashboardCategoryRoute(title) as string);
+    }
+  };
 
   return (
     <div

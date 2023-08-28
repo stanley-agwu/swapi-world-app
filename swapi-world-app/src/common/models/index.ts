@@ -1,4 +1,4 @@
-import { CategoriesEnum } from 'common/utils/CategoriesEnum';
+import { CategoriesEnum } from 'common/utils/categoriesEnum';
 
 export interface IPerson {
   name: string;
@@ -153,8 +153,8 @@ export interface IStarships {
 }
 export interface IAppState {
   category: {
-    dashboard: CategoriesEnum;
-    details: string;
+    title?: CategoriesEnum;
+    id?: string;
   };
   favorites: {
     planets: string[] | [];

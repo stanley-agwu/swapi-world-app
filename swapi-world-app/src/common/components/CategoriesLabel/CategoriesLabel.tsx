@@ -1,13 +1,13 @@
 import { useAppSelector } from 'common/api/store/hooks';
 
-import { CategoriesEnum } from '../../utils/CategoriesEnum';
+import { CategoriesEnum } from '../../utils/categoriesEnum';
 
 import CategoriesLabelItem from './CategoriesLabelItem';
 
 import styles from './CategoriesLabel.module.scss';
 
 const CategoriesLabel = () => {
-  const activeCategory = useAppSelector((state) => state.swapi.category.dashboard);
+  const activeCategory = useAppSelector((state) => state.swapi.category.title);
 
   const categories = [CategoriesEnum.planets, CategoriesEnum.people, CategoriesEnum.starships];
 

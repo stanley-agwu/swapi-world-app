@@ -1,5 +1,8 @@
 export enum CategoriesEnum {
-  planets = 'PLANETS',
-  people = 'PEOPLE',
-  starships = 'STARSHIPS',
+  planets = 'planets',
+  people = 'People',
+  starships = 'starships',
+  planet = 'planet',
+  person = 'person',
+  starship = 'starship',
 }

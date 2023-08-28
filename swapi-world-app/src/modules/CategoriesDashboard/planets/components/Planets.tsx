@@ -57,7 +57,7 @@ const Planets = () => {
   };
 
   const handleRowClick = (id: string) => {
-    navigate(coreConfig.routes.details.planets.format(id));
+    navigate(coreConfig.routes.details.planetUrl.format(id));
   };
 
   const columns = [

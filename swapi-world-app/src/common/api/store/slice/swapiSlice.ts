@@ -1,13 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { IAppState } from 'common/models';
-import { CategoriesEnum } from 'common/utils/CategoriesEnum';
 
 const initialState: IAppState = {
-  category: {
-    dashboard: CategoriesEnum.planets,
-    details: '',
-  },
+  category: {},
   favorites: {
     planets: [],
     people: [],
@@ -25,8 +21,8 @@ export const swapiSlice = createSlice({
   name: swapiModuleName,
   initialState,
   reducers: {
-    setDashboardCategory: (state, action) => {
-      state.category = { ...state.category, dashboard: action.payload };
+    setCategory: (state, action) => {
+      state.category = action.payload;
     },
     addToPlanetsFavorites: (state, action) => {
       state.favorites.planets = [...state.favorites.planets, action.payload];
@@ -63,7 +59,7 @@ export const swapiSlice = createSlice({
 });
 
 export const {
-  setDashboardCategory,
+  setCategory,
   addToPlanetsFavorites,
   removeFromPlanetsFavorites,
   setPlanetList,
