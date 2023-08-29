@@ -8,14 +8,14 @@ import {
   VisibilityTableState,
 } from '@tanstack/react-table';
 
-import { IPlanet } from 'common/models';
+import { IPerson, IPlanet, IStarship } from 'common/models';
 
 import Loader from '../Loader/Loader';
 
 import styles from './Table.module.scss';
 
 export interface TableProps {
-  tableData: IPlanet[] | undefined;
+  tableData: IPlanet[] | IPerson[] | IStarship[] | undefined;
   tableColumns: ColumnDef<any, any>[];
   hasNextPage: boolean;
   initialState?: VisibilityTableState;
@@ -82,7 +82,7 @@ const Table = ({
             <tr
               className={styles.bodyRow}
               key={row.id}
-              onClick={() => handleRowClick(row.id)}
+              onClick={() => handleRowClick(`${Number(row.id) + 1}`)}
               style={{
                 gridTemplateColumns:
                   gridColumnsCustomization || 'repeat(auto-fit, minmax(100px, 1fr))',

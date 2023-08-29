@@ -8,7 +8,7 @@ import swapiSliceReducer, { swapiModuleName } from './slice/swapiSlice';
 
 const persistConfig = {
   key: 'root',
-  timeout: 50,
+  timeout: 0,
   storage,
 };
 
