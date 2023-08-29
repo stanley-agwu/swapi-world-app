@@ -43,7 +43,13 @@ const Table = ({
     initialState,
   });
 
-  const handleRowClick = (id: string) => onHandleRowClick(id);
+  const handleRowClick = (url: string) => {
+    const id = url
+      .split('/')
+      .filter((value) => value)
+      .reverse()[0];
+    onHandleRowClick(id);
+  };
   const handleLoadNextpage = () => onLoadNextPage();
 
   const onScrollEventHandler = (e: UIEvent<HTMLDivElement>) => {
@@ -82,7 +88,7 @@ const Table = ({
             <tr
               className={styles.bodyRow}
               key={row.id}
-              onClick={() => handleRowClick(`${Number(row.id) + 1}`)}
+              onClick={() => handleRowClick(row.original.url)}
               style={{
                 gridTemplateColumns:
                   gridColumnsCustomization || 'repeat(auto-fit, minmax(100px, 1fr))',

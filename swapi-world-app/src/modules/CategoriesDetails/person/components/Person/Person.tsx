@@ -99,8 +99,7 @@ const Person = ({ id }: PersonProps) => {
         <DetailsItem
           dataList={data?.starships as string[]}
           dataKeys={starshipsKeys}
-          category="starships"
-          resource="people"
+          category={{ name: 'starships', domain: 'person' }}
         />
       </Grid>
       <Grid container>
@@ -108,8 +107,7 @@ const Person = ({ id }: PersonProps) => {
         <DetailsItem
           dataList={data?.vehicles as string[]}
           dataKeys={vehiclesKeys}
-          category="vehicles"
-          resource="people"
+          category={{ name: 'vehicles', domain: 'person' }}
         />
       </Grid>
       <Grid container>
@@ -117,8 +115,7 @@ const Person = ({ id }: PersonProps) => {
         <DetailsItem
           dataList={data?.films as string[]}
           dataKeys={filmsKeys}
-          category="films"
-          resource="people"
+          category={{ name: 'films', domain: 'person' }}
         />
       </Grid>
       <Grid container>
@@ -126,8 +123,7 @@ const Person = ({ id }: PersonProps) => {
         <DetailsItem
           dataList={data?.species as string[]}
           dataKeys={speciesKeys}
-          category="species"
-          resource="people"
+          category={{ name: 'species', domain: 'person' }}
         />
       </Grid>
     </div>

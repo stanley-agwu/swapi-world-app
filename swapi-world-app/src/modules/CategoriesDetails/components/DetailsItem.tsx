@@ -13,21 +13,24 @@ import styles from './DetailsItem.module.scss';
 interface DetailsItemProps {
   dataList: string[];
   dataKeys: string[];
-  category: string;
-  resource: string;
+  category: {
+    name: string;
+    domain: string;
+  };
 }
 
 type CategoryType = IFilm[] | IPerson[] | IStarship[] | IVehicle[] | ISpecie[];
 type StringKeyType = { [key: string]: string }[];
 type ResponseType = StringKeyType & CategoryType;
 
-const DetailsItem = ({ dataList, dataKeys, category, resource }: DetailsItemProps) => {
+const DetailsItem = ({ dataList, dataKeys, category }: DetailsItemProps) => {
   const [dataItems, setDataItems] = useState<ResponseType | undefined>();
+  const { name, domain } = category;
 
   if (!dataList || !dataList?.length) {
     return (
       <Grid container className={styles.details}>
-        {`There are no ${category} available for these ${resource}.`}
+        {`There are no ${name} available for this ${domain}.`}
       </Grid>
     );
   }

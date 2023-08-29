@@ -1,28 +1,28 @@
 import { Grid } from '@mui/material';
 
-import { useGetPlanetQuery } from 'common/api/services/swapi';
+import { useGetStarshipQuery } from 'common/api/services/swapi';
 import PageLoader from 'common/components/Loader/PageLoader';
 import DetailsItem from 'modules/CategoriesDetails/components/DetailsItem';
 import { formatUTCDate } from 'modules/CategoriesDetails/utils/common';
 
-import styles from './Planet.module.scss';
+import styles from './Starship.module.scss';
 
-interface PlanetProps {
+interface StarshipProps {
   id: string;
 }
 
-const Planet = ({ id }: PlanetProps) => {
-  const { isLoading, data } = useGetPlanetQuery(id);
+const Starship = ({ id }: StarshipProps) => {
+  const { isLoading, data } = useGetStarshipQuery(id);
 
   if (isLoading) {
     return <PageLoader width={100} height={100} className={styles.loaderContainer} />;
   }
 
   const filmsKeys = ['title', 'director', 'producer', 'release_date'];
-  const residentKeys = ['name', 'birth_year', 'gender', 'skin_color', 'hair_color'];
+  const pilotsKeys = ['name', 'birth_year', 'gender', 'skin_color', 'hair_color'];
 
   return (
-    <div className={styles.planet}>
+    <div className={styles.starship}>
       <Grid container>
         <div className={styles.categoryTitle}>Details</div>
         <Grid container className={styles.details}>
@@ -36,18 +36,50 @@ const Planet = ({ id }: PlanetProps) => {
           </Grid>
           <Grid item xs={12} className={styles.item}>
             <Grid item className={styles.title}>
-              Terrain
+              Model
             </Grid>
             <Grid item className={styles.value}>
-              {data?.terrain}
+              {data?.model}
             </Grid>
           </Grid>
           <Grid item xs={12} className={styles.item}>
             <Grid item className={styles.title}>
-              Climate
+              Manufacturer
             </Grid>
             <Grid item className={styles.value}>
-              {data?.climate}
+              {data?.manufacturer}
+            </Grid>
+          </Grid>
+          <Grid item xs={12} className={styles.item}>
+            <Grid item className={styles.title}>
+              Crew size
+            </Grid>
+            <Grid item className={styles.value}>
+              {data?.crew}
+            </Grid>
+          </Grid>
+          <Grid item xs={12} className={styles.item}>
+            <Grid item className={styles.title}>
+              Passengers size
+            </Grid>
+            <Grid item className={styles.value}>
+              {data?.passengers}
+            </Grid>
+          </Grid>
+          <Grid item xs={12} className={styles.item}>
+            <Grid item className={styles.title}>
+              Cargo capacity
+            </Grid>
+            <Grid item className={styles.value}>
+              {data?.cargo_capacity}
+            </Grid>
+          </Grid>
+          <Grid item xs={12} className={styles.item}>
+            <Grid item className={styles.title}>
+              Consumables
+            </Grid>
+            <Grid item className={styles.value}>
+              {data?.consumables}
             </Grid>
           </Grid>
           <Grid item xs={12} className={styles.item}>
@@ -60,42 +92,10 @@ const Planet = ({ id }: PlanetProps) => {
           </Grid>
           <Grid item xs={12} className={styles.item}>
             <Grid item className={styles.title}>
-              Gravity
+              Cost in credits
             </Grid>
             <Grid item className={styles.value}>
-              {data?.gravity}
-            </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
-            <Grid item className={styles.title}>
-              Surface water
-            </Grid>
-            <Grid item className={styles.value}>
-              {data?.surface_water}
-            </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
-            <Grid item className={styles.title}>
-              Diameter
-            </Grid>
-            <Grid item className={styles.value}>
-              {data?.diameter}
-            </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
-            <Grid item className={styles.title}>
-              Orbiter period
-            </Grid>
-            <Grid item className={styles.value}>
-              {data?.orbital_period}
-            </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
-            <Grid item className={styles.title}>
-              Population
-            </Grid>
-            <Grid item className={styles.value}>
-              {data?.population}
+              {data?.cost_in_credits}
             </Grid>
           </Grid>
         </Grid>
@@ -105,19 +105,19 @@ const Planet = ({ id }: PlanetProps) => {
         <DetailsItem
           dataList={data?.films as string[]}
           dataKeys={filmsKeys}
-          category={{ name: 'films', domain: 'planet' }}
+          category={{ name: 'films', domain: 'starship' }}
         />
       </Grid>
       <Grid container>
-        <div className={styles.categoryTitle}>Residents</div>
+        <div className={styles.categoryTitle}>Pilots</div>
         <DetailsItem
-          dataList={data?.residents as string[]}
-          dataKeys={residentKeys}
-          category={{ name: 'residents', domain: 'planet' }}
+          dataList={data?.pilots as string[]}
+          dataKeys={pilotsKeys}
+          category={{ name: 'pilots', domain: 'starship' }}
         />
       </Grid>
     </div>
   );
 };
 
-export default Planet;
+export default Starship;
