@@ -4,7 +4,7 @@
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  padding: $space-2;
+  padding: $space-2 $space-2 $space-4;
 
   .categoriesDetailsItem {
     width: fit-content;

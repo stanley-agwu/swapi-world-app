@@ -73,7 +73,6 @@ export const coreConfig: CoreConfig = {
       planet: 'planets/{0}',
       person: 'people/{0}',
       starship: 'starships/{0}',
-
       path: {
         planet: '/details/planets/{0}',
         person: '/details/people/{0}',

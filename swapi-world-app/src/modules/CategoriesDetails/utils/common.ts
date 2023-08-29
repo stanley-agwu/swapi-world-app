@@ -1,4 +1,9 @@
+import moment from 'moment';
+
 import { CategoriesEnum } from 'common/utils/categoriesEnum';
+
+export const formatUTCDate = (date: string | undefined) =>
+  date ? moment.utc(date).format('DD/MM/YYYY') : date;
 
 export const getCategoriesDetailsTitle = (category: CategoriesEnum) => {
   switch (true) {

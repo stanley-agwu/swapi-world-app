@@ -1,27 +1,29 @@
 import { Grid } from '@mui/material';
 
-import { useGetPlanetQuery } from 'common/api/services/swapi';
+import { useGetPersonQuery } from 'common/api/services/swapi';
 import PageLoader from 'common/components/Loader/PageLoader';
 import { formatUTCDate } from 'modules/CategoriesDetails/utils/common';
 
-import PlanetFilmsItem from './components/PlanetFilmsItem';
-import PlanetResidentsItem from './components/PlanetResidentsItem';
+import PersonFilmsItem from './components/PersonFilmsItem';
+import PersonSpeciesItem from './components/PersonSpeciesItem';
+import PersonStarshipsItem from './components/PersonStarshipsItem';
+import PersonVehiclesItem from './components/PersonVehiclesItem';
 
-import styles from './Planet.module.scss';
+import styles from './Person.module.scss';
 
-interface PlanetProps {
+interface PersonProps {
   id: string;
 }
 
-const Planet = ({ id }: PlanetProps) => {
-  const { isLoading, data } = useGetPlanetQuery(id);
+const Person = ({ id }: PersonProps) => {
+  const { isLoading, data } = useGetPersonQuery(id);
 
   if (isLoading) {
     return <PageLoader width={100} height={100} className={styles.loaderContainer} />;
   }
 
   return (
-    <div className={styles.planet}>
+    <div className={styles.person}>
       <Grid container>
         <div className={styles.categoryTitle}>Details</div>
         <Grid container className={styles.details}>
@@ -35,18 +37,50 @@ const Planet = ({ id }: PlanetProps) => {
           </Grid>
           <Grid item xs={12} className={styles.item}>
             <Grid item className={styles.title}>
-              Terrain
+              Birth year
             </Grid>
             <Grid item className={styles.value}>
-              {data?.terrain}
+              {data?.birth_year}
             </Grid>
           </Grid>
           <Grid item xs={12} className={styles.item}>
             <Grid item className={styles.title}>
-              Climate
+              Gender
             </Grid>
             <Grid item className={styles.value}>
-              {data?.climate}
+              {data?.gender}
+            </Grid>
+          </Grid>
+          <Grid item xs={12} className={styles.item}>
+            <Grid item className={styles.title}>
+              Skin color
+            </Grid>
+            <Grid item className={styles.value}>
+              {data?.skin_color}
+            </Grid>
+          </Grid>
+          <Grid item xs={12} className={styles.item}>
+            <Grid item className={styles.title}>
+              Hair color
+            </Grid>
+            <Grid item className={styles.value}>
+              {data?.hair_color}
+            </Grid>
+          </Grid>
+          <Grid item xs={12} className={styles.item}>
+            <Grid item className={styles.title}>
+              Height
+            </Grid>
+            <Grid item className={styles.value}>
+              {data?.height}
+            </Grid>
+          </Grid>
+          <Grid item xs={12} className={styles.item}>
+            <Grid item className={styles.title}>
+              Mass
+            </Grid>
+            <Grid item className={styles.value}>
+              {data?.mass}
             </Grid>
           </Grid>
           <Grid item xs={12} className={styles.item}>
@@ -59,56 +93,32 @@ const Planet = ({ id }: PlanetProps) => {
           </Grid>
           <Grid item xs={12} className={styles.item}>
             <Grid item className={styles.title}>
-              Gravity
-            </Grid>
-            <Grid item className={styles.value}>
-              {data?.gravity}
-            </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
-            <Grid item className={styles.title}>
-              Surface water
-            </Grid>
-            <Grid item className={styles.value}>
-              {data?.surface_water}
-            </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
-            <Grid item className={styles.title}>
-              Diameter
-            </Grid>
-            <Grid item className={styles.value}>
-              {data?.diameter}
-            </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
-            <Grid item className={styles.title}>
-              Orbiter period
-            </Grid>
-            <Grid item className={styles.value}>
-              {data?.orbital_period}
-            </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
-            <Grid item className={styles.title}>
               Population
             </Grid>
             <Grid item className={styles.value}>
-              {data?.population}
+              {data?.homeworld}
             </Grid>
           </Grid>
         </Grid>
       </Grid>
       <Grid container>
-        <div className={styles.categoryTitle}>Films</div>
-        <PlanetFilmsItem dataList={data?.films as string[]} type="films" />
+        <div className={styles.categoryTitle}>Starships</div>
+        <PersonStarshipsItem dataList={data?.starships as string[]} type="starships" />
       </Grid>
       <Grid container>
-        <div className={styles.categoryTitle}>Residents</div>
-        <PlanetResidentsItem dataList={data?.residents as string[]} type="residents" />
+        <div className={styles.categoryTitle}>Vehicles</div>
+        <PersonVehiclesItem dataList={data?.vehicles as string[]} type="vehicles" />
+      </Grid>
+      <Grid container>
+        <div className={styles.categoryTitle}>Films</div>
+        <PersonFilmsItem dataList={data?.films as string[]} type="films" />
+      </Grid>
+      <Grid container>
+        <div className={styles.categoryTitle}>Species</div>
+        <PersonSpeciesItem dataList={data?.species as string[]} type="species" />
       </Grid>
     </div>
   );
 };
 
-export default Planet;
+export default Person;

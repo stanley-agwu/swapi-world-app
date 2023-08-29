@@ -1,6 +1,6 @@
-import { IFilm, IPerson } from 'common/models';
+import { IFilm, IPerson, ISpecie, IStarship, IVehicle } from 'common/models';
 
-type ResponseType = IFilm[] | IPerson[];
+type ResponseType = IFilm[] | IPerson[] | IStarship[] | IVehicle[] | ISpecie[];
 
 const asyncFunc = async (url: string) => {
   return (await fetch(url)).json();
