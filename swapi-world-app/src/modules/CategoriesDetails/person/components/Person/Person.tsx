@@ -2,12 +2,8 @@ import { Grid } from '@mui/material';
 
 import { useGetPersonQuery } from 'common/api/services/swapi';
 import PageLoader from 'common/components/Loader/PageLoader';
+import DetailsItem from 'modules/CategoriesDetails/components/DetailsItem';
 import { formatUTCDate } from 'modules/CategoriesDetails/utils/common';
-
-import PersonFilmsItem from './components/PersonFilmsItem';
-import PersonSpeciesItem from './components/PersonSpeciesItem';
-import PersonStarshipsItem from './components/PersonStarshipsItem';
-import PersonVehiclesItem from './components/PersonVehiclesItem';
 
 import styles from './Person.module.scss';
 
@@ -21,6 +17,11 @@ const Person = ({ id }: PersonProps) => {
   if (isLoading) {
     return <PageLoader width={100} height={100} className={styles.loaderContainer} />;
   }
+
+  const filmsKeys = ['title', 'director', 'producer', 'release_date'];
+  const speciesKeys = ['name', 'classification', 'designation', 'average_height', 'language'];
+  const starshipsKeys = ['name', 'manufacturer', 'crew', 'passengers'];
+  const vehiclesKeys = ['name', 'model', 'manufacturer', 'crew', 'passengers', 'consumables'];
 
   return (
     <div className={styles.person}>
@@ -91,31 +92,43 @@ const Person = ({ id }: PersonProps) => {
               {formatUTCDate(data?.created)}
             </Grid>
           </Grid>
-          <Grid item xs={12} className={styles.item}>
-            <Grid item className={styles.title}>
-              Population
-            </Grid>
-            <Grid item className={styles.value}>
-              {data?.homeworld}
-            </Grid>
-          </Grid>
         </Grid>
       </Grid>
       <Grid container>
         <div className={styles.categoryTitle}>Starships</div>
-        <PersonStarshipsItem dataList={data?.starships as string[]} type="starships" />
+        <DetailsItem
+          dataList={data?.starships as string[]}
+          dataKeys={starshipsKeys}
+          category="starships"
+          resource="people"
+        />
       </Grid>
       <Grid container>
         <div className={styles.categoryTitle}>Vehicles</div>
-        <PersonVehiclesItem dataList={data?.vehicles as string[]} type="vehicles" />
+        <DetailsItem
+          dataList={data?.vehicles as string[]}
+          dataKeys={vehiclesKeys}
+          category="vehicles"
+          resource="people"
+        />
       </Grid>
       <Grid container>
         <div className={styles.categoryTitle}>Films</div>
-        <PersonFilmsItem dataList={data?.films as string[]} type="films" />
+        <DetailsItem
+          dataList={data?.films as string[]}
+          dataKeys={filmsKeys}
+          category="films"
+          resource="people"
+        />
       </Grid>
       <Grid container>
         <div className={styles.categoryTitle}>Species</div>
-        <PersonSpeciesItem dataList={data?.species as string[]} type="species" />
+        <DetailsItem
+          dataList={data?.species as string[]}
+          dataKeys={speciesKeys}
+          category="species"
+          resource="people"
+        />
       </Grid>
     </div>
   );

@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 
 import { coreConfig } from 'common/core/config';
-import Person from 'modules/CategoriesDetails/person/components/Planet/Person';
+import Person from 'modules/CategoriesDetails/person/components/Person/Person';
 import Planet from 'modules/CategoriesDetails/planet/components/Planet/Planet';
 
 interface CategoriesDetailsItemProps {

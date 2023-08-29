@@ -1,0 +1,36 @@
+@import 'styles/main';
+
+.details {
+  background: var(--slate-1);
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.2);
+  border-radius: $space;
+  padding: $space-3 $space-2;
+  margin: 0;
+
+  .detailsItem {
+    display: flex;
+    padding: 0;
+    margin: 0;
+  }
+
+  .item {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    align-content: center;
+    width: 100%;
+    padding: $space $space-2 $space $space-4;
+    gap: $space-2;
+    margin: 0;
+
+    .title,
+    .value {
+      text-align: left;
+      margin: 0;
+    }
+
+    .title {
+      color: var(--gray-9);
+      font-weight: 300;
+    }
+  }
+}

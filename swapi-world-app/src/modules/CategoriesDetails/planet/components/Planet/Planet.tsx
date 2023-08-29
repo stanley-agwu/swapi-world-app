@@ -2,10 +2,8 @@ import { Grid } from '@mui/material';
 
 import { useGetPlanetQuery } from 'common/api/services/swapi';
 import PageLoader from 'common/components/Loader/PageLoader';
+import DetailsItem from 'modules/CategoriesDetails/components/DetailsItem';
 import { formatUTCDate } from 'modules/CategoriesDetails/utils/common';
-
-import PlanetFilmsItem from './components/PlanetFilmsItem';
-import PlanetResidentsItem from './components/PlanetResidentsItem';
 
 import styles from './Planet.module.scss';
 
@@ -19,6 +17,9 @@ const Planet = ({ id }: PlanetProps) => {
   if (isLoading) {
     return <PageLoader width={100} height={100} className={styles.loaderContainer} />;
   }
+
+  const filmsKeys = ['title', 'director', 'producer', 'release_date'];
+  const residentKeys = ['name', 'birth_year', 'gender', 'skin_color', 'hair_color'];
 
   return (
     <div className={styles.planet}>
@@ -101,11 +102,21 @@ const Planet = ({ id }: PlanetProps) => {
       </Grid>
       <Grid container>
         <div className={styles.categoryTitle}>Films</div>
-        <PlanetFilmsItem dataList={data?.films as string[]} type="films" />
+        <DetailsItem
+          dataList={data?.films as string[]}
+          dataKeys={filmsKeys}
+          category="films"
+          resource="planets"
+        />
       </Grid>
       <Grid container>
         <div className={styles.categoryTitle}>Residents</div>
-        <PlanetResidentsItem dataList={data?.residents as string[]} type="residents" />
+        <DetailsItem
+          dataList={data?.residents as string[]}
+          dataKeys={residentKeys}
+          category="residents"
+          resource="planets"
+        />
       </Grid>
     </div>
   );
