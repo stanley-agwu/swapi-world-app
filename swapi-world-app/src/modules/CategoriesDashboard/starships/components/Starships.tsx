@@ -56,7 +56,7 @@ const Starships = () => {
   };
 
   const handleRowClick = (id: string) => {
-    navigate(coreConfig.routes.details.starshipUrl.format(id));
+    navigate(coreConfig.routes.details.path.starship.format(id));
   };
 
   const columns = [

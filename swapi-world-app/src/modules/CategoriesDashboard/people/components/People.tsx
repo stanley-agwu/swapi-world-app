@@ -58,7 +58,7 @@ const People = () => {
   };
 
   const handleRowClick = (id: string) => {
-    navigate(coreConfig.routes.details.personUrl.format(id));
+    navigate(coreConfig.routes.details.path.person.format(id));
   };
 
   const columns = [

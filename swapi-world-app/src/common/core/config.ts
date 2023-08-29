@@ -20,15 +20,22 @@ interface CoreConfig {
       planets: string;
       people: string;
       starships: string;
+      path: {
+        planets: string;
+        people: string;
+        starships: string;
+      };
     };
     details: {
       root: string;
       planet: string;
       person: string;
       starship: string;
-      planetUrl: string;
-      personUrl: string;
-      starshipUrl: string;
+      path: {
+        planet: string;
+        person: string;
+        starship: string;
+      };
     };
   };
 }
@@ -55,15 +62,23 @@ export const coreConfig: CoreConfig = {
       planets: 'planets',
       people: 'people',
       starships: 'starships',
+      path: {
+        planets: 'dashboard/planets',
+        people: 'dashboard/people',
+        starships: 'dashboard/starships',
+      },
     },
     details: {
       root: 'details/*',
       planet: 'planets/{0}',
       person: 'people/{0}',
       starship: 'starships/{0}',
-      planetUrl: '/details/planets/{0}',
-      personUrl: '/details/people/{0}',
-      starshipUrl: '/details/starships/{0}',
+
+      path: {
+        planet: '/details/planets/{0}',
+        person: '/details/people/{0}',
+        starship: '/details/starships/{0}',
+      },
     },
   },
 };
