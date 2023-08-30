@@ -26,3 +26,18 @@ export const getDashboardCategoryRoute = (category: string) => {
   }
   return null;
 };
+
+interface RouteProps {
+  title?: CategoriesEnum;
+  id?: string;
+}
+
+export const getRedirectRoute = ({ title, id }: RouteProps) => {
+  if (title && id) {
+    return coreConfig.routes.details.route.format(title, id);
+  }
+  if (title) {
+    coreConfig.routes.dashboard.route.format(title);
+  }
+  return null;
+};

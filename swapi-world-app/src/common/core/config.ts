@@ -17,6 +17,7 @@ interface CoreConfig {
   routes: {
     dashboard: {
       root: string;
+      route: string;
       planets: string;
       people: string;
       starships: string;
@@ -28,6 +29,7 @@ interface CoreConfig {
     };
     details: {
       root: string;
+      route: string;
       planet: string;
       person: string;
       starship: string;
@@ -59,6 +61,7 @@ export const coreConfig: CoreConfig = {
   routes: {
     dashboard: {
       root: 'dashboard/*',
+      route: '/dashboard/{0}',
       planets: 'planets',
       people: 'people',
       starships: 'starships',
@@ -70,6 +73,7 @@ export const coreConfig: CoreConfig = {
     },
     details: {
       root: 'details/*',
+      route: '/details/{0}/{1}',
       planet: 'planets/{0}',
       person: 'people/{0}',
       starship: 'starships/{0}',
