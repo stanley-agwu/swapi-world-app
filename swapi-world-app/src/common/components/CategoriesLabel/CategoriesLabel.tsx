@@ -19,7 +19,7 @@ const CategoriesLabel = () => {
   const handleCategoryChange = (e: MouseEvent<HTMLButtonElement>) => {
     const { title } = e.currentTarget;
     if (title) {
-      navigate(getDashboardCategoryRoute(title) as string);
+      navigate(getDashboardCategoryRoute(title));
     }
   };
 

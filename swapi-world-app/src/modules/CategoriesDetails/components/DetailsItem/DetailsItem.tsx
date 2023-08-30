@@ -5,8 +5,7 @@ import { Grid } from '@mui/material';
 import Loader from 'common/components/Loader/Loader';
 import { IFilm, IPerson, ISpecie, IStarship, IVehicle } from 'common/models';
 import { fetchApiInParallel } from 'modules/CategoriesDetails/api/services';
-
-import { categoriesTitles } from '../utils/categoritesTitleConfig';
+import { categoriesTitles } from 'modules/CategoriesDetails/utils/categoritesTitleConfig';
 
 import styles from './DetailsItem.module.scss';
 

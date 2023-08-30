@@ -24,7 +24,7 @@ export const getDashboardCategoryRoute = (category: string) => {
   if (category === CategoriesEnum.people) {
     return coreConfig.routes.dashboard.people;
   }
-  return null;
+  return '';
 };
 
 interface RouteProps {
@@ -37,7 +37,7 @@ export const getRedirectRoute = ({ title, id }: RouteProps) => {
     return coreConfig.routes.details.route.format(title, id);
   }
   if (title) {
-    coreConfig.routes.dashboard.route.format(title);
+    return coreConfig.routes.dashboard.route.format(title);
   }
   return null;
 };

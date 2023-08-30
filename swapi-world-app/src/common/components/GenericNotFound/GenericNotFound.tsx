@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from 'common/api/store/hooks';
 import { getRedirectRoute } from 'common/utils/common';
 
-import { ReactComponent as DocumentIcon } from '../assets/document.svg';
+import { ReactComponent as DocumentIcon } from './assets/document.svg';
 
 import styles from './GenericNotFound.module.scss';
 

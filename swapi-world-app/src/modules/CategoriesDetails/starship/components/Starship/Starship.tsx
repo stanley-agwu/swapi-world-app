@@ -2,7 +2,7 @@ import { Grid } from '@mui/material';
 
 import { useGetStarshipQuery } from 'common/api/services/swapi';
 import PageLoader from 'common/components/Loader/PageLoader';
-import DetailsItem from 'modules/CategoriesDetails/components/DetailsItem';
+import DetailsItem from 'modules/CategoriesDetails/components/DetailsItem/DetailsItem';
 import { formatUTCDate } from 'modules/CategoriesDetails/utils/common';
 
 import styles from './Starship.module.scss';
