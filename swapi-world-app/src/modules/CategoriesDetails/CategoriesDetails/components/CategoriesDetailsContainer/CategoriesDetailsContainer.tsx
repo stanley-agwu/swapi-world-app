@@ -2,6 +2,7 @@ import { MouseEvent } from 'react';
 
 import { useAppSelector } from 'common/api/store/hooks';
 import CategoriesLabelItem from 'common/components/CategoriesLabel/CategoriesLabelItem';
+import PageLoader from 'common/components/Loader/PageLoader';
 import { CategoriesEnum } from 'common/utils/categoriesEnum';
 import { getCategoriesDetailsTitle } from 'modules/CategoriesDetails/utils/common';
 
@@ -22,7 +23,11 @@ const CategoriesDetailsContainer = () => {
         handleCategoryChange={handleCategoryChange}
         classname={styles.categoriesDetailsItem}
       />
-      {id ? <CategoriesDetailsItem id={id} /> : null}
+      {id ? (
+        <CategoriesDetailsItem id={id} />
+      ) : (
+        <PageLoader width={100} height={100} className={styles.loaderContainer} />
+      )}
     </div>
   );
 };

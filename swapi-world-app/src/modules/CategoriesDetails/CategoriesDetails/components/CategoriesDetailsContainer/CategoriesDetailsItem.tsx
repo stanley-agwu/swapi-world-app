@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 
+import GenericNotFound from 'common/components/GenericNotFound/GenericNotFound';
 import { coreConfig } from 'common/core/config';
 import Person from 'modules/CategoriesDetails/person/components/Person/Person';
 import Planet from 'modules/CategoriesDetails/planet/components/Planet/Planet';
@@ -14,6 +15,7 @@ const CategoriesDetailsItem = ({ id }: CategoriesDetailsItemProps) => (
     <Route path={coreConfig.routes.details.planet.format(id)} element={<Planet id={id} />} />
     <Route path={coreConfig.routes.details.person.format(id)} element={<Person id={id} />} />
     <Route path={coreConfig.routes.details.starship.format(id)} element={<Starship id={id} />} />
+    <Route path="*" element={<GenericNotFound />} />
   </Routes>
 );
 
