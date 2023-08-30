@@ -1,0 +1,30 @@
+@import 'styles/variables';
+
+@mixin text-format($font-size, $font-weight, $line-height, $letter-spacing, $color) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+  color: $color;
+  font-family: $fontFamily;
+}
+
+@mixin text-h1 {
+  @include text-format(
+    $fontSizeXExtraLarge,
+    $fontWeightBold,
+    $baseLineHeight,
+    $baseLetterSpacing,
+    $defaultFontColor
+  );
+}
+
+@mixin text-p1 {
+  @include text-format(
+    $baseFontSize,
+    $fontWeightLight,
+    $baseLineHeight,
+    $baseLetterSpacing,
+    $defaultFontColorGray
+  );
+}
