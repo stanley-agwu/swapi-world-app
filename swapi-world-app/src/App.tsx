@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import 'common/utils/extensions';
 
@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route path={coreConfig.routes.dashboard.root} element={<CategoriesDashboardContainer />} />
         <Route path={coreConfig.routes.details.root} element={<CategoriesDetailsContainer />} />
-        <Route path="*" element={<Navigate to={coreConfig.routes.dashboard.root} replace />} />
+        <Route path="*" element={<CategoriesDashboardContainer />} />
       </Routes>
     </div>
   );

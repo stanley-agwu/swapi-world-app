@@ -16,28 +16,13 @@ export const getDashboardCategoryFromRoute = (category: string) => {
 
 export const getDashboardCategoryRoute = (category: string) => {
   if (category === CategoriesEnum.starships) {
-    return coreConfig.routes.dashboard.starships;
+    return coreConfig.routes.dashboard.path.starships;
   }
   if (category === CategoriesEnum.planets) {
-    return coreConfig.routes.dashboard.planets;
+    return coreConfig.routes.dashboard.path.planets;
   }
   if (category === CategoriesEnum.people) {
-    return coreConfig.routes.dashboard.people;
+    return coreConfig.routes.dashboard.path.people;
   }
   return '';
-};
-
-interface RouteProps {
-  title?: CategoriesEnum;
-  id?: string;
-}
-
-export const getRedirectRoute = ({ title, id }: RouteProps) => {
-  if (title && id) {
-    return coreConfig.routes.details.route.format(title, id);
-  }
-  if (title) {
-    return coreConfig.routes.dashboard.route.format(title);
-  }
-  return null;
 };
