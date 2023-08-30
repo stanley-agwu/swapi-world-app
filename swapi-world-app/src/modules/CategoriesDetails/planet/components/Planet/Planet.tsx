@@ -2,6 +2,8 @@ import { Grid } from '@mui/material';
 
 import { useGetPlanetQuery } from 'common/api/services/swapi';
 import PageLoader from 'common/components/Loader/PageLoader';
+import { coreConfig } from 'common/core/config';
+import Back from 'modules/CategoriesDetails/components/Back/Back';
 import DetailsItem from 'modules/CategoriesDetails/components/DetailsItem/DetailsItem';
 import { formatUTCDate } from 'modules/CategoriesDetails/utils/common';
 
@@ -23,6 +25,7 @@ const Planet = ({ id }: PlanetProps) => {
 
   return (
     <div className={styles.planet}>
+      <Back url={coreConfig.routes.dashboard.path.planets} />
       <Grid container>
         <div className={styles.categoryTitle}>Details</div>
         <Grid container className={styles.details}>

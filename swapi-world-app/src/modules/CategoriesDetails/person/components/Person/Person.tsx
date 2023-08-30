@@ -2,6 +2,8 @@ import { Grid } from '@mui/material';
 
 import { useGetPersonQuery } from 'common/api/services/swapi';
 import PageLoader from 'common/components/Loader/PageLoader';
+import { coreConfig } from 'common/core/config';
+import Back from 'modules/CategoriesDetails/components/Back/Back';
 import DetailsItem from 'modules/CategoriesDetails/components/DetailsItem/DetailsItem';
 import { formatUTCDate } from 'modules/CategoriesDetails/utils/common';
 
@@ -25,6 +27,7 @@ const Person = ({ id }: PersonProps) => {
 
   return (
     <div className={styles.person}>
+      <Back url={coreConfig.routes.dashboard.path.people} />
       <Grid container>
         <div className={styles.categoryTitle}>Details</div>
         <Grid container className={styles.details}>

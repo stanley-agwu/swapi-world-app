@@ -2,6 +2,8 @@ import { Grid } from '@mui/material';
 
 import { useGetStarshipQuery } from 'common/api/services/swapi';
 import PageLoader from 'common/components/Loader/PageLoader';
+import { coreConfig } from 'common/core/config';
+import Back from 'modules/CategoriesDetails/components/Back/Back';
 import DetailsItem from 'modules/CategoriesDetails/components/DetailsItem/DetailsItem';
 import { formatUTCDate } from 'modules/CategoriesDetails/utils/common';
 
@@ -23,6 +25,7 @@ const Starship = ({ id }: StarshipProps) => {
 
   return (
     <div className={styles.starship}>
+      <Back url={coreConfig.routes.dashboard.path.starships} />
       <Grid container>
         <div className={styles.categoryTitle}>Details</div>
         <Grid container className={styles.details}>
