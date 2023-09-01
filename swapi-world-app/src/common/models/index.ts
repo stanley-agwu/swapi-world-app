@@ -161,7 +161,16 @@ export interface IAppState {
     people: string[] | [];
     starships: string[] | [];
   };
-  planets: string[] | [];
-  people: string[] | [];
-  starships: string[] | [];
+  planets: {
+    planetList: string[] | [];
+    pageNumber: number;
+  };
+  people: {
+    peopleList: string[] | [];
+    pageNumber: number;
+  };
+  starships: {
+    starshipList: string[] | [];
+    pageNumber: number;
+  };
 }

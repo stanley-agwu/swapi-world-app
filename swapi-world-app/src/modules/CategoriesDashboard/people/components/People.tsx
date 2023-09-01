@@ -22,13 +22,15 @@ import Avatar from './NameTag/Avatar';
 import styles from './People.module.scss';
 
 const People = () => {
-  const [pageNumber, setPageNumer] = useState(1);
+  const [pageNumber, setPageNumer] = useState<number>(
+    useAppSelector((state) => state.swapi.people.pageNumber) || 1
+  );
   const { isLoading, data } = useGetPeopleQuery(`${pageNumber}`);
   const columnHelper = createColumnHelper<IPerson>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const favoriteList = useAppSelector((state) => state.swapi.favorites.people);
-  const peopleList = useAppSelector((state) => state.swapi.people) as IPerson[];
+  const peopleList = useAppSelector((state) => state.swapi.people.peopleList) as IPerson[];
 
   const handleIsInFavoriteList = (name: string): boolean =>
     (favoriteList as string[])?.includes(name);
@@ -139,7 +141,7 @@ const People = () => {
 
   useEffect(() => {
     if (data?.results) {
-      dispatch(setPeopleList(data?.results));
+      dispatch(setPeopleList({ data: data?.results, pageNumber }));
     }
   }, [data?.results]);
 

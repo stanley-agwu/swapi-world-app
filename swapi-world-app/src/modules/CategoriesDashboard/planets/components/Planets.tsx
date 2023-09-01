@@ -21,13 +21,15 @@ import { IPlanet } from 'common/models';
 import styles from './Planets.module.scss';
 
 const Planets = () => {
-  const [pageNumber, setPageNumer] = useState(1);
+  const [pageNumber, setPageNumer] = useState<number>(
+    useAppSelector((state) => state.swapi.planets.pageNumber) || 1
+  );
   const { isLoading, data } = useGetPlanetsQuery(`${pageNumber}`);
   const columnHelper = createColumnHelper<IPlanet>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const favoriteList = useAppSelector((state) => state.swapi.favorites.planets);
-  const planetList = useAppSelector((state) => state.swapi.planets) as IPlanet[];
+  const planetList = useAppSelector((state) => state.swapi.planets.planetList) as IPlanet[];
 
   const handleIsInFavoriteList = (name: string): boolean =>
     (favoriteList as string[])?.includes(name);
@@ -122,7 +124,7 @@ const Planets = () => {
 
   useEffect(() => {
     if (data?.results) {
-      dispatch(setPlanetList(data?.results));
+      dispatch(setPlanetList({ data: data?.results, pageNumber }));
     }
   }, [data?.results]);
 

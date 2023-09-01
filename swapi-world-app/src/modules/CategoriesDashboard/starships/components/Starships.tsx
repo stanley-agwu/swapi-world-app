@@ -20,13 +20,15 @@ import { IPlanet, IStarship } from 'common/models';
 import styles from './Starships.module.scss';
 
 const Starships = () => {
-  const [pageNumber, setPageNumer] = useState(1);
+  const [pageNumber, setPageNumer] = useState<number>(
+    useAppSelector((state) => state.swapi.starships.pageNumber) || 1
+  );
   const { isLoading, data } = useGetStarshipsQuery(`${pageNumber}`);
   const columnHelper = createColumnHelper<IStarship>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const favoriteList = useAppSelector((state) => state.swapi.favorites.starships);
-  const starshipList = useAppSelector((state) => state.swapi.starships) as IStarship[];
+  const starshipList = useAppSelector((state) => state.swapi.starships.starshipList) as IStarship[];
 
   const handleIsInFavoriteList = (name: string): boolean =>
     (favoriteList as string[])?.includes(name);
@@ -119,7 +121,7 @@ const Starships = () => {
 
   useEffect(() => {
     if (data?.results) {
-      dispatch(setStarshipList(data?.results));
+      dispatch(setStarshipList({ data: data?.results, pageNumber }));
     }
   }, [data?.results]);
 
