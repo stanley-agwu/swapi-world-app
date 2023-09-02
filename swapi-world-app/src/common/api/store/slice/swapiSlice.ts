@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { IAppState, IPerson, IPlanet } from 'common/models';
+import { IAppState, IPerson, IPlanet, IStarship } from 'common/models';
 
 import { getCategoryWithoutFavorites } from '../utils/common';
 
@@ -99,12 +99,24 @@ export const swapiSlice = createSlice({
       const filteredList = state.favorites.starships?.filter((favorite) => favorite !== payload);
       state.favorites.starships = filteredList;
     },
-    setStarshipList: (state: IAppState, { payload }) => {
+    setStarshipListFromPagination: (state: IAppState, { payload }) => {
       const { data, pageNumber } = payload;
       state.starships =
         pageNumber === state.starships.pageNumber
           ? state.starships
           : { starshipList: [...state.starships.starshipList, ...data], pageNumber };
+    },
+    setStarshipListFromFavorites: (state: IAppState, { payload }) => {
+      const { isFavoriteSelected } = payload;
+      state.starships = isFavoriteSelected
+        ? {
+            starshipList: getCategoryWithoutFavorites(
+              state.starships.starshipList,
+              state.favorites.starships
+            ) as IStarship[],
+            pageNumber: state.starships.pageNumber,
+          }
+        : state.starships;
     },
   },
   /* eslint-enable no-param-reassign */
@@ -115,13 +127,14 @@ export const {
   addToPlanetsFavorites,
   removeFromPlanetsFavorites,
   setPlanetListFromPagination,
+  setPlanetListFromFavorites,
   addToPeopleFavorites,
   removeFromPeopleFavorites,
   setPeopleListFromPagination,
   setPeopleListFromFavorites,
   addToStarshipFavorites,
   removeFromStarshipFavorites,
-  setStarshipList,
-  setPlanetListFromFavorites,
+  setStarshipListFromPagination,
+  setStarshipListFromFavorites,
 } = swapiSlice.actions;
 export default swapiSlice.reducer;

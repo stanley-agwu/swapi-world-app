@@ -10,7 +10,8 @@ import { useAppDispatch, useAppSelector } from 'common/api/store/hooks';
 import {
   addToStarshipFavorites,
   removeFromStarshipFavorites,
-  setStarshipList,
+  setStarshipListFromFavorites,
+  setStarshipListFromPagination,
 } from 'common/api/store/slice/swapiSlice';
 import PageLoader from 'common/components/Loader/PageLoader';
 import Table from 'common/components/Table/Table';
@@ -35,6 +36,7 @@ const Starships = () => {
 
   const handleAddToFavorite = (name: string) => {
     dispatch(addToStarshipFavorites(name));
+    dispatch(setStarshipListFromFavorites({ isFavoriteSelected: true }));
   };
 
   const handleRemoveFromFavorite = (name: string) => {
@@ -121,7 +123,7 @@ const Starships = () => {
 
   useEffect(() => {
     if (data?.results) {
-      dispatch(setStarshipList({ data: data?.results, pageNumber }));
+      dispatch(setStarshipListFromPagination({ data: data?.results, pageNumber }));
     }
   }, [data?.results]);
 
