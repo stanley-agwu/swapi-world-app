@@ -10,7 +10,8 @@ import { useAppDispatch, useAppSelector } from 'common/api/store/hooks';
 import {
   addToPeopleFavorites,
   removeFromPeopleFavorites,
-  setPeopleList,
+  setPeopleListFromFavorites,
+  setPeopleListFromPagination,
 } from 'common/api/store/slice/swapiSlice';
 import PageLoader from 'common/components/Loader/PageLoader';
 import Table from 'common/components/Table/Table';
@@ -29,14 +30,14 @@ const People = () => {
   const columnHelper = createColumnHelper<IPerson>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const favoriteList = useAppSelector((state) => state.swapi.favorites.people);
+  const favoriteList = useAppSelector((state) => state.swapi.favorites.people) as string[];
   const peopleList = useAppSelector((state) => state.swapi.people.peopleList) as IPerson[];
 
-  const handleIsInFavoriteList = (name: string): boolean =>
-    (favoriteList as string[])?.includes(name);
+  const handleIsInFavoriteList = (name: string): boolean => favoriteList.includes(name);
 
   const handleAddToFavorite = (name: string) => {
     dispatch(addToPeopleFavorites(name));
+    dispatch(setPeopleListFromFavorites({ isFavoriteSelected: true }));
   };
 
   const handleRemoveFromFavorite = (name: string) => {
@@ -141,7 +142,7 @@ const People = () => {
 
   useEffect(() => {
     if (data?.results) {
-      dispatch(setPeopleList({ data: data?.results, pageNumber }));
+      dispatch(setPeopleListFromPagination({ data: data?.results, pageNumber }));
     }
   }, [data?.results]);
 

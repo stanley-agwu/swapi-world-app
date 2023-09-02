@@ -32,7 +32,7 @@ const Planets = () => {
   const favoriteList = useAppSelector((state) => state.swapi.favorites.planets) as string[];
   const planetList = useAppSelector((state) => state.swapi.planets.planetList) as IPlanet[];
 
-  const handleIsInFavoriteList = (name: string): boolean => favoriteList?.includes(name);
+  const handleIsInFavoriteList = (name: string): boolean => favoriteList.includes(name);
 
   const handleAddToFavorite = (name: string) => {
     dispatch(addToPlanetsFavorites(name));

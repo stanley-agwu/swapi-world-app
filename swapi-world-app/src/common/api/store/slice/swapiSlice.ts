@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { IAppState, IPlanet } from 'common/models';
+import { IAppState, IPerson, IPlanet } from 'common/models';
 
 import { getCategoryWithoutFavorites } from '../utils/common';
 
@@ -73,12 +73,24 @@ export const swapiSlice = createSlice({
       const filteredList = state.favorites.people?.filter((favorite) => favorite !== payload);
       state.favorites.people = filteredList;
     },
-    setPeopleList: (state: IAppState, { payload }) => {
+    setPeopleListFromPagination: (state: IAppState, { payload }) => {
       const { data, pageNumber } = payload;
       state.people =
         pageNumber === state.people.pageNumber
           ? state.people
           : { peopleList: [...state.people.peopleList, ...data], pageNumber };
+    },
+    setPeopleListFromFavorites: (state: IAppState, { payload }) => {
+      const { isFavoriteSelected } = payload;
+      state.people = isFavoriteSelected
+        ? {
+            peopleList: getCategoryWithoutFavorites(
+              state.people.peopleList,
+              state.favorites.people
+            ) as IPerson[],
+            pageNumber: state.people.pageNumber,
+          }
+        : state.people;
     },
     addToStarshipFavorites: (state: IAppState, action) => {
       state.favorites.starships = [...state.favorites.starships, action.payload];
@@ -105,7 +117,8 @@ export const {
   setPlanetListFromPagination,
   addToPeopleFavorites,
   removeFromPeopleFavorites,
-  setPeopleList,
+  setPeopleListFromPagination,
+  setPeopleListFromFavorites,
   addToStarshipFavorites,
   removeFromStarshipFavorites,
   setStarshipList,
