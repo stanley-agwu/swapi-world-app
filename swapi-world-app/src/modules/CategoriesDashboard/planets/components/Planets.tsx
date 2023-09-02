@@ -11,7 +11,8 @@ import { useAppDispatch, useAppSelector } from 'common/api/store/hooks';
 import {
   addToPlanetsFavorites,
   removeFromPlanetsFavorites,
-  setPlanetList,
+  setPlanetListFromFavorites,
+  setPlanetListFromPagination,
 } from 'common/api/store/slice/swapiSlice';
 import PageLoader from 'common/components/Loader/PageLoader';
 import Table from 'common/components/Table/Table';
@@ -28,14 +29,14 @@ const Planets = () => {
   const columnHelper = createColumnHelper<IPlanet>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const favoriteList = useAppSelector((state) => state.swapi.favorites.planets);
+  const favoriteList = useAppSelector((state) => state.swapi.favorites.planets) as string[];
   const planetList = useAppSelector((state) => state.swapi.planets.planetList) as IPlanet[];
 
-  const handleIsInFavoriteList = (name: string): boolean =>
-    (favoriteList as string[])?.includes(name);
+  const handleIsInFavoriteList = (name: string): boolean => favoriteList?.includes(name);
 
   const handleAddToFavorite = (name: string) => {
     dispatch(addToPlanetsFavorites(name));
+    dispatch(setPlanetListFromFavorites({ isFavoriteSelected: true }));
   };
 
   const handleRemoveFromFavorite = (name: string) => {
@@ -124,7 +125,7 @@ const Planets = () => {
 
   useEffect(() => {
     if (data?.results) {
-      dispatch(setPlanetList({ data: data?.results, pageNumber }));
+      dispatch(setPlanetListFromPagination({ data: data?.results, pageNumber }));
     }
   }, [data?.results]);
 

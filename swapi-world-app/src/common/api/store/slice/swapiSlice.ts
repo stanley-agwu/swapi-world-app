@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { IAppState } from 'common/models';
+import { IAppState, IPlanet } from 'common/models';
+
+import { getCategoryWithoutFavorites } from '../utils/common';
 
 const initialState: IAppState = {
   category: {},
@@ -40,12 +42,29 @@ export const swapiSlice = createSlice({
       const filteredList = state.favorites.planets?.filter((favorite) => favorite !== payload);
       state.favorites.planets = filteredList;
     },
-    setPlanetList: (state: IAppState, { payload }) => {
+    setPlanetListFromPagination: (state: IAppState, { payload }) => {
       const { data, pageNumber } = payload;
-      state.planets =
-        pageNumber === state.planets.pageNumber
-          ? state.planets
-          : { planetList: [...state.planets.planetList, ...data], pageNumber };
+      pageNumber === state.planets.pageNumber
+        ? state.planets
+        : {
+            planetList: getCategoryWithoutFavorites(
+              [...state.planets.planetList, ...data],
+              state.favorites.planets
+            ) as IPlanet[],
+            pageNumber,
+          };
+    },
+    setPlanetListFromFavorites: (state: IAppState, { payload }) => {
+      const { isFavoriteSelected } = payload;
+      state.planets = isFavoriteSelected
+        ? {
+            planetList: getCategoryWithoutFavorites(
+              state.planets.planetList,
+              state.favorites.planets
+            ) as IPlanet[],
+            pageNumber: state.planets.pageNumber,
+          }
+        : state.planets;
     },
     addToPeopleFavorites: (state: IAppState, action) => {
       state.favorites.people = [...state.favorites.people, action.payload];
@@ -83,12 +102,13 @@ export const {
   setCategory,
   addToPlanetsFavorites,
   removeFromPlanetsFavorites,
-  setPlanetList,
+  setPlanetListFromPagination,
   addToPeopleFavorites,
   removeFromPeopleFavorites,
   setPeopleList,
   addToStarshipFavorites,
   removeFromStarshipFavorites,
   setStarshipList,
+  setPlanetListFromFavorites,
 } = swapiSlice.actions;
 export default swapiSlice.reducer;

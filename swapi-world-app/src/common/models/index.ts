@@ -162,15 +162,15 @@ export interface IAppState {
     starships: string[] | [];
   };
   planets: {
-    planetList: string[] | [];
+    planetList: IPlanet[] | [];
     pageNumber: number;
   };
   people: {
-    peopleList: string[] | [];
+    peopleList: IPerson[] | [];
     pageNumber: number;
   };
   starships: {
-    starshipList: string[] | [];
+    starshipList: IStarship[] | [];
     pageNumber: number;
   };
 }
