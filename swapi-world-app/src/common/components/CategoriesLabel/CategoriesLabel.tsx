@@ -2,9 +2,8 @@ import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppSelector } from 'common/api/store/hooks';
+import { CategoriesEnum } from 'common/utils/categoriesEnum';
 import { getDashboardCategoryRoute } from 'common/utils/common';
-
-import { CategoriesEnum } from '../../utils/categoriesEnum';
 
 import CategoriesLabelItem from './CategoriesLabelItem';
 

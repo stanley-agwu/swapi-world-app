@@ -4,13 +4,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'common/api/store/hooks';
 import { setCategory } from 'common/api/store/slice/swapiSlice';
 import { coreConfig } from 'common/core/config';
+import { CategoriesEnum } from 'common/utils/categoriesEnum';
 import {
   getCategoriesDetailsFromRoute,
   getDashboardCategoryFromRoute,
   getFavoritesCategoryFromRoute,
 } from 'common/utils/common';
-
-import { CategoriesEnum } from '../utils/categoriesEnum';
 
 const dashboardCategoryMatchRegex = /^\/dashboard\/(planets|people|starships)$/;
 const detailsCategoryMatchRegex = /^\/details\/(planets|people|starships)\/(\d+)$/;
