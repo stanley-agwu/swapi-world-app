@@ -11,7 +11,7 @@ const Starships = () => {
   return (
     <FavoritesItem
       categoryDataList={favoriteStarships as PlanetsDataListType}
-      dataKeys={categoriesTitlesKeys.planetsKeys}
+      dataKeys={categoriesTitlesKeys.starshipsKeys}
       categoryName={CategoriesEnum.favoriteStarships}
     />
   );

@@ -21,6 +21,7 @@ import { IPlanet, IStarship } from 'common/models';
 import styles from './Starships.module.scss';
 
 const Starships = () => {
+  const [shouldLoadNextPage, setShouldLoadNextPage] = useState(false);
   const [pageNumber, setPageNumer] = useState<number>(
     useAppSelector((state) => state.swapi.starships.pageNumber) || 1
   );
@@ -31,26 +32,27 @@ const Starships = () => {
   const favoriteList = useAppSelector((state) => state.swapi.favorites.starships);
   const starshipList = useAppSelector((state) => state.swapi.starships.starshipList) as IStarship[];
 
-  const handleIsInFavoriteList = (name: string): boolean =>
-    (favoriteList as string[])?.includes(name);
-
-  const handleAddToFavorite = (name: string) => {
-    dispatch(addToStarshipFavorites(name));
+  const handleIsInFavoriteList = (starship: IStarship) => {
+    const foundStarship = favoriteList?.find((starshipItem) => starshipItem.name === starship.name);
+    return !!foundStarship;
+  };
+  const handleAddToFavorite = (starship: IStarship) => {
+    dispatch(addToStarshipFavorites(starship));
     dispatch(setStarshipListFromFavorites({ isFavoriteSelected: true }));
   };
 
-  const handleRemoveFromFavorite = (name: string) => {
-    dispatch(removeFromStarshipFavorites(name));
+  const handleRemoveFromFavorite = (starship: IStarship) => {
+    dispatch(removeFromStarshipFavorites(starship));
   };
 
   const handleAddStarshipsToFavorite = (
     e: SyntheticEvent<SVGElement, globalThis.MouseEvent>,
-    name: string
+    starship: IStarship
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    const isInFavoriteList = handleIsInFavoriteList(name);
-    return isInFavoriteList ? handleRemoveFromFavorite(name) : handleAddToFavorite(name);
+    const isInFavoriteList = handleIsInFavoriteList(starship);
+    return isInFavoriteList ? handleRemoveFromFavorite(starship) : handleAddToFavorite(starship);
   };
 
   const handleLoadNextPage = () => {
@@ -94,16 +96,16 @@ const Starships = () => {
       cell: (info) => <i>{info.getValue()}</i>,
       header: () => <span>Consumables</span>,
     }),
-    columnHelper.accessor((row) => row.name, {
+    columnHelper.accessor((row) => row, {
       id: 'icon_heart',
       cell: (info) => (
         <i>
           <MdFavorite
             className={classNames(
               styles.icon_heart,
-              handleIsInFavoriteList(info.getValue()) ? styles.selected : undefined
+              handleIsInFavoriteList(info.row.original) ? styles.selected : undefined
             )}
-            onClick={(e) => handleAddStarshipsToFavorite(e, info.getValue())}
+            onClick={(e) => handleAddStarshipsToFavorite(e, info.row.original)}
             aria-label="Starships favorite"
           />
         </i>
@@ -122,10 +124,16 @@ const Starships = () => {
   ];
 
   useEffect(() => {
+    if (Boolean(data?.next) && starshipList.length < 9) {
+      setShouldLoadNextPage(true);
+    }
+    if (starshipList.length >= 9) {
+      setShouldLoadNextPage(false);
+    }
     if (data?.results) {
       dispatch(setStarshipListFromPagination({ data: data?.results, pageNumber }));
     }
-  }, [data?.results]);
+  }, [data?.results, starshipList.length]);
 
   if (isLoading) {
     return <PageLoader width={100} height={100} className={styles.loaderContainer} />;
@@ -137,6 +145,7 @@ const Starships = () => {
         tableData={starshipList as unknown as IPlanet[]}
         tableColumns={columns}
         hasNextPage={Boolean(data?.next)}
+        shouldLoadNextPage={shouldLoadNextPage}
         onLoadNextPage={handleLoadNextPage}
         onHandleRowClick={handleRowClick}
         gridColumnsCustomization="repeat(6, 1fr) 0.5fr 0.25fr"

@@ -110,25 +110,34 @@ export const swapiSlice = createSlice({
     addToStarshipFavorites: (state: IAppState, action) => {
       state.favorites.starships = [...state.favorites.starships, action.payload];
     },
-    removeFromStarshipFavorites: (state: IAppState, { payload }) => {
-      const filteredList = state.favorites.starships?.filter((favorite) => favorite !== payload);
+    removeFromStarshipFavorites: (state: IAppState, { payload }: { payload: IStarship }) => {
+      const filteredList = state.favorites.starships?.filter(
+        (favorite) => favorite.name !== payload.name
+      );
       state.favorites.starships = filteredList;
     },
     setStarshipListFromPagination: (state: IAppState, { payload }) => {
       const { data, pageNumber } = payload;
+      const favoritesStarshipsList = state.favorites.starships?.map((starship) => starship.name);
       state.starships =
         pageNumber === state.starships.pageNumber
           ? state.starships
-          : { starshipList: [...state.starships.starshipList, ...data], pageNumber };
+          : {
+              starshipList: getCategoryWithoutFavorites(
+                [...state.starships.starshipList, ...data],
+                favoritesStarshipsList
+              ) as IStarship[],
+              pageNumber,
+            };
     },
     setStarshipListFromFavorites: (state: IAppState, { payload }) => {
       const { isFavoriteSelected } = payload;
-      const favoritesStarshipList = state.favorites.starships.map((starship) => starship.name);
+      const favoritesStarshipsList = state.favorites.starships?.map((starship) => starship.name);
       state.starships = isFavoriteSelected
         ? {
             starshipList: getCategoryWithoutFavorites(
               state.starships.starshipList,
-              favoritesStarshipList
+              favoritesStarshipsList
             ) as IStarship[],
             pageNumber: state.starships.pageNumber,
           }
