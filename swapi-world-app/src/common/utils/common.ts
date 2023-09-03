@@ -27,6 +27,19 @@ export const getFavoritesCategoryFromRoute = (category: string) => {
   }
 };
 
+export const getCategoriesDetailsFromRoute = (category: string) => {
+  switch (true) {
+    case category === coreConfig.routes.dashboard.planets:
+      return CategoriesEnum.planet;
+    case category === coreConfig.routes.dashboard.people:
+      return CategoriesEnum.person;
+    case category === coreConfig.routes.dashboard.starships:
+      return CategoriesEnum.starship;
+    default:
+      return undefined;
+  }
+};
+
 export const getDashboardCategoryRoute = (category: string) => {
   if (category === CategoriesEnum.starships) {
     return coreConfig.routes.dashboard.path.starships;

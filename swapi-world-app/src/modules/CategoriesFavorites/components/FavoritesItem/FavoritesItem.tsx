@@ -19,7 +19,7 @@ const FavoritesItem = ({ categoryDataList, dataKeys, categoryName }: FavoritesIt
   if (!categoryDataList.length) {
     return (
       <GenericNotFound
-        title={`No ${categoryName} Favorites added`}
+        title={`No ${categoryName} added`}
         message="Consider adding new favorites to your favorites list."
       />
     );

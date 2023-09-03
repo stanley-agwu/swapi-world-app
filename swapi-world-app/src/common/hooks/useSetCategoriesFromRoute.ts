@@ -5,7 +5,11 @@ import { useAppDispatch } from 'common/api/store/hooks';
 import { setCategory } from 'common/api/store/slice/swapiSlice';
 import { coreConfig } from 'common/core/config';
 import { CategoriesEnum } from 'common/utils/categoriesEnum';
-import { getDashboardCategoryFromRoute, getFavoritesCategoryFromRoute } from 'common/utils/common';
+import {
+  getCategoriesDetailsFromRoute,
+  getDashboardCategoryFromRoute,
+  getFavoritesCategoryFromRoute,
+} from 'common/utils/common';
 
 const dashboardCategoryMatchRegex = /^\/dashboard\/(planets|people|starships)$/;
 const detailsCategoryMatchRegex = /^\/details\/(planets|people|starships)\/(\d+)$/;
@@ -27,7 +31,7 @@ const useSetCategoriesFromRoute = () => {
     }
     if (detailsCategoryMatchRegex.test(location.pathname)) {
       const [id, title] = location.pathname.split('/').reverse();
-      dispatch(setCategory({ title, id }));
+      dispatch(setCategory({ title: getCategoriesDetailsFromRoute(title), id }));
     }
     if (location.pathname === coreConfig.routes.baseUrl) {
       dispatch(setCategory({ title: CategoriesEnum.planets }));

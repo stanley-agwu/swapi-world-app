@@ -1,10 +1,6 @@
-import { MouseEvent } from 'react';
-
 import { useAppSelector } from 'common/api/store/hooks';
 import CategoriesLabelItem from 'common/components/CategoriesLabel/CategoriesLabelItem';
 import PageLoader from 'common/components/Loader/PageLoader';
-import { CategoriesEnum } from 'common/utils/categoriesEnum';
-import { getCategoriesDetailsTitle } from 'modules/CategoriesDetails/utils/common';
 
 import CategoriesDetailsItem from './CategoriesDetailsItem';
 
@@ -15,7 +11,7 @@ const CategoriesDetailsContainer = () => {
   return (
     <div className={styles.categoriesDetailsContainer}>
       <CategoriesLabelItem
-        category={getCategoriesDetailsTitle(title as CategoriesEnum)}
+        category={title}
         activeCategory={title}
         classname={styles.categoriesDetailsItem}
       />
