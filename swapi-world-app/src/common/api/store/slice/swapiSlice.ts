@@ -35,11 +35,13 @@ export const swapiSlice = createSlice({
     setCategory: (state: IAppState, action) => {
       state.category = action.payload;
     },
-    addToPlanetsFavorites: (state: IAppState, action) => {
-      state.favorites.planets = [...state.favorites.planets, action.payload];
+    addToPlanetsFavorites: (state: IAppState, { payload }) => {
+      state.favorites.planets = [...state.favorites.planets, payload];
     },
-    removeFromPlanetsFavorites: (state: IAppState, { payload }) => {
-      const filteredList = state.favorites.planets?.filter((favorite) => favorite !== payload);
+    removeFromPlanetsFavorites: (state: IAppState, { payload }: { payload: IPlanet }) => {
+      const filteredList = state.favorites.planets?.filter(
+        (favorite) => favorite.name !== payload.name
+      );
       state.favorites.planets = filteredList;
     },
     setPlanetListFromPagination: (state: IAppState, { payload }) => {
@@ -69,23 +71,32 @@ export const swapiSlice = createSlice({
           }
         : state.planets;
     },
-    addToPeopleFavorites: (state: IAppState, action) => {
-      state.favorites.people = [...state.favorites.people, action.payload];
+    addToPeopleFavorites: (state: IAppState, { payload }) => {
+      state.favorites.people = [...state.favorites.people, payload];
     },
-    removeFromPeopleFavorites: (state: IAppState, { payload }) => {
-      const filteredList = state.favorites.people?.filter((favorite) => favorite !== payload);
+    removeFromPeopleFavorites: (state: IAppState, { payload }: { payload: IPerson }) => {
+      const filteredList = state.favorites.people?.filter(
+        (favorite) => favorite.name !== payload.name
+      );
       state.favorites.people = filteredList;
     },
     setPeopleListFromPagination: (state: IAppState, { payload }) => {
       const { data, pageNumber } = payload;
+      const favoritesPeopleList = state.favorites.people?.map((person) => person.name);
       state.people =
         pageNumber === state.people.pageNumber
           ? state.people
-          : { peopleList: [...state.people.peopleList, ...data], pageNumber };
+          : {
+              peopleList: getCategoryWithoutFavorites(
+                [...state.people.peopleList, ...data],
+                favoritesPeopleList
+              ) as IPerson[],
+              pageNumber,
+            };
     },
     setPeopleListFromFavorites: (state: IAppState, { payload }) => {
       const { isFavoriteSelected } = payload;
-      const favoritesPeopleList = state.favorites.people.map((person) => person.name);
+      const favoritesPeopleList = state.favorites.people?.map((person) => person.name);
       state.people = isFavoriteSelected
         ? {
             peopleList: getCategoryWithoutFavorites(

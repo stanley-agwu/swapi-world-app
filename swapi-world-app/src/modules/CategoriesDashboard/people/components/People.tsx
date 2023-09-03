@@ -23,6 +23,7 @@ import Avatar from './NameTag/Avatar';
 import styles from './People.module.scss';
 
 const People = () => {
+  const [shouldLoadNextPage, setShouldLoadNextPage] = useState(false);
   const [pageNumber, setPageNumer] = useState<number>(
     useAppSelector((state) => state.swapi.people.pageNumber) || 1
   );
@@ -30,28 +31,31 @@ const People = () => {
   const columnHelper = createColumnHelper<IPerson>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const favoriteList = useAppSelector((state) => state.swapi.favorites.people) as string[];
+  const favoriteList = useAppSelector((state) => state.swapi.favorites.people);
   const peopleList = useAppSelector((state) => state.swapi.people.peopleList) as IPerson[];
 
-  const handleIsInFavoriteList = (name: string): boolean => favoriteList.includes(name);
+  const handleIsInFavoriteList = (person: IPerson) => {
+    const foundPerson = favoriteList?.find((personItem) => personItem.name === person.name);
+    return !!foundPerson;
+  };
 
-  const handleAddToFavorite = (name: string) => {
-    dispatch(addToPeopleFavorites(name));
+  const handleAddToFavorite = (person: IPerson) => {
+    dispatch(addToPeopleFavorites(person));
     dispatch(setPeopleListFromFavorites({ isFavoriteSelected: true }));
   };
 
-  const handleRemoveFromFavorite = (name: string) => {
-    dispatch(removeFromPeopleFavorites(name));
+  const handleRemoveFromFavorite = (person: IPerson) => {
+    dispatch(removeFromPeopleFavorites(person));
   };
 
   const handleAddPeopleToFavorite = (
     e: SyntheticEvent<SVGElement, globalThis.MouseEvent>,
-    name: string
+    person: IPerson
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    const isInFavoriteList = handleIsInFavoriteList(name);
-    return isInFavoriteList ? handleRemoveFromFavorite(name) : handleAddToFavorite(name);
+    const isInFavoriteList = handleIsInFavoriteList(person);
+    return isInFavoriteList ? handleRemoveFromFavorite(person) : handleAddToFavorite(person);
   };
 
   const handleLoadNextPage = () => {
@@ -113,16 +117,16 @@ const People = () => {
       cell: (info) => <i>{info.getValue()}</i>,
       header: () => <span>Gender</span>,
     }),
-    columnHelper.accessor((row) => row.name, {
+    columnHelper.accessor((row) => row, {
       id: 'icon_heart',
       cell: (info) => (
         <i>
           <MdFavorite
             className={classNames(
               styles.icon_heart,
-              handleIsInFavoriteList(info.getValue()) ? styles.selected : undefined
+              handleIsInFavoriteList(info.row.original) ? styles.selected : undefined
             )}
-            onClick={(e) => handleAddPeopleToFavorite(e, info.getValue())}
+            onClick={(e) => handleAddPeopleToFavorite(e, info.row.original)}
             aria-label="People favorite"
           />
         </i>
@@ -141,10 +145,16 @@ const People = () => {
   ];
 
   useEffect(() => {
+    if (Boolean(data?.next) && peopleList.length < 9) {
+      setShouldLoadNextPage(true);
+    }
+    if (peopleList.length >= 9) {
+      setShouldLoadNextPage(false);
+    }
     if (data?.results) {
       dispatch(setPeopleListFromPagination({ data: data?.results, pageNumber }));
     }
-  }, [data?.results]);
+  }, [data?.results, peopleList.length]);
 
   if (isLoading) {
     return <PageLoader width={100} height={100} className={styles.loaderContainer} />;
@@ -156,6 +166,7 @@ const People = () => {
         tableData={peopleList as unknown as IPlanet[]}
         tableColumns={columns}
         hasNextPage={Boolean(data?.next)}
+        shouldLoadNextPage={shouldLoadNextPage}
         onLoadNextPage={handleLoadNextPage}
         onHandleRowClick={handleRowClick}
         gridColumnsCustomization="2fr repeat(7, 1fr) 0.5fr 0.25fr"
