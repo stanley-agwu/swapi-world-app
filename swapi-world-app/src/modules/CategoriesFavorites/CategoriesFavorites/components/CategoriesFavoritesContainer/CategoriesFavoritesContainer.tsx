@@ -1,7 +1,5 @@
 import { useAppSelector } from 'common/api/store/hooks';
 import CategoriesLabelItem from 'common/components/CategoriesLabel/CategoriesLabelItem';
-import { CategoriesEnum } from 'common/utils/categoriesEnum';
-import { getCategoriesDetailsTitle } from 'modules/CategoriesDetails/utils/common';
 
 import CategoriesFavoritesItem from './CategoriesFavoritesItem';
 
@@ -12,7 +10,7 @@ const CategoriesFavoritesContainer = () => {
   return (
     <div className={styles.categoriesFavoritesContainer}>
       <CategoriesLabelItem
-        category={getCategoriesDetailsTitle(title as CategoriesEnum)}
+        category={title}
         activeCategory={title}
         classname={styles.categoriesFavoritesItem}
       />

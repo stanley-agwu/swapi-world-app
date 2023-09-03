@@ -5,10 +5,11 @@ import { useAppDispatch } from 'common/api/store/hooks';
 import { setCategory } from 'common/api/store/slice/swapiSlice';
 import { coreConfig } from 'common/core/config';
 import { CategoriesEnum } from 'common/utils/categoriesEnum';
-import { getDashboardCategoryFromRoute } from 'common/utils/common';
+import { getDashboardCategoryFromRoute, getFavoritesCategoryFromRoute } from 'common/utils/common';
 
 const dashboardCategoryMatchRegex = /^\/dashboard\/(planets|people|starships)$/;
 const detailsCategoryMatchRegex = /^\/details\/(planets|people|starships)\/(\d+)$/;
+const favoritesCategoryMatchRegex = /^\/favorites\/(planets|people|starships)$/;
 
 const useSetCategoriesFromRoute = () => {
   const dispatch = useAppDispatch();
@@ -19,6 +20,10 @@ const useSetCategoriesFromRoute = () => {
     if (dashboardCategoryMatchRegex.test(location.pathname)) {
       const category = location.pathname.split('/').reverse()[0];
       dispatch(setCategory({ title: getDashboardCategoryFromRoute(category) }));
+    }
+    if (favoritesCategoryMatchRegex.test(location.pathname)) {
+      const category = location.pathname.split('/').reverse()[0];
+      dispatch(setCategory({ title: getFavoritesCategoryFromRoute(category) }));
     }
     if (detailsCategoryMatchRegex.test(location.pathname)) {
       const [id, title] = location.pathname.split('/').reverse();
