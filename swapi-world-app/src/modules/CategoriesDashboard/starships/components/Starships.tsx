@@ -1,7 +1,6 @@
 import { SyntheticEvent, useEffect, useState } from 'react';
 import { MdArrowForwardIos, MdFavorite } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
-import classNames from 'classnames';
 
 import { createColumnHelper } from '@tanstack/react-table';
 
@@ -9,7 +8,6 @@ import { useGetStarshipsQuery } from 'common/api/services/swapi';
 import { useAppDispatch, useAppSelector } from 'common/api/store/hooks';
 import {
   addToStarshipFavorites,
-  removeFromStarshipFavorites,
   setStarshipListFromFavorites,
   setStarshipListFromPagination,
 } from 'common/api/store/slice/swapiSlice';
@@ -29,20 +27,11 @@ const Starships = () => {
   const columnHelper = createColumnHelper<IStarship>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const favoriteList = useAppSelector((state) => state.swapi.favorites.starships);
   const starshipList = useAppSelector((state) => state.swapi.starships.starshipList) as IStarship[];
 
-  const handleIsInFavoriteList = (starship: IStarship) => {
-    const foundStarship = favoriteList?.find((starshipItem) => starshipItem.name === starship.name);
-    return !!foundStarship;
-  };
   const handleAddToFavorite = (starship: IStarship) => {
     dispatch(addToStarshipFavorites(starship));
     dispatch(setStarshipListFromFavorites({ isFavoriteSelected: true }));
-  };
-
-  const handleRemoveFromFavorite = (starship: IStarship) => {
-    dispatch(removeFromStarshipFavorites(starship));
   };
 
   const handleAddStarshipsToFavorite = (
@@ -51,8 +40,7 @@ const Starships = () => {
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    const isInFavoriteList = handleIsInFavoriteList(starship);
-    return isInFavoriteList ? handleRemoveFromFavorite(starship) : handleAddToFavorite(starship);
+    return handleAddToFavorite(starship);
   };
 
   const handleLoadNextPage = () => {
@@ -101,10 +89,7 @@ const Starships = () => {
       cell: (info) => (
         <i>
           <MdFavorite
-            className={classNames(
-              styles.icon_heart,
-              handleIsInFavoriteList(info.row.original) ? styles.selected : undefined
-            )}
+            className={styles.icon_heart}
             onClick={(e) => handleAddStarshipsToFavorite(e, info.row.original)}
             aria-label="Starships favorite"
           />

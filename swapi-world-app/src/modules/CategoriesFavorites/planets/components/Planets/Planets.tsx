@@ -1,4 +1,5 @@
 import { useAppSelector } from 'common/api/store/hooks';
+import { removeFromPlanetsFavorites } from 'common/api/store/slice/swapiSlice';
 import { IPlanet } from 'common/models';
 import { CategoriesEnum } from 'common/utils/categoriesEnum';
 import { categoriesTitlesKeys } from 'common/utils/categoriesTitlesKeys';
@@ -13,6 +14,7 @@ const Planets = () => {
       categoryDataList={favoritePlanets as PlanetsDataListType}
       dataKeys={categoriesTitlesKeys.planetsKeys}
       categoryName={CategoriesEnum.favoritePlanets}
+      dispatchFunc={removeFromPlanetsFavorites}
     />
   );
 };

@@ -1,7 +1,6 @@
 import { SyntheticEvent, useEffect, useState } from 'react';
 import { MdArrowForwardIos, MdFavorite } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
-import classNames from 'classnames';
 
 import { createColumnHelper } from '@tanstack/react-table';
 
@@ -9,7 +8,6 @@ import { useGetPeopleQuery } from 'common/api/services/swapi';
 import { useAppDispatch, useAppSelector } from 'common/api/store/hooks';
 import {
   addToPeopleFavorites,
-  removeFromPeopleFavorites,
   setPeopleListFromFavorites,
   setPeopleListFromPagination,
 } from 'common/api/store/slice/swapiSlice';
@@ -31,21 +29,11 @@ const People = () => {
   const columnHelper = createColumnHelper<IPerson>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const favoriteList = useAppSelector((state) => state.swapi.favorites.people);
   const peopleList = useAppSelector((state) => state.swapi.people.peopleList) as IPerson[];
-
-  const handleIsInFavoriteList = (person: IPerson) => {
-    const foundPerson = favoriteList?.find((personItem) => personItem.name === person.name);
-    return !!foundPerson;
-  };
 
   const handleAddToFavorite = (person: IPerson) => {
     dispatch(addToPeopleFavorites(person));
     dispatch(setPeopleListFromFavorites({ isFavoriteSelected: true }));
-  };
-
-  const handleRemoveFromFavorite = (person: IPerson) => {
-    dispatch(removeFromPeopleFavorites(person));
   };
 
   const handleAddPeopleToFavorite = (
@@ -54,8 +42,7 @@ const People = () => {
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    const isInFavoriteList = handleIsInFavoriteList(person);
-    return isInFavoriteList ? handleRemoveFromFavorite(person) : handleAddToFavorite(person);
+    return handleAddToFavorite(person);
   };
 
   const handleLoadNextPage = () => {
@@ -122,10 +109,7 @@ const People = () => {
       cell: (info) => (
         <i>
           <MdFavorite
-            className={classNames(
-              styles.icon_heart,
-              handleIsInFavoriteList(info.row.original) ? styles.selected : undefined
-            )}
+            className={styles.icon_heart}
             onClick={(e) => handleAddPeopleToFavorite(e, info.row.original)}
             aria-label="People favorite"
           />

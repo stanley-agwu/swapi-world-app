@@ -18,11 +18,9 @@
   font-size: $fontSizeXXExtraLarge;
   margin-top: calc($space/2);
 
-  &:hover {
+  &:hover,
+  &:focus,
+  &:active {
     fill: var(--tomato-10);
   }
-}
-
-.selected {
-  fill: var(--tomato-10);
 }

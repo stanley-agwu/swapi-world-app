@@ -1,4 +1,5 @@
 import { useAppSelector } from 'common/api/store/hooks';
+import { removeFromPeopleFavorites } from 'common/api/store/slice/swapiSlice';
 import { IPerson } from 'common/models';
 import { CategoriesEnum } from 'common/utils/categoriesEnum';
 import { categoriesTitlesKeys } from 'common/utils/categoriesTitlesKeys';
@@ -13,6 +14,7 @@ const People = () => {
       categoryDataList={favoritePeople as PlanetsDataListType}
       dataKeys={categoriesTitlesKeys.residentKeys}
       categoryName={CategoriesEnum.favoritePeople}
+      dispatchFunc={removeFromPeopleFavorites}
     />
   );
 };

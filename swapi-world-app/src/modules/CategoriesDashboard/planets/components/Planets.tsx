@@ -1,7 +1,6 @@
 import { SyntheticEvent, useEffect, useState } from 'react';
 import { MdArrowForwardIos, MdFavorite } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
-import classNames from 'classnames';
 import moment from 'moment';
 
 import { createColumnHelper } from '@tanstack/react-table';
@@ -30,21 +29,11 @@ const Planets = () => {
   const columnHelper = createColumnHelper<IPlanet>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const favoriteList = useAppSelector((state) => state.swapi.favorites.planets);
   const planetList = useAppSelector((state) => state.swapi.planets.planetList) as IPlanet[];
-
-  const handleIsInFavoriteList = (planet: IPlanet) => {
-    const foundPlanet = favoriteList?.find((planetItem) => planetItem.name === planet.name);
-    return !!foundPlanet;
-  };
 
   const handleAddToFavorite = (planet: IPlanet) => {
     dispatch(addToPlanetsFavorites(planet));
     dispatch(setPlanetListFromFavorites({ isFavoriteSelected: true }));
-  };
-
-  const handleRemoveFromFavorite = (planet: IPlanet) => {
-    dispatch(removeFromPlanetsFavorites(planet));
   };
 
   const handleAddPlanetToFavorite = (
@@ -53,8 +42,7 @@ const Planets = () => {
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    const isInFavoriteList = handleIsInFavoriteList(planet);
-    return isInFavoriteList ? handleRemoveFromFavorite(planet) : handleAddToFavorite(planet);
+    return handleAddToFavorite(planet);
   };
 
   const handleLoadNextPage = () => {
@@ -105,10 +93,7 @@ const Planets = () => {
       cell: (info) => (
         <i>
           <MdFavorite
-            className={classNames(
-              styles.icon_heart,
-              handleIsInFavoriteList(info.row.original) ? styles.selected : undefined
-            )}
+            className={styles.icon_heart}
             onClick={(e) => handleAddPlanetToFavorite(e, info.row.original)}
             aria-label="Planets favorite"
           />

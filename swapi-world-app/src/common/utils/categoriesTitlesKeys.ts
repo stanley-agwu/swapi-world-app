@@ -3,7 +3,7 @@ interface CategoriesTitlesKeys {
 }
 
 export const categoriesTitlesKeys: CategoriesTitlesKeys = {
-  planetsKeys: ['name', 'terrain', 'population', 'created'],
+  planetsKeys: ['name', 'terrain', 'population', 'climate'],
   filmsKeys: ['title', 'director', 'producer', 'release_date'],
   residentKeys: ['name', 'birth_year', 'gender', 'skin_color', 'hair_color'],
   pilotsKeys: ['name', 'birth_year', 'gender', 'skin_color', 'hair_color'],

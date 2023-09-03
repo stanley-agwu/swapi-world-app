@@ -1,21 +1,33 @@
+import { MdFavorite } from 'react-icons/md';
+import { ActionCreator } from 'redux';
+
 import { Grid } from '@mui/material';
 
+import { useAppDispatch } from 'common/api/store/hooks';
 import GenericNotFound from 'common/components/GenericNotFound/GenericNotFound';
 import { IPerson, IPlanet, IStarship } from 'common/models';
 import { categoriesTitles } from 'common/utils/categoritesTitleConfig';
 
 import styles from './FavoritesItem.module.scss';
 
-type CategoryType = IPlanet[] | IPerson[] | IStarship[];
-type StringKeyValueType = { [key: string]: string }[];
+type CategoriesType = IPlanet[] | IPerson[] | IStarship[];
+type StringKeyValueType = { [key: string]: string };
+type CategoryType = (IPlanet | IPerson | IStarship) & StringKeyValueType;
 
 interface FavoritesItemProps {
-  categoryDataList: CategoryType & StringKeyValueType;
+  categoryDataList: CategoriesType & StringKeyValueType[];
   dataKeys: string[];
   categoryName: string;
+  dispatchFunc: ActionCreator<any>;
 }
 
-const FavoritesItem = ({ categoryDataList, dataKeys, categoryName }: FavoritesItemProps) => {
+const FavoritesItem = ({
+  categoryDataList,
+  dataKeys,
+  categoryName,
+  dispatchFunc,
+}: FavoritesItemProps) => {
+  const dispatch = useAppDispatch();
   if (!categoryDataList.length) {
     return (
       <GenericNotFound
@@ -24,6 +36,10 @@ const FavoritesItem = ({ categoryDataList, dataKeys, categoryName }: FavoritesIt
       />
     );
   }
+
+  const handleRemoveFromFavorite = (category: CategoryType) => {
+    dispatch(dispatchFunc(category as IPlanet | IPerson | IStarship));
+  };
 
   return (
     <Grid container className={styles.favorites}>
@@ -34,6 +50,9 @@ const FavoritesItem = ({ categoryDataList, dataKeys, categoryName }: FavoritesIt
               {categoriesTitles[key]}
             </Grid>
           ))}
+          <Grid item xs={12} className={styles.title}>
+            Remove
+          </Grid>
         </Grid>
         {categoryDataList.map((data, index) => (
           <Grid item xs={12} className={styles.item} key={index}>
@@ -42,6 +61,11 @@ const FavoritesItem = ({ categoryDataList, dataKeys, categoryName }: FavoritesIt
                 {data[key]}
               </Grid>
             ))}
+            <MdFavorite
+              className={styles.icon_heart}
+              onClick={() => handleRemoveFromFavorite(data as CategoryType)}
+              aria-label="People favorite"
+            />
           </Grid>
         ))}
       </Grid>

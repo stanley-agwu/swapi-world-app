@@ -33,4 +33,12 @@
       font-weight: 300;
     }
   }
+
+  .icon_heart {
+    fill: var(--slate-7);
+    font-size: $fontSizeXXExtraLarge;
+    margin-top: calc($space/2);
+    cursor: pointer;
+    fill: var(--tomato-10);
+  }
 }

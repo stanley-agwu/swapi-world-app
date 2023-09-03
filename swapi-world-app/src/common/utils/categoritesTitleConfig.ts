@@ -26,4 +26,5 @@ export const categoriesTitles: CategoriesTitles = {
   terrain: 'Terrain',
   population: 'Population',
   created: 'Date created',
+  climate: 'Climate',
 };

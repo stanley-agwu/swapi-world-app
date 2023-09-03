@@ -1,4 +1,5 @@
 import { useAppSelector } from 'common/api/store/hooks';
+import { removeFromStarshipFavorites } from 'common/api/store/slice/swapiSlice';
 import { IStarship } from 'common/models';
 import { CategoriesEnum } from 'common/utils/categoriesEnum';
 import { categoriesTitlesKeys } from 'common/utils/categoriesTitlesKeys';
@@ -13,6 +14,7 @@ const Starships = () => {
       categoryDataList={favoriteStarships as PlanetsDataListType}
       dataKeys={categoriesTitlesKeys.starshipsKeys}
       categoryName={CategoriesEnum.favoriteStarships}
+      dispatchFunc={removeFromStarshipFavorites}
     />
   );
 };
