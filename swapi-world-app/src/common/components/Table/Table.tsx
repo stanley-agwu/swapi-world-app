@@ -1,4 +1,5 @@
-import { UIEvent, useMemo } from 'react';
+import { UIEvent, useCallback, useMemo } from 'react';
+import { throttle } from 'lodash';
 
 import {
   ColumnDef,
@@ -18,6 +19,7 @@ export interface TableProps {
   tableData: IPlanet[] | IPerson[] | IStarship[] | undefined;
   tableColumns: ColumnDef<any, any>[];
   hasNextPage: boolean;
+  shouldLoadNextPage?: boolean;
   initialState?: VisibilityTableState;
   onLoadNextPage: () => void;
   onHandleRowClick: (id: string) => void;
@@ -28,6 +30,7 @@ const Table = ({
   tableData = [],
   tableColumns = [],
   hasNextPage = false,
+  shouldLoadNextPage = false,
   initialState,
   onLoadNextPage,
   onHandleRowClick,
@@ -50,7 +53,9 @@ const Table = ({
       .reverse()[0];
     onHandleRowClick(id);
   };
-  const handleLoadNextpage = () => onLoadNextPage();
+  const handleLoadNextpage = () => {
+    return onLoadNextPage();
+  };
 
   const onScrollEventHandler = (e: UIEvent<HTMLDivElement>) => {
     const targetElement = e.target as HTMLElement;
@@ -62,8 +67,21 @@ const Table = ({
     }
   };
 
+  const throttledCallback = useCallback(throttle(handleLoadNextpage, Infinity), []);
+
+  const onHandleMouseOver = () => {
+    if (shouldLoadNextPage) {
+      return throttledCallback();
+    }
+    return null;
+  };
+
   return (
-    <div className={styles.tableWrapper} onScroll={onScrollEventHandler}>
+    <div
+      className={styles.tableWrapper}
+      onScroll={onScrollEventHandler}
+      onMouseOver={onHandleMouseOver}
+    >
       <table className={styles.table}>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (

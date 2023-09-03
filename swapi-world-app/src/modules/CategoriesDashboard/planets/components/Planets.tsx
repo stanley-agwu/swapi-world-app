@@ -22,6 +22,7 @@ import { IPlanet } from 'common/models';
 import styles from './Planets.module.scss';
 
 const Planets = () => {
+  const [shouldLoadNextPage, setShouldLoadNextPage] = useState(false);
   const [pageNumber, setPageNumer] = useState<number>(
     useAppSelector((state) => state.swapi.planets.pageNumber) || 1
   );
@@ -127,10 +128,16 @@ const Planets = () => {
   ];
 
   useEffect(() => {
+    if (Boolean(data?.next) && planetList.length < 9) {
+      setShouldLoadNextPage(true);
+    }
+    if (planetList.length >= 9) {
+      setShouldLoadNextPage(false);
+    }
     if (data?.results) {
       dispatch(setPlanetListFromPagination({ data: data?.results, pageNumber }));
     }
-  }, [data?.results]);
+  }, [data?.results, planetList.length]);
 
   if (isLoading) {
     return <PageLoader width={100} height={100} className={styles.loaderContainer} />;
@@ -143,6 +150,7 @@ const Planets = () => {
         tableColumns={columns}
         hasNextPage={Boolean(data?.next)}
         onLoadNextPage={handleLoadNextPage}
+        shouldLoadNextPage={shouldLoadNextPage}
         onHandleRowClick={handleRowClick}
         gridColumnsCustomization="1fr 1fr 1fr 1.5fr 1fr 1fr 0.5fr 0.25fr"
       />
