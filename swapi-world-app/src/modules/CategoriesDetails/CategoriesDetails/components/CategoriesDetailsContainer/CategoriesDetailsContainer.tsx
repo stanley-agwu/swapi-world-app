@@ -12,15 +12,11 @@ import styles from './CategoriesDetailsContainer.module.scss';
 
 const CategoriesDetailsContainer = () => {
   const { id, title } = useAppSelector((state) => state.swapi.category);
-  const handleCategoryChange = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-  };
   return (
     <div className={styles.categoriesDetailsContainer}>
       <CategoriesLabelItem
         category={getCategoriesDetailsTitle(title as CategoriesEnum)}
         activeCategory={title}
-        handleCategoryChange={handleCategoryChange}
         classname={styles.categoriesDetailsItem}
       />
       {id ? (

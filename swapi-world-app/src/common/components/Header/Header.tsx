@@ -37,24 +37,15 @@ const Header = () => (
             Favorites <CaretDownIcon className={styles.CaretDown} aria-hidden />
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className={styles.NavigationMenuContent}>
-            <ul className={classNames(styles.List, styles.two)}>
-              <ListItem title="Introduction" path="/">
-                Build high-quality, accessible design systems and web apps.
+            <ul className={classNames(styles.List, styles.one)}>
+              <ListItem path={coreConfig.routes.favorites.path.planets} title="Planets">
+                Favorite planet or planetoid in the Star Wars Universe.
               </ListItem>
-              <ListItem title="Getting started" path="/">
-                A quick tutorial to get you up and running with Radix Primitives.
+              <ListItem path={coreConfig.routes.favorites.path.people} title="People">
+                Favorite person or character within the Star Wars universe.
               </ListItem>
-              <ListItem title="Styling" path="/">
-                Unstyled and compatible with any styling solution.
-              </ListItem>
-              <ListItem title="Animation" path="/">
-                Use CSS keyframes or any animation library of your choice.
-              </ListItem>
-              <ListItem title="Accessibility" path="/">
-                Tested in a range of browsers and assistive technologies.
-              </ListItem>
-              <ListItem title="Releases" path="/">
-                Radix Primitives releases and their changelogs.
+              <ListItem path={coreConfig.routes.favorites.path.starships} title="Starships">
+                Favorite transport craft that has hyperdrive capability.
               </ListItem>
             </ul>
           </NavigationMenu.Content>

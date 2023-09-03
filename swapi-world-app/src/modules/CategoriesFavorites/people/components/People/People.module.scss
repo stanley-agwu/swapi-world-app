@@ -1,0 +1,48 @@
+@import 'styles/main';
+
+.person {
+  padding: 0 $space-2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: $space-3;
+
+  .details {
+    background: var(--slate-1);
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.2);
+    border-radius: $space;
+    width: 100%;
+    padding: $space-3 $space-2;
+    margin: 0;
+
+    .item {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: $space $space-2 $space $space-4;
+
+      .title,
+      .value {
+        width: 50%;
+        text-align: left;
+      }
+
+      .title {
+        color: var(--gray-9);
+        font-weight: 300;
+      }
+
+      .value {
+        color: var(--slate-12);
+      }
+    }
+  }
+
+  .categoryTitle {
+    padding: $space;
+    font-size: $fontSizeLarge;
+    font-weight: $fontWeightSemiBold;
+    color: var(--slate-12);
+  }
+}

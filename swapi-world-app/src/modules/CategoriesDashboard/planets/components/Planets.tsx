@@ -29,28 +29,31 @@ const Planets = () => {
   const columnHelper = createColumnHelper<IPlanet>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const favoriteList = useAppSelector((state) => state.swapi.favorites.planets) as string[];
+  const favoriteList = useAppSelector((state) => state.swapi.favorites.planets);
   const planetList = useAppSelector((state) => state.swapi.planets.planetList) as IPlanet[];
 
-  const handleIsInFavoriteList = (name: string): boolean => favoriteList.includes(name);
+  const handleIsInFavoriteList = (planet: IPlanet) => {
+    const foundPlanet = favoriteList?.find((planetItem) => planetItem.name === planet.name);
+    return !!foundPlanet;
+  };
 
-  const handleAddToFavorite = (name: string) => {
-    dispatch(addToPlanetsFavorites(name));
+  const handleAddToFavorite = (planet: IPlanet) => {
+    dispatch(addToPlanetsFavorites(planet));
     dispatch(setPlanetListFromFavorites({ isFavoriteSelected: true }));
   };
 
-  const handleRemoveFromFavorite = (name: string) => {
-    dispatch(removeFromPlanetsFavorites(name));
+  const handleRemoveFromFavorite = (planet: IPlanet) => {
+    dispatch(removeFromPlanetsFavorites(planet));
   };
 
   const handleAddPlanetToFavorite = (
     e: SyntheticEvent<SVGElement, globalThis.MouseEvent>,
-    name: string
+    planet: IPlanet
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    const isInFavoriteList = handleIsInFavoriteList(name);
-    return isInFavoriteList ? handleRemoveFromFavorite(name) : handleAddToFavorite(name);
+    const isInFavoriteList = handleIsInFavoriteList(planet);
+    return isInFavoriteList ? handleRemoveFromFavorite(planet) : handleAddToFavorite(planet);
   };
 
   const handleLoadNextPage = () => {
@@ -96,16 +99,16 @@ const Planets = () => {
       ),
       header: () => <span>Date created</span>,
     }),
-    columnHelper.accessor((row) => row.name, {
+    columnHelper.accessor((row) => row, {
       id: 'icon_heart',
       cell: (info) => (
         <i>
           <MdFavorite
             className={classNames(
               styles.icon_heart,
-              handleIsInFavoriteList(info.getValue()) ? styles.selected : undefined
+              handleIsInFavoriteList(info.row.original) ? styles.selected : undefined
             )}
-            onClick={(e) => handleAddPlanetToFavorite(e, info.getValue())}
+            onClick={(e) => handleAddPlanetToFavorite(e, info.row.original)}
             aria-label="Planets favorite"
           />
         </i>

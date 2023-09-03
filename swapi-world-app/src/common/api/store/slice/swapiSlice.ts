@@ -44,23 +44,26 @@ export const swapiSlice = createSlice({
     },
     setPlanetListFromPagination: (state: IAppState, { payload }) => {
       const { data, pageNumber } = payload;
-      pageNumber === state.planets.pageNumber
-        ? state.planets
-        : {
-            planetList: getCategoryWithoutFavorites(
-              [...state.planets.planetList, ...data],
-              state.favorites.planets
-            ) as IPlanet[],
-            pageNumber,
-          };
+      const favoritesPlanetsList = state.favorites.planets?.map((planet) => planet.name);
+      state.planets =
+        pageNumber === state.planets.pageNumber
+          ? state.planets
+          : {
+              planetList: getCategoryWithoutFavorites(
+                [...state.planets.planetList, ...data],
+                favoritesPlanetsList
+              ) as IPlanet[],
+              pageNumber,
+            };
     },
     setPlanetListFromFavorites: (state: IAppState, { payload }) => {
       const { isFavoriteSelected } = payload;
+      const favoritesPlanetsList = state.favorites.planets.map((planet) => planet.name);
       state.planets = isFavoriteSelected
         ? {
             planetList: getCategoryWithoutFavorites(
               state.planets.planetList,
-              state.favorites.planets
+              favoritesPlanetsList
             ) as IPlanet[],
             pageNumber: state.planets.pageNumber,
           }
@@ -82,11 +85,12 @@ export const swapiSlice = createSlice({
     },
     setPeopleListFromFavorites: (state: IAppState, { payload }) => {
       const { isFavoriteSelected } = payload;
+      const favoritesPeopleList = state.favorites.people.map((person) => person.name);
       state.people = isFavoriteSelected
         ? {
             peopleList: getCategoryWithoutFavorites(
               state.people.peopleList,
-              state.favorites.people
+              favoritesPeopleList
             ) as IPerson[],
             pageNumber: state.people.pageNumber,
           }
@@ -108,11 +112,12 @@ export const swapiSlice = createSlice({
     },
     setStarshipListFromFavorites: (state: IAppState, { payload }) => {
       const { isFavoriteSelected } = payload;
+      const favoritesStarshipList = state.favorites.starships.map((starship) => starship.name);
       state.starships = isFavoriteSelected
         ? {
             starshipList: getCategoryWithoutFavorites(
               state.starships.starshipList,
-              state.favorites.starships
+              favoritesStarshipList
             ) as IStarship[],
             pageNumber: state.starships.pageNumber,
           }

@@ -5,4 +5,7 @@ export enum CategoriesEnum {
   planet = 'planet',
   person = 'person',
   starship = 'starship',
+  favoritePlanets = 'favorite planets',
+  favoritePeople = 'favorite people',
+  favoriteStarships = 'favorite starships',
 }

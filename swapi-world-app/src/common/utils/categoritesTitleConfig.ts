@@ -23,4 +23,7 @@ export const categoriesTitles: CategoriesTitles = {
   passengers: 'Passengers size',
   model: 'Model',
   consumables: 'Consumables',
+  terrain: 'Terrain',
+  population: 'Population',
+  created: 'Date created',
 };

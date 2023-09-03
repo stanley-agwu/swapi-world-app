@@ -157,9 +157,9 @@ export interface IAppState {
     id?: string;
   };
   favorites: {
-    planets: string[] | [];
-    people: string[] | [];
-    starships: string[] | [];
+    planets: IPlanet[] | [];
+    people: IPerson[] | [];
+    starships: IStarship[] | [];
   };
   planets: {
     planetList: IPlanet[] | [];

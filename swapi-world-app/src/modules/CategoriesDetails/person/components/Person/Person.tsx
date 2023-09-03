@@ -1,9 +1,10 @@
 import { Grid } from '@mui/material';
 
 import { useGetPersonQuery } from 'common/api/services/swapi';
+import Back from 'common/components/Back/Back';
 import PageLoader from 'common/components/Loader/PageLoader';
 import { coreConfig } from 'common/core/config';
-import Back from 'modules/CategoriesDetails/components/Back/Back';
+import { categoriesTitlesKeys } from 'common/utils/categoriesTitlesKeys';
 import DetailsItem from 'modules/CategoriesDetails/components/DetailsItem/DetailsItem';
 import { formatUTCDate } from 'modules/CategoriesDetails/utils/common';
 
@@ -19,11 +20,6 @@ const Person = ({ id }: PersonProps) => {
   if (isLoading) {
     return <PageLoader width={100} height={100} className={styles.loaderContainer} />;
   }
-
-  const filmsKeys = ['title', 'director', 'producer', 'release_date'];
-  const speciesKeys = ['name', 'classification', 'designation', 'average_height', 'language'];
-  const starshipsKeys = ['name', 'manufacturer', 'crew', 'passengers'];
-  const vehiclesKeys = ['name', 'model', 'manufacturer', 'crew', 'passengers', 'consumables'];
 
   return (
     <div className={styles.person}>
@@ -101,7 +97,7 @@ const Person = ({ id }: PersonProps) => {
         <div className={styles.categoryTitle}>Starships</div>
         <DetailsItem
           dataList={data?.starships as string[]}
-          dataKeys={starshipsKeys}
+          dataKeys={categoriesTitlesKeys.starshipsKeys}
           category={{ name: 'starships', domain: 'person' }}
         />
       </Grid>
@@ -109,7 +105,7 @@ const Person = ({ id }: PersonProps) => {
         <div className={styles.categoryTitle}>Vehicles</div>
         <DetailsItem
           dataList={data?.vehicles as string[]}
-          dataKeys={vehiclesKeys}
+          dataKeys={categoriesTitlesKeys.vehiclesKeys}
           category={{ name: 'vehicles', domain: 'person' }}
         />
       </Grid>
@@ -117,7 +113,7 @@ const Person = ({ id }: PersonProps) => {
         <div className={styles.categoryTitle}>Films</div>
         <DetailsItem
           dataList={data?.films as string[]}
-          dataKeys={filmsKeys}
+          dataKeys={categoriesTitlesKeys.filmsKeys}
           category={{ name: 'films', domain: 'person' }}
         />
       </Grid>
@@ -125,7 +121,7 @@ const Person = ({ id }: PersonProps) => {
         <div className={styles.categoryTitle}>Species</div>
         <DetailsItem
           dataList={data?.species as string[]}
-          dataKeys={speciesKeys}
+          dataKeys={categoriesTitlesKeys.speciesKeys}
           category={{ name: 'species', domain: 'person' }}
         />
       </Grid>

@@ -9,7 +9,7 @@ interface CategoriesLabelItemProps extends ButtonHTMLAttributes<HTMLButtonElemen
   category: CategoriesEnum | undefined;
   activeCategory: string | undefined;
   classname?: string;
-  handleCategoryChange: (e: MouseEvent<HTMLButtonElement>) => void;
+  handleCategoryChange?: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 const CategoriesLabelItem = ({
@@ -27,7 +27,7 @@ const CategoriesLabelItem = ({
       activeCategory === category ? styles.active : undefined
     )}
     aria-label={category}
-    onClick={(e) => handleCategoryChange(e)}
+    onClick={(e) => (handleCategoryChange ? handleCategoryChange(e) : undefined)}
   >
     {category}
   </button>

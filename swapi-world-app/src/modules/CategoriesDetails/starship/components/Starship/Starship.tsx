@@ -1,9 +1,10 @@
 import { Grid } from '@mui/material';
 
 import { useGetStarshipQuery } from 'common/api/services/swapi';
+import Back from 'common/components/Back/Back';
 import PageLoader from 'common/components/Loader/PageLoader';
 import { coreConfig } from 'common/core/config';
-import Back from 'modules/CategoriesDetails/components/Back/Back';
+import { categoriesTitlesKeys } from 'common/utils/categoriesTitlesKeys';
 import DetailsItem from 'modules/CategoriesDetails/components/DetailsItem/DetailsItem';
 import { formatUTCDate } from 'modules/CategoriesDetails/utils/common';
 
@@ -19,9 +20,6 @@ const Starship = ({ id }: StarshipProps) => {
   if (isLoading) {
     return <PageLoader width={100} height={100} className={styles.loaderContainer} />;
   }
-
-  const filmsKeys = ['title', 'director', 'producer', 'release_date'];
-  const pilotsKeys = ['name', 'birth_year', 'gender', 'skin_color', 'hair_color'];
 
   return (
     <div className={styles.starship}>
@@ -107,7 +105,7 @@ const Starship = ({ id }: StarshipProps) => {
         <div className={styles.categoryTitle}>Films</div>
         <DetailsItem
           dataList={data?.films as string[]}
-          dataKeys={filmsKeys}
+          dataKeys={categoriesTitlesKeys.filmsKeys}
           category={{ name: 'films', domain: 'starship' }}
         />
       </Grid>
@@ -115,7 +113,7 @@ const Starship = ({ id }: StarshipProps) => {
         <div className={styles.categoryTitle}>Pilots</div>
         <DetailsItem
           dataList={data?.pilots as string[]}
-          dataKeys={pilotsKeys}
+          dataKeys={categoriesTitlesKeys.pilotsKeys}
           category={{ name: 'pilots', domain: 'starship' }}
         />
       </Grid>
