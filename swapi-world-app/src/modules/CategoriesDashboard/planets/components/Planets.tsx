@@ -14,8 +14,10 @@ import {
 } from 'common/api/store/slice/swapiSlice';
 import PageLoader from 'common/components/Loader/PageLoader';
 import Table from 'common/components/Table/Table';
+import { showError } from 'common/components/Toast';
 import { coreConfig } from 'common/core/config';
 import { IPlanet } from 'common/models';
+import { Notification } from 'common/utils/messages';
 
 import styles from './Planets.module.scss';
 
@@ -24,7 +26,7 @@ const Planets = () => {
   const [pageNumber, setPageNumer] = useState<number>(
     useAppSelector((state) => state.swapi.planets.pageNumber) || 1
   );
-  const { isLoading, data } = useGetPlanetsQuery(`${pageNumber}`);
+  const { isLoading, data, isError } = useGetPlanetsQuery(`${pageNumber}`);
   const columnHelper = createColumnHelper<IPlanet>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -125,6 +127,10 @@ const Planets = () => {
 
   if (isLoading) {
     return <PageLoader width={100} height={100} className={styles.loaderContainer} />;
+  }
+
+  if (isError) {
+    showError(Notification.error.title, Notification.error.message);
   }
 
   return (

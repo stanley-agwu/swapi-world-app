@@ -3,8 +3,10 @@ import { Grid } from '@mui/material';
 import { useGetStarshipQuery } from 'common/api/services/swapi';
 import Back from 'common/components/Back/Back';
 import PageLoader from 'common/components/Loader/PageLoader';
+import { showError } from 'common/components/Toast';
 import { coreConfig } from 'common/core/config';
 import { categoriesTitlesKeys } from 'common/utils/categoriesTitlesKeys';
+import { Notification } from 'common/utils/messages';
 import DetailsItem from 'modules/CategoriesDetails/components/DetailsItem/DetailsItem';
 import { formatUTCDate } from 'modules/CategoriesDetails/utils/common';
 
@@ -15,10 +17,14 @@ interface StarshipProps {
 }
 
 const Starship = ({ id }: StarshipProps) => {
-  const { isLoading, data } = useGetStarshipQuery(id);
+  const { isLoading, data, isError } = useGetStarshipQuery(id);
 
   if (isLoading) {
     return <PageLoader width={100} height={100} className={styles.loaderContainer} />;
+  }
+
+  if (isError) {
+    showError(Notification.error.title, Notification.error.message);
   }
 
   return (

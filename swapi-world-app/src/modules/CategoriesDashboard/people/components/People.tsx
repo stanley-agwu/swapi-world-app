@@ -13,8 +13,10 @@ import {
 } from 'common/api/store/slice/swapiSlice';
 import PageLoader from 'common/components/Loader/PageLoader';
 import Table from 'common/components/Table/Table';
+import { showError } from 'common/components/Toast/toastShowUtils/toastShowUtils';
 import { coreConfig } from 'common/core/config';
 import { IPerson, IPlanet } from 'common/models';
+import { Notification } from 'common/utils/messages';
 
 import Avatar from './NameTag/Avatar';
 
@@ -25,7 +27,7 @@ const People = () => {
   const [pageNumber, setPageNumer] = useState<number>(
     useAppSelector((state) => state.swapi.people.pageNumber) || 1
   );
-  const { isLoading, data } = useGetPeopleQuery(`${pageNumber}`);
+  const { isLoading, data, isError } = useGetPeopleQuery(`${pageNumber}`);
   const columnHelper = createColumnHelper<IPerson>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -142,6 +144,10 @@ const People = () => {
 
   if (isLoading) {
     return <PageLoader width={100} height={100} className={styles.loaderContainer} />;
+  }
+
+  if (isError) {
+    showError(Notification.error.title, Notification.error.message);
   }
 
   return (

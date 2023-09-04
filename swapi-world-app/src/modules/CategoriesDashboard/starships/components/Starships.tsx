@@ -13,8 +13,10 @@ import {
 } from 'common/api/store/slice/swapiSlice';
 import PageLoader from 'common/components/Loader/PageLoader';
 import Table from 'common/components/Table/Table';
+import { showError } from 'common/components/Toast';
 import { coreConfig } from 'common/core/config';
 import { IPlanet, IStarship } from 'common/models';
+import { Notification } from 'common/utils/messages';
 
 import styles from './Starships.module.scss';
 
@@ -23,7 +25,7 @@ const Starships = () => {
   const [pageNumber, setPageNumer] = useState<number>(
     useAppSelector((state) => state.swapi.starships.pageNumber) || 1
   );
-  const { isLoading, data } = useGetStarshipsQuery(`${pageNumber}`);
+  const { isLoading, data, isError } = useGetStarshipsQuery(`${pageNumber}`);
   const columnHelper = createColumnHelper<IStarship>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -122,6 +124,10 @@ const Starships = () => {
 
   if (isLoading) {
     return <PageLoader width={100} height={100} className={styles.loaderContainer} />;
+  }
+
+  if (isError) {
+    showError(Notification.error.title, Notification.error.message);
   }
 
   return (
