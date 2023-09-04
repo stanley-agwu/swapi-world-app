@@ -39,10 +39,11 @@ export const swapiSlice = createSlice({
       state.favorites.planets = [...state.favorites.planets, payload];
     },
     removeFromPlanetsFavorites: (state: IAppState, { payload }: { payload: IPlanet }) => {
-      const filteredList = state.favorites.planets?.filter(
+      const filteredFavoritesList = state.favorites.planets?.filter(
         (favorite) => favorite.name !== payload.name
       );
-      state.favorites.planets = filteredList;
+      state.favorites.planets = filteredFavoritesList;
+      state.planets.planetList = [...state.planets.planetList, payload];
     },
     setPlanetListFromPagination: (state: IAppState, { payload }) => {
       const { data, pageNumber } = payload;
@@ -79,6 +80,7 @@ export const swapiSlice = createSlice({
         (favorite) => favorite.name !== payload.name
       );
       state.favorites.people = filteredList;
+      state.people.peopleList = [...state.people.peopleList, payload];
     },
     setPeopleListFromPagination: (state: IAppState, { payload }) => {
       const { data, pageNumber } = payload;
@@ -115,6 +117,7 @@ export const swapiSlice = createSlice({
         (favorite) => favorite.name !== payload.name
       );
       state.favorites.starships = filteredList;
+      state.starships.starshipList = [...state.starships.starshipList, payload];
     },
     setStarshipListFromPagination: (state: IAppState, { payload }) => {
       const { data, pageNumber } = payload;

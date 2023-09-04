@@ -9,7 +9,6 @@ import { useGetPlanetsQuery } from 'common/api/services/swapi';
 import { useAppDispatch, useAppSelector } from 'common/api/store/hooks';
 import {
   addToPlanetsFavorites,
-  removeFromPlanetsFavorites,
   setPlanetListFromFavorites,
   setPlanetListFromPagination,
 } from 'common/api/store/slice/swapiSlice';
