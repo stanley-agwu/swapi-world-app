@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import 'common/utils/extensions';
 
 import Header from 'common/components/Header/Header';
+import Toast from 'common/components/Toast/Toast';
 import { coreConfig } from 'common/core/config';
 import useSetCategoriesFromRoute from 'common/hooks/useSetCategoriesFromRoute';
 import CategoriesDashboardContainer from 'modules/CategoriesDashboard/CategoriesDashboard/components/CategoriesDashboardContainer';
@@ -22,6 +23,7 @@ function App() {
         <Route path={coreConfig.routes.favorites.root} element={<CategoriesFavoritesContainer />} />
         <Route path="*" element={<CategoriesDashboardContainer />} />
       </Routes>
+      <Toast />
     </div>
   );
 }

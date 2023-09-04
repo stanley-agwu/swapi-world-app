@@ -5,8 +5,10 @@ import { Grid } from '@mui/material';
 
 import { useAppDispatch } from 'common/api/store/hooks';
 import GenericNotFound from 'common/components/GenericNotFound/GenericNotFound';
+import { showInformation } from 'common/components/Toast';
 import { IPerson, IPlanet, IStarship } from 'common/models';
 import { categoriesTitles } from 'common/utils/categoritesTitleConfig';
+import { Notification } from 'common/utils/messages';
 
 import styles from './FavoritesItem.module.scss';
 
@@ -39,6 +41,7 @@ const FavoritesItem = ({
 
   const handleRemoveFromFavorite = (category: CategoryType) => {
     dispatch(dispatchFunc(category as IPlanet | IPerson | IStarship));
+    showInformation(Notification.info.title, Notification.info.message);
   };
 
   return (

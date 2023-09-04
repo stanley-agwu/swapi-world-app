@@ -14,7 +14,7 @@ import {
 } from 'common/api/store/slice/swapiSlice';
 import PageLoader from 'common/components/Loader/PageLoader';
 import Table from 'common/components/Table/Table';
-import { showError } from 'common/components/Toast';
+import { showError, showSuccess } from 'common/components/Toast';
 import { coreConfig } from 'common/core/config';
 import { IPlanet } from 'common/models';
 import { Notification } from 'common/utils/messages';
@@ -35,6 +35,7 @@ const Planets = () => {
   const handleAddToFavorite = (planet: IPlanet) => {
     dispatch(addToPlanetsFavorites(planet));
     dispatch(setPlanetListFromFavorites({ isFavoriteSelected: true }));
+    showSuccess(Notification.success.title, Notification.success.message);
   };
 
   const handleAddPlanetToFavorite = (
