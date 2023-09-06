@@ -1,11 +1,12 @@
-import React from 'react';
-
-import { render, screen } from '@testing-library/react';
+import store from 'tests/store';
+import { render, screen } from 'tests/test-utils';
 
 import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('App', () => {
+  it('render Planets as default view', async () => {
+    render(<App />, { store: store() });
+    expect(await screen.findByText('Planets')).toBeInTheDocument();
+    expect(await screen.findByText('Climate')).toBeInTheDocument();
+  });
 });
