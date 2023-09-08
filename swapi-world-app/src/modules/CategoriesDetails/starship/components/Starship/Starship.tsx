@@ -20,7 +20,7 @@ const Starship = ({ id }: StarshipProps) => {
   const { isLoading, data, isError } = useGetStarshipQuery(id);
 
   if (isLoading) {
-    return <PageLoader width={100} height={100} className={styles.loaderContainer} />;
+    return <PageLoader className={styles.loaderContainer} />;
   }
 
   if (isError) {

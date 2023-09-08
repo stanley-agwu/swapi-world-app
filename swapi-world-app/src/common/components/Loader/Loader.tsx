@@ -8,7 +8,7 @@ export interface LoaderProps {
   height?: number;
 }
 
-const Loader = ({ width = 80, height = 80, className, ...props }: LoaderProps): JSX.Element => {
+const Loader = ({ width = 100, height = 100, className, ...props }: LoaderProps): JSX.Element => {
   const defaultOptions = {
     ...props,
     loop: true,

@@ -119,7 +119,7 @@ const Table = ({
           ))}
         </tbody>
       </table>
-      {hasNextPage ? <Loader width={80} height={80} className={styles.loader} /> : null}
+      {hasNextPage ? <Loader className={styles.loader} /> : null}
     </div>
   );
 };

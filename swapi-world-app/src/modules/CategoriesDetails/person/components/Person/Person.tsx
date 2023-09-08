@@ -20,7 +20,7 @@ const Person = ({ id }: PersonProps) => {
   const { isLoading, data, isError } = useGetPersonQuery(id);
 
   if (isLoading) {
-    return <PageLoader width={100} height={100} className={styles.loaderContainer} />;
+    return <PageLoader className={styles.loaderContainer} />;
   }
 
   if (isError) {

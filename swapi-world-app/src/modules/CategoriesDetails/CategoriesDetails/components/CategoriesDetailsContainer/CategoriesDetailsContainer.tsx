@@ -15,11 +15,7 @@ const CategoriesDetailsContainer = () => {
         activeCategory={title}
         classname={styles.categoriesDetailsItem}
       />
-      {id ? (
-        <CategoriesDetailsItem id={id} />
-      ) : (
-        <PageLoader width={100} height={100} className={styles.loaderContainer} />
-      )}
+      {id ? <CategoriesDetailsItem id={id} /> : <PageLoader className={styles.loaderContainer} />}
     </div>
   );
 };
