@@ -1,0 +1,28 @@
+{
+  "name": "graphql-project",
+  "version": "1.0.0",
+  "description": "A GraphQL project, using ReactJS front-end, ExpressJS and NodeJS backend and MongoDB database.",
+  "main": "app.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node app",
+    "dev": "cross-env NODE_ENV=development nodemon app"
+  },
+  "keywords": [
+    "query",
+    "rendering",
+    "authorization"
+  ],
+  "author": "Stanley Agwu",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.11.0",
+    "graphql": "^15.3.0",
+    "lodash": "^4.17.20",
+    "mongoose": "^5.10.7",
+    "morgan": "^1.10.0"
+  }
+}
