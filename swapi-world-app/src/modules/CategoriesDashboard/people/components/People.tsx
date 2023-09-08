@@ -107,7 +107,7 @@ const People = () => {
       cell: (info) => <i>{info.getValue()}</i>,
       header: () => <span>Gender</span>,
     }),
-    columnHelper.accessor((row) => row, {
+    columnHelper.accessor((row: IPerson) => row, {
       id: 'icon_heart',
       cell: (info) => (
         <i>
