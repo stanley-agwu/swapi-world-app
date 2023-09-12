@@ -68,11 +68,6 @@ const Planets = () => {
       cell: (info) => <i>{info.getValue()}</i>,
       header: () => <span>Climate</span>,
     }),
-    columnHelper.accessor((row) => row.gravity, {
-      id: 'gravity',
-      cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Gravity</span>,
-    }),
     columnHelper.accessor((row) => row.terrain, {
       id: 'terrain',
       cell: (info) => <i>{info.getValue()}</i>,
@@ -143,7 +138,7 @@ const Planets = () => {
         onLoadNextPage={handleLoadNextPage}
         shouldLoadNextPage={shouldLoadNextPage}
         onHandleRowClick={handleRowClick}
-        gridColumnsCustomization="1fr 1fr 1fr 1.5fr 1fr 1fr 0.5fr 0.25fr"
+        gridColumnsCustomization="1fr 1fr 1.5fr 1.5fr 1fr 0.5fr 0.25fr"
       />
     </div>
   );

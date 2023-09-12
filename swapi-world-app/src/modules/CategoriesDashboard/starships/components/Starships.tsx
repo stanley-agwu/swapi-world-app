@@ -77,11 +77,6 @@ const Starships = () => {
       cell: (info) => <i>{info.getValue()}</i>,
       header: () => <span>Cost</span>,
     }),
-    columnHelper.accessor((row) => row.cargo_capacity, {
-      id: 'cargo_capacity',
-      cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Cargo capacity</span>,
-    }),
     columnHelper.accessor((row) => row.consumables, {
       id: 'consumables',
       cell: (info) => <i>{info.getValue()}</i>,
@@ -140,7 +135,7 @@ const Starships = () => {
         shouldLoadNextPage={shouldLoadNextPage}
         onLoadNextPage={handleLoadNextPage}
         onHandleRowClick={handleRowClick}
-        gridColumnsCustomization="repeat(6, 1fr) 0.5fr 0.25fr"
+        gridColumnsCustomization="repeat(5, 1fr) 0.5fr 0.25fr"
       />
     </div>
   );

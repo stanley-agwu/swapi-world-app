@@ -18,7 +18,7 @@ import { coreConfig } from 'common/core/config';
 import { IPerson, IPlanet } from 'common/models';
 import { Notification } from 'common/utils/messages';
 
-import Avatar from './NameTag/Avatar';
+import NameTag from './NameTag/NameTag';
 
 import styles from './People.module.scss';
 
@@ -65,17 +65,11 @@ const People = () => {
         const name = info.getValue();
         return (
           <i>
-            <Avatar name={name} />
-            {name}
+            <NameTag name={name} />
           </i>
         );
       },
       header: () => <span>Name</span>,
-    }),
-    columnHelper.accessor((row) => row.height, {
-      id: 'height',
-      cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Height</span>,
     }),
     columnHelper.accessor((row) => row.birth_year, {
       id: 'birth_year',
@@ -87,25 +81,15 @@ const People = () => {
       cell: (info) => <i>{info.getValue()}</i>,
       header: () => <span>Skin color</span>,
     }),
-    columnHelper.accessor((row) => row.hair_color, {
-      id: 'hair_color',
-      cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Hair color</span>,
-    }),
-    columnHelper.accessor((row) => row.eye_color, {
-      id: 'eye_color',
-      cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Eye color</span>,
-    }),
     columnHelper.accessor((row) => row.mass, {
       id: 'mass',
       cell: (info) => <i>{info.getValue()}</i>,
       header: () => <span>Body mass</span>,
     }),
-    columnHelper.accessor((row) => row.gender, {
-      id: 'gender',
+    columnHelper.accessor((row) => row.height, {
+      id: 'height',
       cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Gender</span>,
+      header: () => <span>Height</span>,
     }),
     columnHelper.accessor((row: IPerson) => row, {
       id: 'icon_heart',
@@ -160,7 +144,7 @@ const People = () => {
         shouldLoadNextPage={shouldLoadNextPage}
         onLoadNextPage={handleLoadNextPage}
         onHandleRowClick={handleRowClick}
-        gridColumnsCustomization="2fr repeat(7, 1fr) 0.5fr 0.25fr"
+        gridColumnsCustomization="1.5fr repeat(4, 1fr) 0.5fr 0.25fr"
       />
     </div>
   );
