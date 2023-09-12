@@ -10,7 +10,7 @@ const NameTag = ({ name }: INameTag) => {
   return (
     <div className={styles.nameTag}>
       <Avatar name={name} />
-      <span className={styles.name}>name</span>
+      <span className={styles.name}>{name}</span>
     </div>
   );
 };

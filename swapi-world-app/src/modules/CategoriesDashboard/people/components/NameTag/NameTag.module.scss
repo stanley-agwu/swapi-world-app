@@ -8,17 +8,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid var(--slate-7);
-}
-
-.name {
-  margin-left: $space;
 }
 
 .avatar {
-  width: 36px;
-  min-width: 36px;
-  height: 36px;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: var(--gray-6);
   margin-right: $space;
@@ -32,7 +27,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--gray-12);
-  font-weight: $fontWeightSemiBold;
-  font-size: $fontSizeExtraSmall;
+  @include text-p3;
 }

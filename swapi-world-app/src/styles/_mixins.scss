@@ -28,3 +28,23 @@
     $defaultFontColorGray
   );
 }
+
+@mixin text-p2 {
+  @include text-format(
+    $baseFontSize,
+    $fontWeightSemiBold,
+    $baseLineHeight,
+    $baseLetterSpacing,
+    $baseFontColor
+  );
+}
+
+@mixin text-p3 {
+  @include text-format(
+    $fontSizeSmall,
+    $fontWeightBold,
+    $baseLineHeight,
+    $baseLetterSpacing,
+    $baseFontColor
+  );
+}

@@ -13,6 +13,7 @@
     padding-right: $space;
     &::-webkit-scrollbar {
       width: 8px;
+      height: 8px;
     }
     &::-webkit-scrollbar-track {
       background: var(--mauve-0);
@@ -31,6 +32,7 @@
   font-size: $baseFontSize;
   padding: $space;
   width: 100%;
+  position: relative;
 }
 
 .headerRow,
@@ -41,6 +43,13 @@
   grid-column-gap: $space-2;
   justify-items: start;
   overflow-wrap: break-word;
+}
+
+thead {
+  position: sticky;
+  top: 0px;
+  z-index: 2;
+  background: $white;
 }
 
 .headerRow {
@@ -54,8 +63,7 @@
 }
 
 .bodyRow {
-  font-weight: $baseFontWeight;
-  font-size: $normalFontSize;
+  @include text-p2;
   color: $baseFontColor;
   border-bottom: 2px solid var(--slate-5);
   padding: $space 0;
