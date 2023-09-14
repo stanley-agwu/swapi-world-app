@@ -32,7 +32,7 @@
 @mixin text-p2 {
   @include text-format(
     $baseFontSize,
-    $fontWeightSemiBold,
+    $baseFontWeight,
     $baseLineHeight,
     $baseLetterSpacing,
     $baseFontColor
@@ -42,7 +42,7 @@
 @mixin text-p3 {
   @include text-format(
     $fontSizeSmall,
-    $fontWeightBold,
+    $fontWeightSemiBold,
     $baseLineHeight,
     $baseLetterSpacing,
     $baseFontColor
