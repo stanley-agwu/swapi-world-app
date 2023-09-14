@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { Grid } from '@mui/material';
 
+import { ContentContainer, GridContent } from 'common/components/ContentBox/ContentBox';
 import Loader from 'common/components/Loader/Loader';
 import { showError } from 'common/components/Toast';
 import { IFilm, IPerson, ISpecie, IStarship, IVehicle } from 'common/models';
@@ -30,9 +31,9 @@ const DetailsItem = ({ dataList, dataKeys, category }: DetailsItemProps) => {
 
   if (!dataList || !dataList?.length) {
     return (
-      <Grid container className={styles.noItems}>
-        {`There are no ${name} available for this ${domain}.`}
-      </Grid>
+      <ContentContainer className={styles.noItems}>
+        <GridContent>{`There are no ${name} available for this ${domain}.`}</GridContent>
+      </ContentContainer>
     );
   }
 
@@ -55,21 +56,21 @@ const DetailsItem = ({ dataList, dataKeys, category }: DetailsItemProps) => {
     <Grid container className={styles.details}>
       {dataItems && dataItems?.length ? (
         <Grid container className={styles.detailsItem}>
-          <Grid item xs={12} className={styles.item}>
+          <GridContent className={styles.item}>
             {dataKeys.map((key, index) => (
               <Grid item xs={12} className={styles.title} key={index}>
                 {categoriesTitles[key]}
               </Grid>
             ))}
-          </Grid>
+          </GridContent>
           {dataItems.map((data, index) => (
-            <Grid item xs={12} className={styles.item} key={index}>
+            <GridContent className={styles.item} key={index}>
               {dataKeys.map((key, idx) => (
                 <Grid item xs={12} className={styles.value} key={idx}>
                   {data[key]}
                 </Grid>
               ))}
-            </Grid>
+            </GridContent>
           ))}
         </Grid>
       ) : (

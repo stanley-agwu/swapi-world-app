@@ -4,6 +4,7 @@ import { ActionCreator } from 'redux';
 import { Grid } from '@mui/material';
 
 import { useAppDispatch } from 'common/api/store/hooks';
+import { GridContent } from 'common/components/ContentBox/ContentBox';
 import GenericNotFound from 'common/components/GenericNotFound/GenericNotFound';
 import { showInformation } from 'common/components/Toast';
 import { IPerson, IPlanet, IStarship } from 'common/models';
@@ -47,7 +48,7 @@ const FavoritesItem = ({
   return (
     <Grid container className={styles.favorites}>
       <Grid container className={styles.detailsItem}>
-        <Grid item xs={12} className={styles.item}>
+        <GridContent className={styles.item}>
           {dataKeys.map((key, index) => (
             <Grid item xs={12} className={styles.title} key={index}>
               {categoriesTitles[key]}
@@ -56,9 +57,9 @@ const FavoritesItem = ({
           <Grid item xs={12} className={styles.title}>
             Remove
           </Grid>
-        </Grid>
+        </GridContent>
         {categoryDataList.map((data, index) => (
-          <Grid item xs={12} className={styles.item} key={index}>
+          <GridContent className={styles.item} key={index}>
             {dataKeys.map((key, idx) => (
               <Grid item xs={12} className={styles.value} key={idx}>
                 {data[key]}
@@ -69,7 +70,7 @@ const FavoritesItem = ({
               onClick={() => handleRemoveFromFavorite(data as CategoryType)}
               aria-label="People favorite"
             />
-          </Grid>
+          </GridContent>
         ))}
       </Grid>
     </Grid>

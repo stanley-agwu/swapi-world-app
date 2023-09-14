@@ -2,6 +2,7 @@ import { Grid } from '@mui/material';
 
 import { useGetPersonQuery } from 'common/api/services/swapi';
 import Back from 'common/components/Back/Back';
+import { GridContent } from 'common/components/ContentBox/ContentBox';
 import PageLoader from 'common/components/Loader/PageLoader';
 import { showError } from 'common/components/Toast';
 import { coreConfig } from 'common/core/config';
@@ -33,70 +34,70 @@ const Person = ({ id }: PersonProps) => {
       <Grid container>
         <div className={styles.categoryTitle}>Details</div>
         <Grid container className={styles.details}>
-          <Grid item xs={12} className={styles.item}>
+          <GridContent className={styles.item}>
             <Grid item className={styles.title}>
               Name
             </Grid>
             <Grid item className={styles.value}>
               {data?.name}
             </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
+          </GridContent>
+          <GridContent className={styles.item}>
             <Grid item className={styles.title}>
               Birth year
             </Grid>
             <Grid item className={styles.value}>
               {data?.birth_year}
             </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
+          </GridContent>
+          <GridContent className={styles.item}>
             <Grid item className={styles.title}>
               Gender
             </Grid>
             <Grid item className={styles.value}>
               {data?.gender}
             </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
+          </GridContent>
+          <GridContent className={styles.item}>
             <Grid item className={styles.title}>
               Skin color
             </Grid>
             <Grid item className={styles.value}>
               {data?.skin_color}
             </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
+          </GridContent>
+          <GridContent className={styles.item}>
             <Grid item className={styles.title}>
               Hair color
             </Grid>
             <Grid item className={styles.value}>
               {data?.hair_color}
             </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
+          </GridContent>
+          <GridContent className={styles.item}>
             <Grid item className={styles.title}>
               Height
             </Grid>
             <Grid item className={styles.value}>
               {data?.height}
             </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
+          </GridContent>
+          <GridContent className={styles.item}>
             <Grid item className={styles.title}>
               Mass
             </Grid>
             <Grid item className={styles.value}>
               {data?.mass}
             </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
+          </GridContent>
+          <GridContent className={styles.item}>
             <Grid item className={styles.title}>
               Date created
             </Grid>
             <Grid item className={styles.value}>
               {formatUTCDate(data?.created)}
             </Grid>
-          </Grid>
+          </GridContent>
         </Grid>
       </Grid>
       <Grid container>

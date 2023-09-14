@@ -18,9 +18,7 @@
     grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
     align-content: center;
     width: 100%;
-    padding: $space $space-2 $space $space-4;
     gap: $space-2;
-    margin: 0;
 
     .title,
     .value {

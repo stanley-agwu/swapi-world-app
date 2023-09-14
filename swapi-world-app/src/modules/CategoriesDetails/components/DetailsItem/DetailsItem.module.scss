@@ -18,7 +18,6 @@
     grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
     align-content: center;
     width: 100%;
-    padding: $space $space-2 $space $space-4;
     gap: $space-2;
     margin: 0;
 
@@ -39,6 +38,7 @@
   background: var(--slate-1);
   box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.2);
   border-radius: $space;
-  padding: $space-3 $space-5;
-  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  padding: 16px;
 }

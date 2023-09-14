@@ -1,7 +1,6 @@
 @import 'styles/main';
 
 .starship {
-  padding: 0 $space-2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,7 +19,6 @@
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      padding: $space $space-2 $space $space-4;
 
       .title,
       .value {

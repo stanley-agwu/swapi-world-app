@@ -12,6 +12,7 @@ import {
   setPlanetListFromFavorites,
   setPlanetListFromPagination,
 } from 'common/api/store/slice/swapiSlice';
+import { ContentContainer } from 'common/components/ContentBox/ContentBox';
 import PageLoader from 'common/components/Loader/PageLoader';
 import Table from 'common/components/Table/Table';
 import { showError, showSuccess } from 'common/components/Toast';
@@ -130,7 +131,7 @@ const Planets = () => {
   }
 
   return (
-    <div className={styles.planets}>
+    <ContentContainer className={styles.planets}>
       <Table
         tableData={planetList}
         tableColumns={columns}
@@ -140,7 +141,7 @@ const Planets = () => {
         onHandleRowClick={handleRowClick}
         gridColumnsCustomization="1fr 1fr 1.5fr 1.5fr 1fr 0.5fr 0.25fr"
       />
-    </div>
+    </ContentContainer>
   );
 };
 

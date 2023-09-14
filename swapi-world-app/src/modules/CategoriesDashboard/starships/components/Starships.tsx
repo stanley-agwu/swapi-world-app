@@ -11,6 +11,7 @@ import {
   setStarshipListFromFavorites,
   setStarshipListFromPagination,
 } from 'common/api/store/slice/swapiSlice';
+import { ContentContainer } from 'common/components/ContentBox/ContentBox';
 import PageLoader from 'common/components/Loader/PageLoader';
 import Table from 'common/components/Table/Table';
 import { showError, showSuccess } from 'common/components/Toast';
@@ -127,7 +128,7 @@ const Starships = () => {
   }
 
   return (
-    <div className={styles.starships}>
+    <ContentContainer className={styles.starships}>
       <Table
         tableData={starshipList as unknown as IPlanet[]}
         tableColumns={columns}
@@ -137,7 +138,7 @@ const Starships = () => {
         onHandleRowClick={handleRowClick}
         gridColumnsCustomization="repeat(5, 1fr) 0.5fr 0.25fr"
       />
-    </div>
+    </ContentContainer>
   );
 };
 

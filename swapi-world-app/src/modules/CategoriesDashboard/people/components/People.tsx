@@ -11,6 +11,7 @@ import {
   setPeopleListFromFavorites,
   setPeopleListFromPagination,
 } from 'common/api/store/slice/swapiSlice';
+import { ContentContainer } from 'common/components/ContentBox/ContentBox';
 import PageLoader from 'common/components/Loader/PageLoader';
 import Table from 'common/components/Table/Table';
 import { showError, showSuccess } from 'common/components/Toast/toastShowUtils/toastShowUtils';
@@ -136,7 +137,7 @@ const People = () => {
   }
 
   return (
-    <div className={styles.people}>
+    <ContentContainer className={styles.people}>
       <Table
         tableData={peopleList as unknown as IPlanet[]}
         tableColumns={columns}
@@ -146,7 +147,7 @@ const People = () => {
         onHandleRowClick={handleRowClick}
         gridColumnsCustomization="1.5fr repeat(4, 1fr) 0.5fr 0.25fr"
       />
-    </div>
+    </ContentContainer>
   );
 };
 

@@ -2,6 +2,7 @@ import { Grid } from '@mui/material';
 
 import { useGetPlanetQuery } from 'common/api/services/swapi';
 import Back from 'common/components/Back/Back';
+import { GridContent } from 'common/components/ContentBox/ContentBox';
 import PageLoader from 'common/components/Loader/PageLoader';
 import { showError } from 'common/components/Toast';
 import { coreConfig } from 'common/core/config';
@@ -33,78 +34,78 @@ const Planet = ({ id }: PlanetProps) => {
       <Grid container>
         <div className={styles.categoryTitle}>Details</div>
         <Grid container className={styles.details}>
-          <Grid item xs={12} className={styles.item}>
+          <GridContent className={styles.item}>
             <Grid item className={styles.title}>
               Name
             </Grid>
             <Grid item className={styles.value}>
               {data?.name}
             </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
+          </GridContent>
+          <GridContent className={styles.item}>
             <Grid item className={styles.title}>
               Terrain
             </Grid>
             <Grid item className={styles.value}>
               {data?.terrain}
             </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
+          </GridContent>
+          <GridContent className={styles.item}>
             <Grid item className={styles.title}>
               Climate
             </Grid>
             <Grid item className={styles.value}>
               {data?.climate}
             </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
+          </GridContent>
+          <GridContent className={styles.item}>
             <Grid item className={styles.title}>
               Date created
             </Grid>
             <Grid item className={styles.value}>
               {formatUTCDate(data?.created)}
             </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
+          </GridContent>
+          <GridContent className={styles.item}>
             <Grid item className={styles.title}>
               Gravity
             </Grid>
             <Grid item className={styles.value}>
               {data?.gravity}
             </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
+          </GridContent>
+          <GridContent className={styles.item}>
             <Grid item className={styles.title}>
               Surface water
             </Grid>
             <Grid item className={styles.value}>
               {data?.surface_water}
             </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
+          </GridContent>
+          <GridContent className={styles.item}>
             <Grid item className={styles.title}>
               Diameter
             </Grid>
             <Grid item className={styles.value}>
               {data?.diameter}
             </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
+          </GridContent>
+          <GridContent className={styles.item}>
             <Grid item className={styles.title}>
               Orbiter period
             </Grid>
             <Grid item className={styles.value}>
               {data?.orbital_period}
             </Grid>
-          </Grid>
-          <Grid item xs={12} className={styles.item}>
+          </GridContent>
+          <GridContent className={styles.item}>
             <Grid item className={styles.title}>
               Population
             </Grid>
             <Grid item className={styles.value}>
               {data?.population}
             </Grid>
-          </Grid>
+          </GridContent>
         </Grid>
       </Grid>
       <Grid container>
