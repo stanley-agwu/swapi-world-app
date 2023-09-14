@@ -2,7 +2,6 @@
 
 .categories {
   width: 100%;
-  height: 64px;
   background: $white;
   display: flex;
   padding: $space-2;
@@ -11,6 +10,7 @@
 .categoriesItem {
   text-transform: uppercase;
   font-size: $normalFontSize;
+  line-height: 30px;
   font-weight: $fontWeightSemiBold;
   margin: 0 $space-2;
   cursor: pointer;
