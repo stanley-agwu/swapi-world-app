@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react';
 import { Grid } from '@mui/material';
 
 import Loader from 'common/components/Loader/Loader';
+import { showError } from 'common/components/Toast';
 import { IFilm, IPerson, ISpecie, IStarship, IVehicle } from 'common/models';
 import { categoriesTitles } from 'common/utils/categoritesTitleConfig';
+import { Notification } from 'common/utils/messages';
 import { fetchApiInParallel } from 'modules/CategoriesDetails/api/services';
 
 import styles from './DetailsItem.module.scss';
@@ -20,15 +22,15 @@ interface DetailsItemProps {
 
 type CategoryType = IFilm[] | IPerson[] | IStarship[] | IVehicle[] | ISpecie[];
 type StringKeyType = { [key: string]: string }[];
-type ResponseType = StringKeyType & CategoryType;
+type ResponseListType = StringKeyType & CategoryType;
 
 const DetailsItem = ({ dataList, dataKeys, category }: DetailsItemProps) => {
-  const [dataItems, setDataItems] = useState<ResponseType | undefined>();
+  const [dataItems, setDataItems] = useState<ResponseListType | undefined>();
   const { name, domain } = category;
 
   if (!dataList || !dataList?.length) {
     return (
-      <Grid container className={styles.details}>
+      <Grid container className={styles.noItems}>
         {`There are no ${name} available for this ${domain}.`}
       </Grid>
     );
@@ -36,8 +38,15 @@ const DetailsItem = ({ dataList, dataKeys, category }: DetailsItemProps) => {
 
   useEffect(() => {
     const asyncFunction = async () => {
-      const data = dataList.length ? ((await fetchApiInParallel(dataList)) as ResponseType) : [];
-      return setDataItems(data);
+      const { results, errors } = dataList.length
+        ? await fetchApiInParallel(dataList)
+        : { results: null, errors: null };
+      if (results) {
+        setDataItems(results as ResponseListType);
+      }
+      if (errors) {
+        showError(Notification.error.title, Notification.error.message);
+      }
     };
     asyncFunction();
   }, []);
