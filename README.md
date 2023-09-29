@@ -25,7 +25,7 @@ Launches the test coverage in an interactive mode.
 
 ## Usage
 
-The app on load shows a dashboard of planets, people and starships. Each planet, person or starship on the dashboards can be added to a favorite list on on favorites views. And on click of a category(planet, person or starship) on the dashboards a user is routed to a catgory details view. All pages(views) are bookmarkable.
+The app on load shows a dashboard of planets, people and starships. Each planet, person or starship on the dashboards can be added to a favorite list, on favorites views. And on click of a category (planet, person or starship) on the dashboards a user is routed to a category details view. All pages (views) are bookmarkable and data are persisted accross sessions.
 
 ## More information
 
