@@ -70,4 +70,26 @@ describe('Categories dashboard', () => {
 
     expect(await screen.findByText('Added to favorites list.')).toBeInTheDocument();
   });
+  it('adds person to favorites', async () => {
+    render(<CategoriesDashboardContainer />, {
+      store: store(),
+      routerProps: { initialEntries: ['/people'] },
+    });
+    const peopleFavorite = await screen.findAllByLabelText('People favorite');
+
+    userEvent.click(peopleFavorite[0]);
+
+    expect(await screen.findByText('Added to favorites list.')).toBeInTheDocument();
+  });
+  it.skip('adds starship to favorites', async () => {
+    render(<CategoriesDashboardContainer />, {
+      store: store(),
+      routerProps: { initialEntries: ['/starships'] },
+    });
+    const starshipsFavorite = await screen.findAllByLabelText('Starships favorite');
+
+    userEvent.click(starshipsFavorite[0]);
+
+    expect(await screen.findByText('Added to favorites list.')).toBeInTheDocument();
+  });
 });
