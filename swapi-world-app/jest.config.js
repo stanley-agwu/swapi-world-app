@@ -16,7 +16,6 @@ module.exports = {
     '!<rootDir>/src/reportWebVitals.ts',
     '!<rootDir>/src/index.tsx',
   ],
-  coverageReporters: ['text'],
   coveragePathIgnorePatterns: [
     'node_modules',
     'index.tsx',

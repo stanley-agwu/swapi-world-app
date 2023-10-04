@@ -59,6 +59,7 @@ thead {
     height: 48px;
     padding: $space;
     text-align: center;
+    word-wrap: break-word;
   }
 }
 
@@ -80,6 +81,7 @@ thead {
     justify-content: center;
     align-items: center;
     padding: $space;
+    word-wrap: break-word;
   }
 
   td:last-of-type {
