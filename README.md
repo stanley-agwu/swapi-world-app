@@ -32,3 +32,9 @@ The app on load shows a dashboard of planets, people and starships. Each planet,
 See [swapi-world-app](https://swapi-world-app.vercel.app/dashboard/planets)
 
 See [Github](https://github.com/stanley-agwu/swapi-world-app).
+
+## Thank you
+
+A warm thank you to SWAPI - The Star Wars API that provided a free API for this app.
+
+See [SWAPI](https://swapi.dev).
