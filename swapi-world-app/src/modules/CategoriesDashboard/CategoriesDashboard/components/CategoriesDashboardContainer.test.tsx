@@ -12,11 +12,11 @@ describe('Categories dashboard', () => {
       store: store(),
       routerProps: { initialEntries: ['/planets'] },
     });
-    const planetsTab = await screen.findByRole('button', { name: 'Planets' });
+    const planetsTab = await screen.findByRole('tab', { name: 'Planets' });
 
-    expect(planetsTab.classList).toContain('active');
+    expect(planetsTab.classList).toContain('Mui-selected');
     expect(await screen.findByRole('columnheader', { name: 'Terrain' })).toBeInTheDocument();
-  });
+  }, 2000);
   it('renders People dashboard', async () => {
     const history = createMemoryHistory({ initialEntries: ['/people'] });
     const preloadedState = {
@@ -32,9 +32,9 @@ describe('Categories dashboard', () => {
       preloadedState,
       routerProps: { initialEntries: ['/people'] },
     });
-    const peopleTab = await screen.findByRole('button', { name: 'People' });
+    const peopleTab = await screen.findByRole('tab', { name: 'People' });
 
-    expect(peopleTab.classList).toContain('active');
+    expect(peopleTab.classList).toContain('Mui-selected');
     expect(await screen.findByRole('columnheader', { name: 'Skin color' })).toBeInTheDocument();
     expect(history.location.pathname).toBe('/people');
   });
@@ -53,9 +53,9 @@ describe('Categories dashboard', () => {
       preloadedState,
       routerProps: { initialEntries: ['/starships'] },
     });
-    const starshipsTab = await screen.findByRole('button', { name: 'Starships' });
+    const starshipsTab = await screen.findByRole('tab', { name: 'Starships' });
 
-    expect(starshipsTab.classList).toContain('active');
+    expect(starshipsTab.classList).toContain('Mui-selected');
     expect(await screen.findByRole('columnheader', { name: 'Manufacturer' })).toBeInTheDocument();
     expect(history.location.pathname).toBe('/starships');
   });
