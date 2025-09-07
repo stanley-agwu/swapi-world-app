@@ -62,3 +62,72 @@ export const GridContent = forwardRef(
 );
 
 GridContent.displayName = 'GridContent';
+
+export interface StyledTypographyProps {
+  className?: string;
+}
+
+export const Typography = styled((props: StyledTypographyProps) => <MuiTypography {...props} />)(
+  () => ({
+    fontFamily: ['Inter', 'sans-serif'].join(','),
+    '&:hover': {
+      color: '#b3b3b3',
+      opacity: 1,
+    },
+  })
+);
+
+export interface StyledTabsProps {
+  children: ReactNode[];
+  value: number;
+  ref: MutableRefObject<any | null>;
+  onChange: (event: SyntheticEvent, newValue: number) => void;
+}
+
+const StyledTabs = styled((props: StyledTabsProps) => (
+  <MuiTabs
+    {...props}
+    TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
+  />
+))({
+  '& .MuiTabs-indicator': {
+    display: 'flex',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+  },
+  '& .MuiTabs-indicatorSpan': {
+    width: '100%',
+    backgroundColor: '#e58fb1',
+  },
+});
+
+export interface TabsProps extends ComponentProps<'div'> {
+  value: number;
+  children: ReactNode[];
+  handleChange: (event: SyntheticEvent, newValue: number) => void;
+  className?: string;
+}
+
+export const Tabs = forwardRef<MutableRefObject<any | null>, TabsProps>(
+  ({ value, handleChange, children, ...props }: TabsProps, ref) => {
+    return (
+      <StyledTabs
+        sx={{
+          width: '100%',
+          bgcolor: '#ffffff',
+        }}
+        {...props}
+        ref={ref as MutableRefObject<any | null>}
+        value={value}
+        onChange={handleChange}
+        aria-label="Tabs"
+      >
+        {children}
+      </StyledTabs>
+    );
+  }
+);
+
+Tabs.displayName = 'Tabs';
+
+export default Tabs;

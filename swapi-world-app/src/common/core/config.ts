@@ -57,7 +57,7 @@ interface CoreConfig {
 
 export const coreConfig: CoreConfig = {
   endpoints: {
-    root: 'https://swapi.dev/api/',
+    root: 'https://swapi.info/api/',
     people: 'people/?page={0}',
     planets: 'planets/?page={0}',
     films: 'films/?page={0}',

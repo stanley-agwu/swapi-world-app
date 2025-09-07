@@ -37,4 +37,4 @@ See [Github](https://github.com/stanley-agwu/swapi-world-app).
 
 A warm thank you to SWAPI - The Star Wars API that provided a free API for this app.
 
-See [SWAPI](https://swapi.dev).
+See [SWAPI](https://swapi.info).
