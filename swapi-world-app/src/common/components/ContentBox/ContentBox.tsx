@@ -1,7 +1,17 @@
-import { ClassAttributes, forwardRef, HTMLAttributes, MutableRefObject } from 'react';
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+import {
+  ClassAttributes,
+  ComponentProps,
+  forwardRef,
+  HTMLAttributes,
+  MutableRefObject,
+  ReactNode,
+  SyntheticEvent,
+} from 'react';
 import classNames from 'classnames';
 
-import { Grid } from '@mui/material';
+import styled from '@emotion/styled';
+import { Grid, Tabs as MuiTabs } from '@mui/material';
 
 import styles from './ContentBox.module.scss';
 
@@ -63,20 +73,6 @@ export const GridContent = forwardRef(
 
 GridContent.displayName = 'GridContent';
 
-export interface StyledTypographyProps {
-  className?: string;
-}
-
-export const Typography = styled((props: StyledTypographyProps) => <MuiTypography {...props} />)(
-  () => ({
-    fontFamily: ['Inter', 'sans-serif'].join(','),
-    '&:hover': {
-      color: '#b3b3b3',
-      opacity: 1,
-    },
-  })
-);
-
 export interface StyledTabsProps {
   children: ReactNode[];
   value: number;
@@ -112,7 +108,7 @@ export const Tabs = forwardRef<MutableRefObject<any | null>, TabsProps>(
   ({ value, handleChange, children, ...props }: TabsProps, ref) => {
     return (
       <StyledTabs
-        sx={{
+        style={{
           width: '100%',
           bgcolor: '#ffffff',
         }}
